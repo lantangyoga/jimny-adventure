@@ -389,7 +389,7 @@ h1.logoH{margin:0 0 8px;font-size:0;line-height:0}h1.logoH .logo{width:min(380px
       <div class="sec"><span>Waktu</span><div class="grp" id="setTime"><button type="button" class="chip" data-m="auto">Otomatis</button><button type="button" class="chip" data-m="day">Siang</button><button type="button" class="chip" data-m="dusk">Sore</button><button type="button" class="chip" data-m="night">Malam</button></div></div>
       <div class="sec"><span>Tampilkan di layar</span><div class="chk" id="setHud"></div></div></div></div>
     <div class="cams" id="towRow" hidden style="top:calc(env(safe-area-inset-top,0px) + 54px)"><button class="chip" id="bTow" type="button">Panggil derek · 🪙500</button></div>
-    <div class="cams" id="camRow" hidden><button class="chip" id="bCam" type="button">Kamera</button><button class="chip" id="bLook" type="button">Belakang</button><button class="chip" id="bPho" type="button" aria-label="Mode foto">📷</button><button class="chip" id="bRadio" type="button" aria-label="Radio">📻</button></div>
+    <div class="cams" id="camRow" hidden><button class="chip" id="bCam" type="button">Kamera</button><button class="chip" id="bLook" type="button">Belakang</button><button class="chip" id="bPho" type="button" aria-label="Mode foto">📷</button></div>
     <div id="stk" hidden role="alert"><b id="stkT">Terjebak</b><p id="stkP"></p><div class="row"><button class="chip" id="stkW" type="button">Pakai winch</button><button class="chip" id="stkH" type="button">Minta tolong</button><button class="chip" id="stkD" type="button">Panggil derek</button></div></div>
     <div id="chat" hidden><div id="chatL"></div><form id="chatF" autocomplete="off"><input id="chatI" maxlength="200" placeholder="Ketik pesan…" enterkeyhint="send"><button class="chip" type="submit">Kirim</button></form></div>
     <div id="cd"></div>
@@ -2207,18 +2207,19 @@ function tapCar(cx,cy){
 let tapT=null;
 function tapDown(e){tapT={x:e.clientX,y:e.clientY,t:performance.now(),id:e.pointerId};}
 function tapRuko(cx,cy){
+  const _o=S.inCar?car:pl;
   const r=renderer.domElement.getBoundingClientRect();ndc.set((cx-r.left)/r.width*2-1,-((cy-r.top)/r.height*2-1));ray.setFromCamera(ndc,cam);
   const hit=ray.intersectObjects(RUKOS.filter(k=>k.on).map(k=>k.g).concat(INFOC?[INFOC.g]:[]),true)[0];if(!hit)return false;
-  if(hit.object.userData.info){if(Math.hypot(pl.x-INFOC.dx,pl.z-INFOC.dz)<16)openInfo();else toast('Dekati Pusat Informasi dulu, lalu ketuk lagi',1600);return true;}
+  if(hit.object.userData.info){if(Math.hypot(_o.x-INFOC.dx,_o.z-INFOC.dz)<16)openInfo();else toast('Dekati Pusat Informasi dulu, lalu ketuk lagi',1600);return true;}
   const i=hit.object.userData.shop;if(i===undefined)return false;const k=RUKOS[i];
-  if(Math.min(Math.hypot(pl.x-k.dx,pl.z-k.dz),Math.hypot(pl.x-k.dx2,pl.z-k.dz2))<14)openShop(k.ad);else toast('Dekati ruko dulu, lalu ketuk lagi',1600);return true;
+  if(S.inCar&&Math.abs(car.v)>=4){toast('Pelan dulu, lalu ketuk lagi',1400);return true;}if(Math.min(Math.hypot(_o.x-k.dx,_o.z-k.dz),Math.hypot(_o.x-k.dx2,_o.z-k.dz2))<14)openShop(k.ad);else toast('Dekati ruko dulu, lalu ketuk lagi',1600);return true;
 }
 function tapBill(cx,cy){if(!BILLS.length||S.shopOpen||(R.on&&!R.done))return false;
   const r=renderer.domElement.getBoundingClientRect();ndc.set((cx-r.left)/r.width*2-1,-((cy-r.top)/r.height*2-1));ray.setFromCamera(ndc,cam);
   const gs=BILLS.filter(b=>b.g&&b.g.visible!==false&&Math.hypot(b.x-cam.position.x,b.z-cam.position.z)<140);if(!gs.length)return false;
   const ms=[];gs.forEach(b=>b.g.traverse(o=>{if(o.isMesh){o.userData.bill=b;ms.push(o);}}));
   const hit=ray.intersectObjects(ms,false)[0];if(!hit)return false;openShop(hit.object.userData.bill.ad);return true;}
-function tapUp(e){if(!tapT||e.pointerId!==tapT.id)return;const d=Math.hypot(e.clientX-tapT.x,e.clientY-tapT.y),el=performance.now()-tapT.t;tapT=null;if(d<12&&el<350){if(tapBill(e.clientX,e.clientY))return;if(S.inCar){if(tapCar(e.clientX,e.clientY))toggleCam();}else if(S.mode==='free'&&!S.shopOpen)tapRuko(e.clientX,e.clientY);}}
+function tapUp(e){if(!tapT||e.pointerId!==tapT.id)return;const d=Math.hypot(e.clientX-tapT.x,e.clientY-tapT.y),el=performance.now()-tapT.t;tapT=null;if(d<12&&el<350){if(tapBill(e.clientX,e.clientY))return;if(S.mode==='free'&&!S.shopOpen&&!R.on&&tapRuko(e.clientX,e.clientY))return;if(S.inCar){if(tapCar(e.clientX,e.clientY))toggleCam();}}}
 ['gl','joyzone'].forEach(id=>{const el=$(id);el.addEventListener('pointerdown',tapDown);el.addEventListener('pointerup',tapUp);});
 const CAMO={yaw:0,pit:0,id:null,x:0,y:0,t:0};
 {const g=$('gl');
@@ -2299,6 +2300,9 @@ jz.addEventListener('pointerdown',e=>{if(jid!==null)return;jid=e.pointerId;try{j
 jz.addEventListener('pointermove',e=>{if(e.pointerId===jid)jMove(e);});
 jz.addEventListener('pointerup',e=>{if(e.pointerId===jid)jReset();});
 jz.addEventListener('pointercancel',e=>{if(e.pointerId===jid)jReset();});
+jz.addEventListener('lostpointercapture',e=>{if(e.pointerId===jid)jReset();});
+window.addEventListener('pointerup',e=>{if(e.pointerId===jid)jReset();},true);window.addEventListener('pointercancel',e=>{if(e.pointerId===jid)jReset();},true);
+window.addEventListener('touchend',e=>{if(jid!==null&&!e.touches.length)jReset();},true);window.addEventListener('blur',()=>{if(jid!==null)jReset();});document.addEventListener('visibilitychange',()=>{if(jid!==null)jReset();});
 let brakeHeld=false,gasHeld=false,revHeld=false,lookHeld=false;
 function hold(id,cb){const b=$(id);
   b.addEventListener('pointerdown',e=>{e.preventDefault();cb(true);b.classList.add('down');try{b.setPointerCapture(e.pointerId);}catch(_){}});
@@ -2567,6 +2571,7 @@ function action(){
   if(shopN&&shopN.bengkel&&(!S.inCar||Math.abs(car.v)<4)){if(shopN.gm==='bantuan')openHelp();else goGarage(true,shopN.gm);return;}
   if(shopN&&shopN.info&&(!S.inCar||Math.abs(car.v)<4)){openInfo();return;}
   if(shopN&&shopN.bill&&(!S.inCar||Math.abs(car.v)<4)){openShop(shopN.ad);return;}
+  if(S.inCar&&shopN&&shopN.ruko&&Math.abs(car.v)<4){openShop(shopN.ad);return;}
   if(!S.inCar&&shopN&&Math.hypot(pl.x-car.x,pl.z-car.z)>=4){if(shopN.house)goGarage(false);else if(shopN.bengkel){if(shopN.gm==='bantuan')openHelp();else goGarage(true,shopN.gm);}else openShop(shopN.ad);return;}
   if(R.on){toast('Selesaikan balapan dulu');return;}
   if(S.inCar){
@@ -3949,7 +3954,7 @@ function updateHud(){
   const near=!S.inCar&&!PK.on&&Math.hypot(pl.x-car.x,pl.z-car.z)<4;
   const bk=!!(shopN&&shopN.bengkel);
   $('bAct').classList.toggle('ready',S.inCar?Math.abs(car.v)<4&&!R.on:(near||!!shopN));
-  setT('bAct',(shopN&&shopN.park)?(S.inCar?'PARKIR':'AMBIL MOBIL'):bk?(({salon:'SALON',showroom:'SHOWROOM',pom:'POM BENSIN',bantuan:'BANTUAN'})[shopN.gm]||'BENGKEL'):(S.inCar?'KELUAR':(shopN&&!near?'TOKO':'MASUK')));
+  setT('bAct',(shopN&&shopN.park)?(S.inCar?'PARKIR':'AMBIL MOBIL'):bk?(({salon:'SALON',showroom:'SHOWROOM',pom:'POM BENSIN',bantuan:'BANTUAN'})[shopN.gm]||'BENGKEL'):(S.inCar?((shopN&&shopN.ruko)?'TOKO':'KELUAR'):(shopN&&!near?'TOKO':'MASUK')));
   const pr=$('prompt');
   if(shopN&&(!near||bk||shopN.park)){setT('prompt',shopN.park?(isTouch?'Ketuk · ':'E · ')+(S.inCar?'Parkir di basement':'Ambil mobil dari basement'):(isTouch?'Ketuk TOKO · '+shopN.ad.name:'E · Lihat '+shopN.ad.name));pr.classList.add('on');}
   else if(near){setT('prompt',isTouch?'Ketuk MASUK':'E · Masuk mobil');pr.classList.add('on');}else pr.classList.remove('on');
@@ -4019,7 +4024,7 @@ function update(dt){
   shopN=null;
   if(INFOC&&S.mode==='free'&&!S.shopOpen&&!R.on&&(!S.inCar||Math.abs(car.v)<4)){const o=S.inCar?car:pl,d=Math.hypot(o.x-INFOC.dx,o.z-INFOC.dz);if(d<9)shopN={ad:{name:'Pusat Informasi'},d,info:true};}
   if(S.mode==='free'&&!S.shopOpen&&!R.on&&(!S.inCar||Math.abs(car.v)<4)){const o=S.inCar?car:pl;for(const b of BILLS){const d=Math.hypot(o.x-b.x,o.z-b.z);if(d<13&&(!shopN||d<shopN.d))shopN={ad:b.ad,d,bill:true};}}
-  if(!S.inCar&&S.mode==='free'&&!S.shopOpen){for(const r of RUKOS)if(r.on){const d=Math.min(Math.hypot(pl.x-r.dx,pl.z-r.dz),Math.hypot(pl.x-r.dx2,pl.z-r.dz2));if(d<6.5&&(!shopN||d<shopN.d))shopN={ad:r.ad,d};}}
+  if(S.mode==='free'&&!S.shopOpen&&!R.on&&(!S.inCar||Math.abs(car.v)<4)){const o=S.inCar?car:pl,lim=S.inCar?12:6.5;for(const r of RUKOS)if(r.on){const d=Math.min(Math.hypot(o.x-r.dx,o.z-r.dz),Math.hypot(o.x-r.dx2,o.z-r.dz2));if(d<lim&&(!shopN||d<shopN.d))shopN={ad:r.ad,d,ruko:true};}}
   if(!S.inCar&&S.mode==='free'&&!S.shopOpen){for(const h of HOUSES)if(h.own){const d=Math.hypot(pl.x-h.dx,pl.z-h.dz);if(d<7&&(!shopN||d<shopN.d))shopN={ad:{name:h.apt?'Garasi Apartemenmu · Sibiru Tower':'Garasi Rumahmu · Sibiru Residence'},d,house:true};}
   }
   if(S.mode==='free'&&!S.shopOpen&&!R.on&&(!S.inCar||Math.abs(car.v)<4)){const o=S.inCar?car:pl;for(const m of LMS)if((m.t==='bengkel'||m.t==='salon'||m.t==='showroom'||m.t==='pom'||m.t==='bantuan')&&m.on){const d=Math.hypot(o.x-m.x,o.z-(m.z+6));if(d<(S.inCar?16:10)&&(!shopN||d<shopN.d))shopN={ad:{name:({salon:'Salon Mobil Kinclong',showroom:'Showroom Mobil Second',pom:'Pom Bensin Sibiru',bantuan:'Pusat Bantuan',bengkel:'Bengkel Sibiru'})[m.t]},d,bengkel:true,gm:m.t};}}
@@ -4403,13 +4408,13 @@ function radioStep(t,k){const st=RADIO.st,D=RADIO.g,b=60/RST[st].bpm/2,i=k%16,ba
     if([0,3,6,8,11,14].includes(i))rNote(t,i%8===0?160:240,0.16,'sine',0.13,D,i%8===0?70:120);
     if([2,5,10,13].includes(i))rNoise(t,0.08,2500,0.07,D,'bandpass');if(i%4===0)rNote(t,mtf(45),b*1.5,'triangle',0.06,D);}
 }
-function radioTick(){if(!ac||!RADIO.st)return;if(!RADIO.g){RADIO.g=ac.createGain();RADIO.g.connect(A.master);}
+function radioTick(){return;if(!ac||!RADIO.st)return;if(!RADIO.g){RADIO.g=ac.createGain();RADIO.g.connect(A.master);}
   const want=(soundOn&&S.mode!=='menu'&&!CIN.on)?(S.inCar?0.9:0.25):0;RADIO.g.gain.setTargetAtTime(want,ac.currentTime,0.2);
   if(want<=0)return;const b=60/RST[RADIO.st].bpm/2;if(RADIO.next<ac.currentTime)RADIO.next=ac.currentTime+0.05;
   while(RADIO.next<ac.currentTime+0.25){try{radioStep(RADIO.next,RADIO.step);}catch(e){}RADIO.next+=b;RADIO.step++;}}
 function radioCycle(){initAudio();RADIO.st=(RADIO.st+1)%RST.length;RADIO.step=0;RADIO.next=0;$('bRadio').classList.toggle('on',RADIO.st>0);toast(RADIO.st?'📻 '+RST[RADIO.st].n:'📻 Radio mati',1400);}
-$('bRadio').addEventListener('click',radioCycle);$('bPho').addEventListener('click',phoOpen);
-addEventListener('keydown',e=>{if(e.target&&e.target.tagName==='INPUT')return;if(e.code==='KeyR'&&S.mode!=='menu')radioCycle();if(e.code==='KeyP'&&S.mode!=='menu'){PH76.on?phoClose():phoOpen();}if(e.code==='Escape'&&PH76.on)phoClose();});
+$('bPho').addEventListener('click',phoOpen);
+addEventListener('keydown',e=>{if(e.target&&e.target.tagName==='INPUT')return;if(e.code==='KeyP'&&S.mode!=='menu'){PH76.on?phoClose():phoOpen();}if(e.code==='Escape'&&PH76.on)phoClose();});
 const SND76={g:1,thr:0};
 function engineFx(thr){if(!ac||!soundOn||!S.inCar)return;if(car.gear!==SND76.g){if(car.gear>SND76.g&&thr>0.3)rNoise(ac.currentTime,0.06,900,0.06,A.master,'bandpass');SND76.g=car.gear;}
   if(CUST.ext.eng2&&SND76.thr>0.8&&thr<0.1&&car.rpm>4200){const t=ac.currentTime;rNoise(t,0.07,300,0.18,A.master,'lowpass');rNoise(t+0.09,0.05,400,0.1,A.master,'lowpass');}
@@ -4473,7 +4478,7 @@ updPts();
  walk(document.body);
  new MutationObserver(ms=>{for(const m of ms){if(m.type==='characterData')fixNode(m.target);else m.addedNodes.forEach(walk);}}).observe(document.body,{subtree:true,childList:true,characterData:true});}
 
-window.__jimny={PREM,premUntil,pb,renderShopCoin,redeemCode,renderSpec,COINPK,PREMPK,bogClear,PH76,BOG,KV,RADIO,dState,dProg,kvStart,kvState,bogStart,winchGo,phoOpen,phoClose,lvLine,LB,renderHub,plvOf,startMission,CLOTS:()=>CLOTS,BILLS,INFOC:()=>INFOC,openInfo,renderInfo,setPIT:v=>{PIT=v;},cam,vehApply,startGhost,setGHD:v=>{GHD=v;},GHS,ACT,R,startMode,standings,TWRS,PK,parkCar,unparkAt,callTow,HANGS,hangXZ,GH,REM,HN:()=>HN,setHN:v=>{HN=v;},ghostStep,carMesh,keys,inHouse,collide,garPick,garBuy,cancelPrev,getPrev:()=>PREV,scene,cam,CIN,startWelcome,endWelcome,cinCam,monGet,monAdd,ownGet,GAR,garGate,renderGar,LMS,getFuel:()=>FUEL,setFuel:v=>{FUEL=v;},NPK1,NPK2,PBOX,CAMPERS,CAMPF,update,stepMission,getCH:()=>CH,pl,fit,PS,H,PUD,HOUSES,startMission,MI,stuck,addRock,rockH,shopN:()=>shopN,openShop,RUKOS,GATES,RUKO,car,pl,S,PUD,HILLS,ROCKC,ROCKB,grid,R,WP,N,ACT,LV,RTS,stepCar,CK,setCockpit,carBumps,stepAI,applyAll,MUDZ,PS,pathAt,applyRoute,startMode};
+window.__jimny={car,S,pl,action,PREM,premUntil,pb,renderShopCoin,redeemCode,renderSpec,COINPK,PREMPK,bogClear,PH76,BOG,KV,RADIO,dState,dProg,kvStart,kvState,bogStart,winchGo,phoOpen,phoClose,lvLine,LB,renderHub,plvOf,startMission,CLOTS:()=>CLOTS,BILLS,INFOC:()=>INFOC,openInfo,renderInfo,setPIT:v=>{PIT=v;},cam,vehApply,startGhost,setGHD:v=>{GHD=v;},GHS,ACT,R,startMode,standings,TWRS,PK,parkCar,unparkAt,callTow,HANGS,hangXZ,GH,REM,HN:()=>HN,setHN:v=>{HN=v;},ghostStep,carMesh,keys,inHouse,collide,garPick,garBuy,cancelPrev,getPrev:()=>PREV,scene,cam,CIN,startWelcome,endWelcome,cinCam,monGet,monAdd,ownGet,GAR,garGate,renderGar,LMS,getFuel:()=>FUEL,setFuel:v=>{FUEL=v;},NPK1,NPK2,PBOX,CAMPERS,CAMPF,update,stepMission,getCH:()=>CH,pl,fit,PS,H,PUD,HOUSES,startMission,MI,stuck,addRock,rockH,shopN:()=>shopN,openShop,RUKOS,GATES,RUKO,car,pl,S,PUD,HILLS,ROCKC,ROCKB,grid,R,WP,N,ACT,LV,RTS,stepCar,CK,setCockpit,carBumps,stepAI,applyAll,MUDZ,PS,pathAt,applyRoute,startMode};
 resize();
 toMenu();
 if(!ME.reg)showReg();
