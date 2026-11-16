@@ -2781,11 +2781,24 @@ function carBumps(dt){
 /* ---------- modes ---------- */
 function settle(){car.air=false;car.yv=0;car.vyG=0;car.vx=car.vz=car.v=0;car.steer=0;car.rpm=900;car.gear=1;car.wet=false;fit(car.x,car.z,car.h);car.y=GF.y;car.pitch=GF.pitch;car.roll=GF.roll;stepCar(0.001,0,0,true);}
 function placeAtStart(u,lat){u=u===undefined?-0.03:u;lat=lat||0;const p=pathAt(u),q=pathAt(u+0.03),tx=q[0]-p[0],tz=q[1]-p[1],Ln=Math.hypot(tx,tz)||1;car.x=p[0]+tz/Ln*lat;car.z=p[1]-tx/Ln*lat;car.h=Math.atan2(tx,tz);settle();}
+let RESTIN=false,posT=0;
+function posKey(){return 'jimnyPos_'+MAP.id;}
 function spawnFree(){
-  car.x=0;car.z=0;car.h=0.5;settle();
+  RESTIN=false;
+  car.x=0;car.z=0;car.h=0.5;
+  const hm=HOUSES.find(q=>q.own);
+  if(hm){car.x=hm.x+hm.ox*13;car.z=hm.z+hm.oz*13;car.h=Math.atan2(hm.ox,hm.oz);}
+  car.vx=car.vz=0;car.v=0;settle();
   pl.x=car.x-Math.cos(car.h)*2.6;pl.z=car.z+Math.sin(car.h)*2.6;pl.h=car.h+0.6;pl.sp=0;pl.y=H(pl.x,pl.z);
+  try{const sv=JSON.parse(localStorage.getItem(posKey())||'null');
+    if(sv&&isFinite(sv.x)&&isFinite(sv.z)&&Math.abs(sv.x)<2000&&Math.abs(sv.z)<2000){car.x=sv.x;car.z=sv.z;car.h=sv.h||0;car.vx=car.vz=0;car.v=0;settle();
+      pl.x=sv.px;pl.z=sv.pz;pl.h=sv.ph||0;pl.sp=0;pl.y=H(pl.x,pl.z);RESTIN=!!sv.ic;}}catch(e){}
   stepPerson(0.001,{thr:0,str:0,run:false});
 }
+function posSave(dt,force){posT-=dt;if(posT>0&&!force)return;posT=2;
+  if(S.mode!=='free'||R.on||trav||PK.on||CIN.on||MI.on)return;
+  try{localStorage.setItem(posKey(),JSON.stringify({x:+car.x.toFixed(1),z:+car.z.toFixed(1),h:+car.h.toFixed(2),px:+pl.x.toFixed(1),pz:+pl.z.toFixed(1),ph:+pl.h.toFixed(2),ic:S.inCar?1:0}));}catch(e){}}
+addEventListener('pagehide',()=>posSave(0,true));document.addEventListener('visibilitychange',()=>{if(document.hidden)posSave(0,true);});
 let gridUsed=0;
 function twPt(t,lx,lz){const c=Math.cos(t.yaw),s=Math.sin(t.yaw);return[t.x+lx*c+lz*s,t.z-lx*s+lz*c];}
 function parkCar(t){PK.on=true;PK.t=t.idx;car.v=0;car.vx=car.vz=0;car.x=t.pk[0];car.z=t.pk[1];car.h=t.yaw;S.inCar=false;person.visible=true;carMesh.visible=false;
@@ -2801,7 +2814,7 @@ function startMode(m,lv,grid){
   S.mode=m;R.type=m==='free'?'':m;R.on=false;R.done=false;R.level=0;ring.visible=false;hideAI();
   $('menu').hidden=true;$('end').hidden=true;$('hud').hidden=false;car.dirt=0;
   if(m!=='free')unparkQuiet();
-  if(m==='free'){applyAll();spawnFree();S.inCar=false;person.visible=true;toast('Jalan ke mobil, lalu masuk',2200);
+  if(m==='free'){applyAll();spawnFree();S.inCar=false;person.visible=true;if(RESTIN){S.inCar=true;person.visible=false;RESTIN=false;toast('Lanjut dari posisi terakhir',1800);}else toast('Jalan ke mobil, lalu masuk',2200);
     if(PK.on){const t=TWRS[PK.t];if(t){car.x=t.pk[0];car.z=t.pk[1];car.h=t.yaw;settle();carMesh.visible=false;const q=twPt(t,4,16.5);pl.x=q[0];pl.z=q[1];pl.h=t.yaw;pl.y=H(pl.x,pl.z);stepPerson(0.001,{thr:0,str:0,run:false});toast('Mobilmu terparkir di basement Sibiru Tower '+t.letter,3000);}else{PK.on=false;carMesh.visible=true;}}}
   else{
     R.on=true;R.passed=0;R.laps=1;R.clock=0;R.cd=3;R.prog=0;R.off=0;R.hold=0;
@@ -4031,7 +4044,7 @@ function update(dt){
   if(S.mode==='free'&&!S.shopOpen&&!R.on&&!MI.on&&TWRS.length){const o=S.inCar?car:pl;for(const t of TWRS){const d=Math.hypot(o.x-t.pk[0],o.z-t.pk[1]);
     if(S.inCar&&!PK.on&&Math.abs(car.v)<4&&d<10&&(!shopN||d<shopN.d))shopN={ad:{name:'Basement Sibiru Tower '+t.letter},d,park:t};
     if(!S.inCar&&PK.on&&PK.t===t.idx&&d<10&&(!shopN||d<shopN.d))shopN={ad:{name:'Ambil mobil · Sibiru Tower '+t.letter},d,park:t};}}
-  odoStep(dt);trafStep(dt);ambTick(dt);if(infoTick)infoTick(dt);
+  posSave(dt);odoStep(dt);trafStep(dt);ambTick(dt);if(infoTick)infoTick(dt);
   gateCheck();stepMission(dt);netTick(dt);if(MAP.city&&HOUSES.length)houseLabels(dt);
   if(CH&&!S.shopOpen){CH.t-=dt;if(CH.t<=0){const c=CH;CH=null;if(S.mode==='free')startMission(c.type,c.lvl,true);}}
   if(!S.inCar&&S.mode==='free'&&!S.shopOpen&&!MI.on){for(const c of CAMPERS){if(S.t>c.t&&Math.hypot(pl.x-c.x,pl.z-c.z)<4.5){c.t=S.t+14;toast(c.n+': '+c.lines[c.i++%c.lines.length],3200);break;}}}
@@ -4478,7 +4491,7 @@ updPts();
  walk(document.body);
  new MutationObserver(ms=>{for(const m of ms){if(m.type==='characterData')fixNode(m.target);else m.addedNodes.forEach(walk);}}).observe(document.body,{subtree:true,childList:true,characterData:true});}
 
-window.__jimny={car,S,pl,action,PREM,premUntil,pb,renderShopCoin,redeemCode,renderSpec,COINPK,PREMPK,bogClear,PH76,BOG,KV,RADIO,dState,dProg,kvStart,kvState,bogStart,winchGo,phoOpen,phoClose,lvLine,LB,renderHub,plvOf,startMission,CLOTS:()=>CLOTS,BILLS,INFOC:()=>INFOC,openInfo,renderInfo,setPIT:v=>{PIT=v;},cam,vehApply,startGhost,setGHD:v=>{GHD=v;},GHS,ACT,R,startMode,standings,TWRS,PK,parkCar,unparkAt,callTow,HANGS,hangXZ,GH,REM,HN:()=>HN,setHN:v=>{HN=v;},ghostStep,carMesh,keys,inHouse,collide,garPick,garBuy,cancelPrev,getPrev:()=>PREV,scene,cam,CIN,startWelcome,endWelcome,cinCam,monGet,monAdd,ownGet,GAR,garGate,renderGar,LMS,getFuel:()=>FUEL,setFuel:v=>{FUEL=v;},NPK1,NPK2,PBOX,CAMPERS,CAMPF,update,stepMission,getCH:()=>CH,pl,fit,PS,H,PUD,HOUSES,startMission,MI,stuck,addRock,rockH,shopN:()=>shopN,openShop,RUKOS,GATES,RUKO,car,pl,S,PUD,HILLS,ROCKC,ROCKB,grid,R,WP,N,ACT,LV,RTS,stepCar,CK,setCockpit,carBumps,stepAI,applyAll,MUDZ,PS,pathAt,applyRoute,startMode};
+window.__jimny={startMode,car,S,pl,action,PREM,premUntil,pb,renderShopCoin,redeemCode,renderSpec,COINPK,PREMPK,bogClear,PH76,BOG,KV,RADIO,dState,dProg,kvStart,kvState,bogStart,winchGo,phoOpen,phoClose,lvLine,LB,renderHub,plvOf,startMission,CLOTS:()=>CLOTS,BILLS,INFOC:()=>INFOC,openInfo,renderInfo,setPIT:v=>{PIT=v;},cam,vehApply,startGhost,setGHD:v=>{GHD=v;},GHS,ACT,R,startMode,standings,TWRS,PK,parkCar,unparkAt,callTow,HANGS,hangXZ,GH,REM,HN:()=>HN,setHN:v=>{HN=v;},ghostStep,carMesh,keys,inHouse,collide,garPick,garBuy,cancelPrev,getPrev:()=>PREV,scene,cam,CIN,startWelcome,endWelcome,cinCam,monGet,monAdd,ownGet,GAR,garGate,renderGar,LMS,getFuel:()=>FUEL,setFuel:v=>{FUEL=v;},NPK1,NPK2,PBOX,CAMPERS,CAMPF,update,stepMission,getCH:()=>CH,pl,fit,PS,H,PUD,HOUSES,startMission,MI,stuck,addRock,rockH,shopN:()=>shopN,openShop,RUKOS,GATES,RUKO,car,pl,S,PUD,HILLS,ROCKC,ROCKB,grid,R,WP,N,ACT,LV,RTS,stepCar,CK,setCockpit,carBumps,stepAI,applyAll,MUDZ,PS,pathAt,applyRoute,startMode};
 resize();
 toMenu();
 if(!ME.reg)showReg();
