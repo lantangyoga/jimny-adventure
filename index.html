@@ -1278,7 +1278,7 @@ if(CITY){
   }else if(type==='braga'){
    for(let lx=-70;lx<=70;lx+=14)for(const s of[-1,1]){const px=lx,pz=s*8.4;
     const gy=H(x+px,z+pz);const pole=new T.Mesh(new T.CylinderGeometry(0.09,0.12,4.6,8),dark);pole.position.set(px,gy-y+2.3,pz);g.add(pole);
-    const lamp=new T.Mesh(new T.SphereGeometry(0.34,10,8),SM(0xfff0c0,0.2,0,{emissive:C(0xffe9a8),emissiveIntensity:0.9}));lamp.position.set(px,gy-y+4.8,pz);g.add(lamp);}
+    const lamp=new T.Mesh(new T.SphereGeometry(0.34,10,8),SM(0xfff0c0,0.2,0,{emissive:C(0xffe9a8),emissiveIntensity:0.9}));lamp.position.set(px,gy-y+4.8,pz);g.add(lamp);obs.push([x+px,z+pz,0.45]);}
    ly=14;
   }else if(type==='taman'){
    const gr=SM(0x4f8a45,0.95),path=SM(0xd8cdb4,0.9),lp=SM(0xfff0c0,0.2,0,{emissive:C(0xffe9a8),emissiveIntensity:0.9});
@@ -1292,7 +1292,7 @@ if(CITY){
    for(const [bx2,bz,ry] of[[-5,-10.5,0],[5,10.5,Math.PI],[-10.5,5,Math.PI/2],[10.5,-5,-Math.PI/2]]){
     const b=new T.Group();mk(b,BX(3.2,0.4,1),wood,0,0.75,0);mk(b,BX(3.2,0.8,0.18),wood,0,1.15,-0.45);mk(b,BX(0.2,0.7,0.8),dark,-1.4,0.4,0);mk(b,BX(0.2,0.7,0.8),dark,1.4,0.4,0);
     b.position.set(bx2,0.3,bz);b.rotation.y=ry;g.add(b);}
-   for(const [lx2,lz2] of[[-4,-4],[4,4],[-4,4],[4,-4]]){mk(g,new T.CylinderGeometry(0.1,0.13,4.2,8),dark,lx2*3.2,2.4,lz2*3.2);mk(g,new T.SphereGeometry(0.38,10,8),lp,lx2*3.2,4.7,lz2*3.2);}
+   for(const [lx2,lz2] of[[-4,-4],[4,4],[-4,4],[4,-4]]){mk(g,new T.CylinderGeometry(0.1,0.13,4.2,8),dark,lx2*3.2,2.4,lz2*3.2);mk(g,new T.SphereGeometry(0.38,10,8),lp,lx2*3.2,4.7,lz2*3.2);obs.push([x+lx2*3.2,z+lz2*3.2,0.45]);}
    ly=14;
   }else if(type==='cafe'){
    const wall=SM(0xe9dcc1,0.85),glassK=SM(0x1d2b36,0.12,0.4,{emissive:C(0xffd9a0),emissiveIntensity:0.3}),dk=SM(0x3a2a1c,0.8);
@@ -1508,7 +1508,7 @@ const RUKOS=[],GATES=[];
  });
  /* street details: two benches + lamps */
  for(const lx of[-14,14]){const p=toW(lx,0),pl2=new T.Mesh(new T.CylinderGeometry(0.1,0.12,5,8),darkM);pl2.position.set(p[0],RUKO.y+2.4,p[1]);scene.add(pl2);
-  const lm=new T.Mesh(new T.SphereGeometry(0.4,10,8),SM(0xfff0c0,0.2,0,{emissive:C(0xffe9a8),emissiveIntensity:0.9}));lm.position.set(p[0],RUKO.y+5.1,p[1]);scene.add(lm);}
+  const lm=new T.Mesh(new T.SphereGeometry(0.4,10,8),SM(0xfff0c0,0.2,0,{emissive:C(0xffe9a8),emissiveIntensity:0.9}));lm.position.set(p[0],RUKO.y+5.1,p[1]);scene.add(lm);addOb(p[0],p[1],0.45);}
 
  /* ---- Pusat Informasi: menara di tengah ruko + videotron 2 muka ---- */
  const VT={c:cv(1024,512),t:0,acc:0};VT.g=VT.c.getContext('2d');VT.tx=new T.CanvasTexture(VT.c);VT.tx.encoding=T.sRGBEncoding;VT.tx.anisotropy=4;
@@ -4016,7 +4016,7 @@ function cityDeco(){
   const poles=new T.InstancedMesh(new T.BoxGeometry(0.2,5.6,0.2),poleM,N),headA=new T.InstancedMesh(new T.BoxGeometry(0.5,1.5,0.4),headM,N),headB=new T.InstancedMesh(new T.BoxGeometry(0.4,1.5,0.5),headM,N);
   LAMPA=new T.InstancedMesh(new T.BoxGeometry(0.3,0.3,0.5),new T.MeshBasicMaterial({color:0xffffff}),N*6);
   LAMPB=new T.InstancedMesh(new T.BoxGeometry(0.5,0.3,0.3),new T.MeshBasicMaterial({color:0xffffff}),N*6);
-  pts.forEach((q,n)=>{const [x,z]=q,y=H(x,z);
+  pts.forEach((q,n)=>{const [x,z]=q,y=H(x,z);addOb(x,z,0.45);
     d.rotation.set(0,0,0);d.position.set(x,y+2.8,z);d.updateMatrix();poles.setMatrixAt(n,d.matrix);
     d.position.set(x,y+5.0,z);d.updateMatrix();headA.setMatrixAt(n,d.matrix);
     d.position.set(x,y+3.2,z);d.updateMatrix();headB.setMatrixAt(n,d.matrix);
@@ -4850,7 +4850,7 @@ updPts();
  walk(document.body);
  new MutationObserver(ms=>{for(const m of ms){if(m.type==='characterData')fixNode(m.target);else m.addedNodes.forEach(walk);}}).observe(document.body,{subtree:true,childList:true,characterData:true});}
 
-window.__jimny={MP,mpOpen,mpResume,mpBack,GHS,finish,TOWA,callTow,openDm,ACT,R,startMode,car,S,pl,action,PREM,premUntil,pb,renderShopCoin,redeemCode,renderSpec,COINPK,PREMPK,bogClear,PH76,BOG,KV,RADIO,dState,dProg,kvStart,kvState,bogStart,winchGo,phoOpen,phoClose,lvLine,LB,renderHub,plvOf,startMission,CLOTS:()=>CLOTS,BILLS,INFOC:()=>INFOC,openInfo,renderInfo,setPIT:v=>{PIT=v;},cam,vehApply,startGhost,setGHD:v=>{GHD=v;},GHS,ACT,R,startMode,standings,TWRS,PK,parkCar,unparkAt,callTow,HANGS,hangXZ,GH,REM,HN:()=>HN,setHN:v=>{HN=v;},ghostStep,carMesh,keys,inHouse,collide,garPick,garBuy,cancelPrev,getPrev:()=>PREV,scene,cam,CIN,startWelcome,endWelcome,cinCam,monGet,monAdd,ownGet,GAR,garGate,renderGar,LMS,getFuel:()=>FUEL,setFuel:v=>{FUEL=v;},NPK1,NPK2,PBOX,CAMPERS,CAMPF,update,stepMission,getCH:()=>CH,pl,fit,PS,H,PUD,HOUSES,startMission,MI,stuck,addRock,rockH,shopN:()=>shopN,openShop,RUKOS,GATES,RUKO,car,pl,S,PUD,HILLS,ROCKC,ROCKB,grid,R,WP,N,ACT,LV,RTS,stepCar,CK,setCockpit,carBumps,stepAI,applyAll,MUDZ,PS,pathAt,applyRoute,startMode};
+window.__jimny={collide,MAPG:()=>MAP,MP,mpOpen,mpResume,mpBack,GHS,finish,TOWA,callTow,openDm,ACT,R,startMode,car,S,pl,action,PREM,premUntil,pb,renderShopCoin,redeemCode,renderSpec,COINPK,PREMPK,bogClear,PH76,BOG,KV,RADIO,dState,dProg,kvStart,kvState,bogStart,winchGo,phoOpen,phoClose,lvLine,LB,renderHub,plvOf,startMission,CLOTS:()=>CLOTS,BILLS,INFOC:()=>INFOC,openInfo,renderInfo,setPIT:v=>{PIT=v;},cam,vehApply,startGhost,setGHD:v=>{GHD=v;},GHS,ACT,R,startMode,standings,TWRS,PK,parkCar,unparkAt,callTow,HANGS,hangXZ,GH,REM,HN:()=>HN,setHN:v=>{HN=v;},ghostStep,carMesh,keys,inHouse,collide,garPick,garBuy,cancelPrev,getPrev:()=>PREV,scene,cam,CIN,startWelcome,endWelcome,cinCam,monGet,monAdd,ownGet,GAR,garGate,renderGar,LMS,getFuel:()=>FUEL,setFuel:v=>{FUEL=v;},NPK1,NPK2,PBOX,CAMPERS,CAMPF,update,stepMission,getCH:()=>CH,pl,fit,PS,H,PUD,HOUSES,startMission,MI,stuck,addRock,rockH,shopN:()=>shopN,openShop,RUKOS,GATES,RUKO,car,pl,S,PUD,HILLS,ROCKC,ROCKB,grid,R,WP,N,ACT,LV,RTS,stepCar,CK,setCockpit,carBumps,stepAI,applyAll,MUDZ,PS,pathAt,applyRoute,startMode};
 resize();
 toMenu();
 if(!ME.reg)showReg();
