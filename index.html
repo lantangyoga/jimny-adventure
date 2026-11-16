@@ -1448,7 +1448,7 @@ const RUKOS=[],GATES=[];
   const tw=g.measureText(txt).width||1,off=(t*110)%tw;g.fillStyle='#ffd37a';for(let x=-off;x<W;x+=tw)g.fillText(txt,x,486);
   g.fillStyle='#d62828';g.fillRect(24,22,96,38);g.fillStyle='#fff';g.font='bold 24px Arial';g.fillText('● LIVE',36,42);
   const d=new Date();g.textAlign='right';g.fillStyle='rgba(255,255,255,.9)';g.fillText(('0'+d.getHours()).slice(-2)+':'+('0'+d.getMinutes()).slice(-2),W-28,42);}
- {
+ if(false){/* menara Pusat Informasi dinonaktifkan sementara */
   const g=new T.Group(),add=(geo,m,x,y,z)=>{const o=new T.Mesh(geo,m);o.position.set(x,y,z);g.add(o);return o;};
   const stone=SM(0xd8d2c4,0.8),fin=SM(0xe8e4da,0.6,0.2),steel=SM(0x2b3138,0.5,0.5);
   const gl2=new T.MeshStandardMaterial({color:C(0x16222d),roughness:0.1,metalness:0.5,emissive:C(0x6fa8ff),emissiveIntensity:0.14});
