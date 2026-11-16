@@ -190,8 +190,8 @@ h1 span{color:var(--blue)}
 .card[disabled]:hover{border-color:var(--line)}
 .tag{display:inline-block;font:600 11px var(--disp);letter-spacing:.12em;text-transform:uppercase;border:1px solid var(--amber);color:var(--amber);padding:1px 6px;border-radius:99px;margin-left:6px;vertical-align:middle}
 .help{margin-top:12px;font-size:13px;color:var(--mute);line-height:1.4}
-#end{position:absolute;inset:0;display:flex;background:rgba(8,14,11,.66);padding:20px;overflow:auto}
-#end[hidden]{display:none}
+#end{z-index:50;position:absolute;inset:0;display:flex;background:rgba(8,14,11,.66);padding:20px;overflow:auto}
+#end[hidden]{display:none}#end button,#end .chip{touch-action:manipulation;position:relative;z-index:1}
 .panel{background:rgba(14,25,19,.96);border:1px solid var(--line);border-radius:14px;padding:22px 24px;text-align:center;max-width:340px;width:100%;margin:auto}
 .panel h2{margin:0;font:800 44px/1 var(--disp);text-transform:uppercase;color:var(--amber)}
 .panel p{margin:8px 0;font:600 20px var(--disp);letter-spacing:.05em;text-transform:uppercase}
@@ -519,7 +519,7 @@ h1.logoH{margin:0 0 8px;font-size:0;line-height:0}h1.logoH .logo{width:min(380px
   </div></div>
 
   <div id="reg" hidden role="dialog" aria-modal="true" aria-labelledby="rgT"><div class="shopbox regbox">
-    <div class="shophd" style="background:#1f5fd0"><b id="rgT">Daftar pemain</b><span id="rgSub">Cukup tulis username Instagram dan emailmu. Kamu otomatis punya rumah dan garasi di Sibiru Residence, Kota Bandung, lalu langsung custom mobilmu.</span></div>
+    <div class="shophd" style="background:#1f5fd0"><b id="rgT">Daftar pemain</b><span id="rgSub">Cukup tulis username Instagram dan emailmu. Kamu otomatis punya rumah dan garasi di Sibiru Residence, Kota Bandung (kalau 700 rumah sudah penuh, kamu dapat unit apartemen di Sibiru Tower), lalu langsung custom mobilmu.</span></div>
     <div id="rgS1">
       <div class="rgf" id="rgFName"><label for="rgName">Username Instagram</label><input id="rgName" maxlength="31" autocomplete="off" autocapitalize="none" spellcheck="false" placeholder="@username_kamu"></div>
       <div class="rgf" id="rgFMail"><label for="rgMail">Email (untuk masuk di perangkat lain)</label><input id="rgMail" type="email" inputmode="email" autocomplete="email" autocapitalize="none" spellcheck="false" placeholder="email@kamu.com"></div>
@@ -2346,6 +2346,17 @@ $('bCam').addEventListener('pointerdown',e=>{e.preventDefault();toggleCam();});
 hold('bBrake',v=>{brakeHeld=v;});hold('bGas',v=>{gasHeld=v;});hold('bRev',v=>{revHeld=v;});
 $('bAct').addEventListener('pointerdown',e=>{e.preventDefault();action();});
 $('drv').addEventListener('pointerdown',e=>{e.preventDefault();toggleDrive();});
+/* lepas semua input yang mungkin nyangkut (jari masih "menempel" saat dialog muncul) */
+function releaseInputs(){
+  try{jReset();}catch(e){}
+  gasHeld=brakeHeld=revHeld=lookHeld=false;CAMO.id=null;
+  document.querySelectorAll('#tb .down,.cams .down').forEach(el=>el.classList.remove('down'));
+  ['gl','joyzone','bGas','bRev','bBrake','bLook'].forEach(id=>{const el=$(id);if(!el)return;for(let i=0;i<12;i++){try{if(el.hasPointerCapture(i))el.releasePointerCapture(i);}catch(_){}}});
+}
+/* catat galat tak terduga supaya mudah dilacak */
+{let ne=0;const logErr=m=>{try{const a=JSON.parse(localStorage.getItem('jimnyErrLog')||'[]');a.push({t:new Date().toISOString(),m:String(m).slice(0,200),mode:S.mode,ty:R.type});localStorage.setItem('jimnyErrLog',JSON.stringify(a.slice(-8)));}catch(_){}
+  if(ne++<3)try{toast('Galat kecil: '+String(m).slice(0,60),3000);}catch(_){}};
+ addEventListener('error',e=>logErr((e&&e.message)||'error'));addEventListener('unhandledrejection',e=>logErr((e&&e.reason&&e.reason.message)||e.reason||'promise'));}
 function readInput(){
   let thr=0,str=0;
   if(keys.KeyW||keys.ArrowUp)thr+=1;if(keys.KeyS||keys.ArrowDown)thr-=1;
@@ -2870,6 +2881,7 @@ function startMode(m,lv,grid){
   camSnap=true;applyView();
 }
 function toMenu(){
+  try{releaseInputs();}catch(e){}
   if(MP.room&&!MP.keep)mpLeave();
   const _w=S.mode!=='menu';CH=null;msReset();$('ms').hidden=true;$('rmap').hidden=true;
   S.mode='menu';R.on=false;R.done=false;ring.visible=false;hideAI();S.pend=R.type==='ghost'?'ghost':'race';showLv((R.type==='race'||R.type==='qual'||R.type==='ghost')&&R.level>0);
@@ -3650,7 +3662,7 @@ function showLv(v){$('lv').hidden=!v;const ey=document.querySelector('#lv .eyebr
 /* hadiah balap: dibandingkan bayaran misi setara (level misi = level balap / 2, bintang 2): juara 1 = 5x, juara 2 = 2x, juara 3 = 1x */
 function raceMon(L,rank){const m=5000+Math.ceil(L/2)*3000+3000;return rank===1?m*5:rank===2?m*2:rank===3?m:2500;}
 function finish(){
-  let pts=0,mon=null;
+  let pts=0,mon=null;try{releaseInputs();}catch(e){}
   R.done=true;ring.visible=false;$('next').hidden=true;$('endList').innerHTML='';$('next').textContent='Level berikutnya';$('again').textContent='Main lagi';$('next').classList.remove('main');$('again').classList.add('main');
   if(R.type==='qual'){
     const L=R.level,qt=qualTimes(L),lv=LV[L-1];
@@ -3705,6 +3717,10 @@ document.querySelectorAll('[data-mode]').forEach(b=>b.addEventListener('click',(
 $('lvGo').addEventListener('click',()=>{if(S.pend==='ghost')startGhost(selLv);else startMode('qual',selLv);});
 $('lvBack').addEventListener('click',()=>showLv(false));
 $('menuBtn').addEventListener('click',toMenu);$('toMenu').addEventListener('click',toMenu);
+/* cadangan untuk iPhone/WebView: bila 'click' tidak terkirim, pointerup tetap menjalankan tombol dialog */
+{const eb=$('end');let lastUp=0;
+ eb.addEventListener('click',e=>{if(e.isTrusted&&performance.now()-lastUp<700){e.stopImmediatePropagation();e.preventDefault();}},true);
+ eb.addEventListener('pointerup',e=>{if(e.pointerType==='mouse')return;const b=e.target&&e.target.closest&&e.target.closest('button');if(!b||b.disabled||b.hidden||!eb.contains(b))return;lastUp=performance.now();e.preventDefault();b.click();});}
 $('again').addEventListener('click',()=>{if(R.mp){mpBack(false);return;}if(R.type==='ghost')startGhost(R.level);else startMode(R.type,R.level,R.type==='race'?gridUsed:0);});
 $('next').addEventListener('click',()=>{if(R.mp){mpBack(true);return;}if(R.type==='qual')startMode('race',R.level,R.grid);else if(R.type==='ghost')startGhost(R.level+1);else startMode('qual',R.level+1);});
 
@@ -4462,7 +4478,7 @@ function netAreas(){const a=areaKeys();NET.own=a.own;
   for(const [k,ch] of NET.chs)if(!a.set.has(k)){try{ONL.removeChannel(ch);}catch(e){}NET.chs.delete(k);}}
 /* ----- hangout spots and offline "ghost" players ----- */
 const HANGS=[
- {id:'teras',n:'Duduk santai di teras rumah',s:'Di teras rumah',pose:'sit',own:1},
+ {id:'teras',n:'Duduk santai di teras rumah / lobby apartemen',s:'Di teras rumah',pose:'sit',own:1},
  {id:'cafe',n:'Nongkrong di Kafe Kopdar',s:'Nongkrong di Kafe',lm:'cafe',r:[11,16],pose:'idle'},
  {id:'warkop',n:'Ngopi di Warkop Sibiru',s:'Ngopi di Warkop',lm:'kuliner',stall:0,pose:'sit'},
  {id:'sate',n:'Makan sate di Pujasera',s:'Makan sate',lm:'kuliner',stall:1,pose:'sit'},
@@ -4482,8 +4498,8 @@ const HANGS=[
 const HGM={};HANGS.forEach(h=>HGM[h.id]=h);
 let HBS=null;
 function hangXZ(p){const hg=HGM[p.hang];if(!hg)return null;const sd=hid(p.id||p.name);
-  if(hg.own){if(!HBS){HBS=new Map();HOUSES.forEach(h=>HBS.set(h.slot,h));}const h=HBS.get(p.house_no%1000);if(!h)return null;const sg=(sd&1)?1:-1,x=h.x+h.ox*5.7-h.oz*sg*1.9,z=h.z+h.oz*5.7+h.ox*sg*1.9;return{x,z,yaw:Math.atan2(h.ox,h.oz),pose:'sit',stool:1};}
-  if(hg.apt){const t=APTS.length?APTS[sd%APTS.length]:null;if(!t)return null;const q=t.spot(sd);return{x:q.x,z:q.z,yaw:q.yaw+Math.PI,pose:hg.pose};}
+  if(hg.own){if(!HBS){HBS=new Map();HOUSES.forEach(h=>HBS.set(h.slot,h));}const h=HBS.get(p.house_no%1000);if(h){const sg=(sd&1)?1:-1,x=h.x+h.ox*5.7-h.oz*sg*1.9,z=h.z+h.oz*5.7+h.ox*sg*1.9;return{x,z,yaw:Math.atan2(h.ox,h.oz),pose:'sit',stool:1};}}
+  if(hg.apt||hg.own){const t=APTS.length?APTS[sd%APTS.length]:null;if(!t)return null;const q=t.spot(sd);return{x:q.x,z:q.z,yaw:q.yaw+Math.PI,pose:hg.own?'idle':hg.pose};}
   const m=LMS.find(q=>q.t===hg.lm);if(!m)return null;
   if(hg.stall!==undefined){const k=sd%8,sx=m.x-13.5+hg.stall*9;return{x:sx+(k%4-1.5)*1.2,z:m.z+(k<4?-8.3:-11.7),yaw:k<4?Math.PI:0,pose:'sit',seat:1};}
   if(hg.strip){const x=m.x+((sd%140)-70),z=m.z+((sd&2)?4.6:-4.6);return{x,z,yaw:(sd&4)?1.57:-1.57,pose:hg.pose};}
