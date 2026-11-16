@@ -354,7 +354,7 @@ h1.logoH{margin:0 0 8px;font-size:0;line-height:0}h1.logoH .logo{width:min(380px
       <div class="sec"><span>Permainan</span><div class="grp"><button class="chip" id="menuBtn" type="button">Menu utama</button><button class="chip" id="snd" type="button">Suara: nyala</button><button class="chip" id="fsBtn" type="button">Layar penuh</button></div><p id="fsHint" hidden style="margin:8px 0 0;font:600 12px/1.4 var(--body);color:var(--mute)">iPhone tidak mengizinkan layar penuh di Safari. Ketuk ikon Bagikan → <b>Tambah ke Layar Utama</b>, lalu buka game dari ikon itu agar tampil penuh tanpa bilah browser.</p></div>
       <div class="sec"><span>Waktu</span><div class="grp" id="setTime"><button type="button" class="chip" data-m="auto">Otomatis</button><button type="button" class="chip" data-m="day">Siang</button><button type="button" class="chip" data-m="dusk">Sore</button><button type="button" class="chip" data-m="night">Malam</button></div></div>
       <div class="sec"><span>Tampilkan di layar</span><div class="chk" id="setHud"></div></div></div></div>
-    <div class="cams" id="towRow" hidden style="top:calc(env(safe-area-inset-top,0px) + 54px)"><button class="chip" id="bTow" type="button">Panggil derek · Rp50.000</button></div>
+    <div class="cams" id="towRow" hidden style="top:calc(env(safe-area-inset-top,0px) + 54px)"><button class="chip" id="bTow" type="button">Panggil derek · 🪙500</button></div>
     <div class="cams" id="camRow" hidden><button class="chip" id="bCam" type="button">Kamera</button><button class="chip" id="bLook" type="button">Belakang</button></div>
     <div id="chat" hidden><div id="chatL"></div><form id="chatF" autocomplete="off"><input id="chatI" maxlength="200" placeholder="Ketik pesan…" enterkeyhint="send"><button class="chip" type="submit">Kirim</button></form></div>
     <div id="cd"></div>
@@ -2273,7 +2273,7 @@ $('todPop').addEventListener('click',e=>{const m=e.target.dataset&&e.target.data
 document.addEventListener('pointerdown',e=>{const p=$('todPop');if(!p.hidden&&!e.target.closest('#clkW'))p.hidden=true;});
 
 /* ---- setelan: tombol menu, suara, waktu, dan tampilan HUD ---- */
-const HUDI=[['clu','Speedometer & instrumen'],['rev','Gigi & putaran mesin'],['obj','Misi & uang'],['mm','Peta mini'],['zone','Nama area'],['clk','Jam'],['keys','Petunjuk tombol'],['board','Papan peringkat']];
+const HUDI=[['clu','Speedometer & instrumen'],['rev','Gigi & putaran mesin'],['obj','Misi & koin'],['mm','Peta mini'],['zone','Nama area'],['clk','Jam'],['keys','Petunjuk tombol'],['board','Papan peringkat']];
 let HUDO={};try{HUDO=JSON.parse(localStorage.getItem('jimnyHud')||'{}')||{};}catch(_){HUDO={};}
 function hudApply(){const h=$('hud');for(const [k] of HUDI)h.classList.toggle('hide-'+k,HUDO[k]===false);}
 {const box=$('setHud');for(const [k,n] of HUDI){const l=document.createElement('label'),i=document.createElement('input');i.type='checkbox';i.checked=HUDO[k]!==false;i.addEventListener('change',()=>{HUDO[k]=i.checked;try{localStorage.setItem('jimnyHud',JSON.stringify(HUDO));}catch(_){}hudApply();});l.append(i,document.createTextNode(n));box.appendChild(l);}hudApply();}
@@ -2764,11 +2764,12 @@ function msFree(minR,maxR,avoid,a0,a1){
 function msTarget(name,pt,hex){MI.tn=name;MI.tx=pt[0];MI.tz=pt[1];setBeacon(pt[0],pt[1],hex);WPT={name,x:pt[0],z:pt[1],keep:true};}
 function msReset(){MI.on=false;beacon.visible=false;stuck.visible=false;rope.visible=false;NPK1.visible=NPK2.visible=PBOX.visible=false;if(WPT&&WPT.keep)WPT=null;}
 function ptsGet(){let n=0;try{n=parseInt(localStorage.getItem('jimnyPts'))||0;}catch(e){}return n;}
-function updPts(){const e=$('ptsLine');if(e)e.textContent='Poin: '+ptsGet()+' · Uang: '+rp(monGet());}
-function rp(n){return 'Rp'+Math.round(n).toString().replace(/\B(?=(\d{3})+(?!\d))/g,'.');}
+function updPts(){const e=$('ptsLine');if(e)e.textContent='Poin: '+ptsGet()+' · Koin: '+rp(monGet());}
+/* mata uang game: Koin (disimpan dalam satuan lama, ditampilkan dibagi 100) */
+function rp(n){const v=Math.round(n/100);return '🪙\u2060'+(v<0?'-':'')+Math.abs(v).toString().replace(/\B(?=(\d{3})+(?!\d))/g,'.');}
 function monGet(){let n=0;try{n=parseInt(localStorage.getItem('jimnyMoney'))||0;}catch(e){}return n;}
 function monAdd(n){try{localStorage.setItem('jimnyMoney',String(Math.max(0,monGet()+Math.round(n))));}catch(e){}updPts();netSave();}
-function ptsAdd(n,m){try{localStorage.setItem('jimnyPts',String(ptsGet()+n));}catch(e){}monAdd(m!==undefined?m:n*500);updPts();netSave();}
+function ptsAdd(n,m){try{localStorage.setItem('jimnyPts',String(ptsGet()+n));}catch(e){}monAdd(m!==undefined?m:n*250);updPts();netSave();}
 const PRICE={col:150000,shape:350000,rim:75000,stk:50000,ext:{bar:500000,rack:500000,stripe:100000,snorkel:120000,lamp:180000,flare:150000,winch:600000,flag:40000,jerry:60000,eng1:350000,eng2:800000,tire:300000,tank:250000}};
 function ownGet(){let o=null;try{o=JSON.parse(localStorage.getItem('jimnyOwn')||'null');}catch(e){}return Array.isArray(o)?o:null;}
 function ownSet(o){try{localStorage.setItem('jimnyOwn',JSON.stringify(o));}catch(e){}netSave();}
@@ -2866,11 +2867,11 @@ function msEnd(ok,title,desc,stars){
   let next={label:'Coba lagi',fn:()=>startMission(type,lvl)},extra='';
   if(ok){misSet(type,Math.min(5,lvl+1));
     if(lvl<5)next={label:'Lanjut Level '+(lvl+1),fn:()=>startMission(type,lvl+1,true)};
-    else{next={label:'Ulangi dengan titik baru',fn:()=>startMission(type,5)};extra=' Level maksimum tamat! Ulangi kapan saja, titik misinya berbeda tiap kali, untuk terus cari uang.';}}
-  const pts=ok?40+lvl*20+stars*25:10,mon=ok?30000+lvl*10000+stars*5000:5000;ptsAdd(pts,mon);
+    else{next={label:'Ulangi dengan titik baru',fn:()=>startMission(type,5)};extra=' Level maksimum tamat! Ulangi kapan saja, titik misinya berbeda tiap kali, untuk terus cari koin.';}}
+  const pts=ok?40+lvl*20+stars*25:10,mon=ok?5000+lvl*3000+stars*1500:1000;ptsAdd(pts,mon);
   if(ok&&lvl<5&&type!=='foto'){CH={type,lvl:lvl+1,t:3.6};toast('Level '+lvl+' selesai '+('★'.repeat(stars)+'☆'.repeat(3-stars))+' · +'+rp(mon)+' · lanjut Level '+(lvl+1),3400);return;}
   if(ok)fbMaybe(3200);
-  openShop({name:title,photos:type==='foto'&&ok?MI.photos:[],tag:(stars?('★'.repeat(stars)+'☆'.repeat(3-stars))+' · ':'')+MISN[type]+' Level '+lvl,col:ok?'#2f7d4f':'#a8402f',desc:desc+' +'+pts+' poin dan +'+rp(mon)+' (uangmu '+rp(monGet())+').'+extra,products:[],next});
+  openShop({name:title,photos:type==='foto'&&ok?MI.photos:[],tag:(stars?('★'.repeat(stars)+'☆'.repeat(3-stars))+' · ':'')+MISN[type]+' Level '+lvl,col:ok?'#2f7d4f':'#a8402f',desc:desc+' +'+pts+' poin dan +'+rp(mon)+' (koinmu '+rp(monGet())+').'+extra,products:[],next});
 }
 function msShot(){try{renderer.render(scene,cam);const sc=renderer.domElement,c=document.createElement('canvas');c.width=480;c.height=270;const g=c.getContext('2d');
   const r=16/9,sw=sc.width,sh=sc.height;let w=sw,h=sh;if(sw/sh>r)w=sh*r;else h=sw/r;g.drawImage(sc,(sw-w)/2,(sh-h)/2,w,h,0,0,480,270);return c.toDataURL('image/jpeg',0.72);}catch(e){return '';}}
@@ -3228,14 +3229,14 @@ function renderHelp(){
   const bd=$('hlpBody');bd.innerHTML='';
   const card=(t,d)=>{const c=document.createElement('div');c.className='prod';const b=document.createElement('b');b.textContent=t;const sp=document.createElement('span');sp.textContent=d;c.append(b,sp);bd.appendChild(c);return c;};
   if(HT==='info'){
-    card('Kamu',(ME.name||'Pemain')+(ME.city?' · '+ME.city:'')+' · Uang '+rp(monGet())+' · Bensin '+Math.round(FUEL)+'%'+' · '+saveInfo());
+    card('Kamu',(ME.name||'Pemain')+(ME.city?' · '+ME.city:'')+' · Koin '+rp(monGet())+' · Bensin '+Math.round(FUEL)+'%'+' · '+saveInfo());
     card('Kota Bandung','Sibiru Residence (700 rumah pemain), Sibiru Tower (10 menara, 300 unit apartemen), Jl. Braga, Gedung Sate, Masjid Raya, Taman Kota, Kafe Kopdar, Campground Lembang, dan deretan ruko.');
-    card('Bensin','Tangki penuh cukup sekitar 50 km. Isi di Pom Bensin (Rp1.000 per 1%). Kalau habis di jalan, panggil derek atau jalan kaki ke Pom Bensin.');
+    card('Bensin','Tangki penuh cukup sekitar 50 km. Isi di Pom Bensin (🪙10 per 1%). Kalau habis di jalan, panggil derek atau jalan kaki ke Pom Bensin.');
     card('Parkir basement','Di Sibiru Tower, berhenti di depan pintu PARKIR BASEMENT lalu tekan tombol PARKIR. Mobilmu masuk basement dan tidak terlihat pemain lain. Ambil lagi lewat tombol AMBIL MOBIL.');
     card('Tempat belanja','Bengkel Sibiru: mesin, ban, tangki, aksesori tangguh. Salon Mobil Kinclong: cat, velg, stiker. Showroom Mobil Second: beli mobil baru, lalu pilih di Garasi rumahmu.');
     card('Pindah kota','Jakarta, Merapi, Bromo, Sumba, dan Lombok ada di balik gerbang peta. Buka tab Tempat untuk menandai gerbangnya, atau tekan M untuk peta lengkap. Kota baru terbuka lewat balapan Level 10 di peta sebelumnya, atau Upgrade.');
     card('Kontrol','WASD/panah: setir. E: masuk/keluar atau buka tempat. M: peta lengkap. F: 4x2/4x4. V: kamera dashboard.');
-    const c=card('Butuh bantuan?','Mobilmu mogok atau jauh dari mana-mana? Derek mengantar ke Pom Bensin (maks Rp50.000).');const b=document.createElement('button');b.type='button';b.className='chip';b.textContent='Panggil derek';b.addEventListener('click',()=>{closeShop();callTow();});c.appendChild(b);
+    const c=card('Butuh bantuan?','Mobilmu mogok atau jauh dari mana-mana? Derek mengantar ke Pom Bensin (maks 🪙500).');const b=document.createElement('button');b.type='button';b.className='chip';b.textContent='Panggil derek';b.addEventListener('click',()=>{closeShop();callTow();});c.appendChild(b);
   }else if(HT==='misi'){
     const u=misGet();
     ['pkg','tow','foto'].forEach(k=>{const c=card(MISN[k],MISD[k]+' Level maksimum terbuka: '+Math.min(5,u[k])+' dari 5.');const row=document.createElement('div');row.className='lvrow';
@@ -3289,7 +3290,7 @@ const ICO={
 let GAR={shop:false,mode:'home'};const SALONX=['stripe','lamp','flag'];
 function garGate(key,price){
   if(ownHas(key))return true;
-  if(monGet()<price){toast('Uang kurang '+rp(price-monGet())+' · kerjakan misi dulu',2400);return false;}
+  if(monGet()<price){toast('Koin kurang '+rp(price-monGet())+' · kerjakan misi dulu',2400);return false;}
   monAdd(-price);const o=ownGet()||[];o.push(key);ownSet(o);toast('Dibeli '+rp(price),1400);return true;
 }
 const cloneC=c=>Object.assign({},c,{ext:Object.assign({},c.ext)});
@@ -3302,7 +3303,7 @@ function garPick(k,price,name,fn){
   const snap=cloneC(CUST);fn();PREV={snap,k,price,name};applyCust();renderGar();
 }
 function garBuy(){
-  if(!PREV)return;if(monGet()<PREV.price){toast('Uang kurang '+rp(PREV.price-monGet())+' · kerjakan misi dulu',2400);return;}
+  if(!PREV)return;if(monGet()<PREV.price){toast('Koin kurang '+rp(PREV.price-monGet())+' · kerjakan misi dulu',2400);return;}
   $('cfmP').textContent='Saldomu akan terpotong '+rp(PREV.price)+' untuk '+PREV.name+'. Saldo sekarang '+rp(monGet())+', sisa '+rp(monGet()-PREV.price)+'.';$('cfm').hidden=false;
 }
 $('cfmNo').addEventListener('click',()=>{$('cfm').hidden=true;});
@@ -3322,9 +3323,9 @@ function renderGar0(){
   const gm=GAR.mode||'home',isB=gm==='bengkel',isS=gm==='salon',isV=gm==='showroom',isP=gm==='pom',vis=(id,on)=>{$(id).parentElement.style.display=on?'':'none';};
   $('gEy').textContent=isP?'Pom Bensin Sibiru · isi bensin':isV?'Showroom Mobil Second · beli mobil baru':isB?'Bengkel Sibiru · performa dan aksesori tangguh':(isS?'Salon Mobil Kinclong · cat, velg, stiker, tampilan':'Garasi · kustom mobilmu');
   const home=gm==='home',sty=home||isS;vis('gCar',home||isV);vis('gCol',sty);vis('gPlate',sty);vis('gShape',sty);vis('gRim',sty);vis('gStk',sty);vis('gPerf',home||isB);vis('gExt',home||isB||isS);
-  $('gHint').textContent=first?'Mobil standar. Warna pertama gratis. Modifikasi lain dibeli pakai uang hasil misi.':(isP?'Uangmu '+rp(monGet())+'. Bensin '+rp(FUELP)+' per 1%. Tekan tombol di bawah untuk mengisi.':'Uangmu '+rp(monGet())+'. Ketuk barang untuk pratinjau, lalu tekan Beli.')+(isP?'':isB?'':(isS?' Performa ada di Bengkel Sibiru.':(isV?' Mobil yang dibeli bisa dipilih di Garasi rumahmu.':' Bensin diisi di Pom Bensin. Mobil baru dibeli di Showroom.')))+(CUST.car&&CUST.car!=='jimny'?' '+CARM[CUST.car].d:'');
+  $('gHint').textContent=first?'Mobil standar. Warna pertama gratis. Modifikasi lain dibeli pakai koin hasil misi.':(isP?'Koinmu '+rp(monGet())+'. Bensin '+rp(FUELP)+' per 1%. Tekan tombol di bawah untuk mengisi.':'Koinmu '+rp(monGet())+'. Ketuk barang untuk pratinjau, lalu tekan Beli.')+(isP?'':isB?'':(isS?' Performa ada di Bengkel Sibiru.':(isV?' Mobil yang dibeli bisa dipilih di Garasi rumahmu.':' Bensin diisi di Pom Bensin. Mobil baru dibeli di Showroom.')))+(CUST.car&&CUST.car!=='jimny'?' '+CARM[CUST.car].d:'');
   $('mi').classList.toggle('prevOn',!!PREV);
-  $('gBuy').hidden=!PREV;if(PREV)$('gBuyT').textContent='Pratinjau: '+PREV.name+' · '+rp(PREV.price)+(monGet()<PREV.price?' · uang kurang '+rp(PREV.price-monGet()):' · tekan BELI untuk membeli');
+  $('gBuy').hidden=!PREV;if(PREV)$('gBuyT').textContent='Pratinjau: '+PREV.name+' · '+rp(PREV.price)+(monGet()<PREV.price?' · koin kurang '+rp(PREV.price-monGet()):' · tekan BELI untuk membeli');
   const sw=(id,list,cur,fn,kf,price,nmS)=>{const b=$(id);b.innerHTML='';list.forEach((c,i)=>{const k=kf(c,i),own=ownHas(k),e=document.createElement('button');e.type='button';e.style.background=hx(c);e.className=((c===cur||i===cur&&typeof cur==='number')?'sel':'')+(own?'':' lock');e.setAttribute('aria-label','Warna '+(i+1)+(own?'':' · '+rp(price)));e.title=own?'':rp(price);e.addEventListener('click',()=>garPick(k,price,nmS,()=>fn(c,i)));b.appendChild(e);});};
   sw('gCol',CUSTCOL,CUST.col,c=>{CUST.col=c;},c=>'col:'+c,PRICE.col,'Cat warna baru');$('gColIn').value=hx(CUST.col);$('gColIn').style.display=first?'':'none';
   sw('gStk',STKC,CUST.stk,(c,i)=>{CUST.stk=i;},(c,i)=>'stk:'+i,PRICE.stk,'Stiker warna baru');
@@ -3344,11 +3345,11 @@ function renderGar0(){
   const need=Math.ceil(100-FUEL),cost=need*FUELP;$('gFuel').textContent='Bensin '+Math.round(FUEL)+'% · '+(need>0?'isi penuh '+rp(cost):'sudah penuh');
 }
 $('gSvc').addEventListener('click',()=>{const o=odoCar();if(o.svc<SVC_KM*0.05){toast('Mobil masih prima, belum perlu servis',1600);return;}
-  const p=svcPrice();if(monGet()<p){toast('Uang kurang '+rp(p-monGet())+' · kerjakan misi dulu',2400);return;}
+  const p=svcPrice();if(monGet()<p){toast('Koin kurang '+rp(p-monGet())+' · kerjakan misi dulu',2400);return;}
   monAdd(-p);o.svc=0;svcW=0;odoSave();netSave();toast('Servis selesai · oli baru · '+rp(p),2200);renderGar();});
 $('gFuel').addEventListener('click',()=>{const need=Math.ceil(100-FUEL);if(need<=0){toast('Bensin sudah penuh',1200);return;}
   let pay=need*FUELP,fill=need;if(monGet()<pay){fill=Math.floor(monGet()/FUELP);pay=fill*FUELP;}
-  if(fill<=0){toast('Uang kurang · kerjakan misi dulu',2000);return;}
+  if(fill<=0){toast('Koin kurang · kerjakan misi dulu',2000);return;}
   monAdd(-pay);FUEL=Math.min(100,FUEL+fill);fuelSave();toast('Isi '+fill+'% · '+rp(pay),1500);renderGar();});
 $('gColIn').addEventListener('input',e=>{CUST.col=parseInt(e.target.value.slice(1),16)||CUST.col;applyCust();});
 $('gColIn').addEventListener('change',()=>renderGar());
@@ -3408,7 +3409,7 @@ function finish(){
     $('endA').textContent=fmt(R.clock);
     $('endB').textContent=(isBest?'Rekor baru: ':'Terbaik: ')+fmt(best);
   }
-  if(pts){ptsAdd(pts);$('endB').textContent+=' · +'+pts+' poin · +'+rp(pts*500)+' (uangmu '+rp(monGet())+')';}
+  if(pts){ptsAdd(pts);$('endB').textContent+=' · +'+pts+' poin · +'+rp(pts*250)+' (koinmu '+rp(monGet())+')';}
   $('end').hidden=false;fbMaybe(2600);
 }
 function needHub(after,fn){if(MAP.id==='bandung'){fn();return;}try{localStorage.setItem('jimnyMap','bandung');localStorage.setItem('jimnyAfter',after);}catch(e){}location.hash='bandung';location.reload();}
@@ -3427,7 +3428,7 @@ $('next').addEventListener('click',()=>{if(R.type==='qual')startMode('race',R.le
 
 /* ---------- video sambutan ---------- */
 const CIN={on:false,t:0,hx:0,hz:0,o:1,ox:0,oz:1,done:null};
-const CINL=[[0,'Selamat datang di Kota Bandung!'],[6,'Ini rumahmu di Sibiru Residence, lengkap dengan garasi.'],[11.5,'Kerjakan misi untuk dapat uang. Belanjakan di Pom Bensin, Bengkel, Salon, dan Showroom.']],CIND=17.5;
+const CINL=[[0,'Selamat datang di Kota Bandung!'],[6,'Ini rumahmu di Sibiru Residence, lengkap dengan garasi.'],[11.5,'Kamu dapat modal 🪙1.000. Kerjakan misi untuk tambah koin, lalu belanjakan di Pom Bensin, Bengkel, Salon, dan Showroom.']],CIND=20;
 /* musik latar video sambutan: arpeggio + pad akor + kick lembut, mengecil saat narator bicara */
 const CHP=[[130.8,164.8,196],[110,130.8,164.8],[87.3,110,130.8],[98,123.5,146.8]],CHA=[[261.6,329.6,392,523.3],[220,261.6,329.6,440],[174.6,220,261.6,349.2],[196,246.9,293.7,392]];
 function cinMusic(){
@@ -3441,7 +3442,7 @@ function cinMusic(){
     if(st%2===1){const nb=ac.createBuffer(1,2205,ac.sampleRate),d=nb.getChannelData(0);for(let i=0;i<d.length;i++)d[i]=(Math.random()*2-1)*(1-i/d.length);const src=ac.createBufferSource(),hp=ac.createBiquadFilter(),g=ac.createGain();src.buffer=nb;hp.type='highpass';hp.frequency.value=7000;g.gain.value=0.05*duck;src.connect(hp);hp.connect(g);g.connect(A.master);src.start(t);}
   }catch(_){}
 }
-const CINV=['Selamat datang di Kota Bandung!','Ini rumahmu di Sibiru Residence, lengkap dengan garasi.','Kerjakan misi untuk dapat uang, lalu belanja di bengkel dan showroom. Selamat bertualang!'];
+const CINV=['Selamat datang di Kota Bandung!','Ini rumahmu di Sibiru Residence, lengkap dengan garasi.','Kamu dapat modal seribu koin. Kerjakan misi untuk tambah koin, lalu belanja di bengkel dan showroom. Selamat bertualang!'];
 function cinSay(txt){
   if(!soundOn||!('speechSynthesis' in window)||!txt)return;
   try{speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(txt);u.lang='id-ID';const v=(speechSynthesis.getVoices()||[]).find(x=>/^id/i.test(x.lang));if(v)u.voice=v;u.rate=0.97;u.pitch=1.03;u.volume=1;CIN.vo=1;u.onend=u.onerror=()=>{CIN.vo=0;};speechSynthesis.speak(u);}catch(e){CIN.vo=0;}
@@ -3459,7 +3460,7 @@ function startWelcome(fromReg){
   hideHudBits(true);
 }
 function hideHudBits(v){$('hud').style.visibility=v?'hidden':'';}
-function endWelcome(){if(!CIN.on)return;CIN.on=false;CIN.vo=0;try{if('speechSynthesis' in window)speechSynthesis.cancel();}catch(e){}$('cin').hidden=true;hideHudBits(false);camSnap=true;toast('Jalan ke mobil, lalu masuk. Uang awal '+rp(monGet()),3200);}
+function endWelcome(){if(!CIN.on)return;CIN.on=false;CIN.vo=0;try{if('speechSynthesis' in window)speechSynthesis.cancel();}catch(e){}$('cin').hidden=true;hideHudBits(false);camSnap=true;toast('Jalan ke mobil, lalu masuk. Modal awalmu '+rp(monGet()),3600);}
 $('cinS').addEventListener('click',endWelcome);
 function cinCam(dt){
   CIN.t+=dt;const t=CIN.t,c=CIN;
