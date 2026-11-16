@@ -89,6 +89,20 @@ button{font-family:inherit;color:inherit;cursor:pointer}
 .gg u i.w{background:#ffb02e}.gg u i.d{background:#e0453a}#svcT{padding:1px 7px;border-radius:99px;background:#e0453a;color:#fff;animation:blk 1s infinite}@keyframes blk{50%{opacity:.35}}
 #wallet{font:700 13px var(--body);color:#fff;margin-top:3px;text-shadow:0 1px 6px rgba(0,0,0,.7)}
 #gHint{font:600 12px/1.35 var(--body);color:var(--amber);margin:2px 0 6px}
+#gWal{font:700 14px var(--disp);letter-spacing:.06em;color:var(--amber);margin:2px 0 6px}
+#gSpec{margin:6px 0 10px;border:1px solid var(--line,rgba(255,255,255,.14));border-radius:12px;padding:8px 10px;background:rgba(255,255,255,.03);overflow-x:auto}
+#gSpec h4{margin:0 0 6px;font:700 12px var(--disp);letter-spacing:.1em;text-transform:uppercase;color:var(--amber)}
+#gSpec table{border-collapse:collapse;width:100%;min-width:430px;font:600 11px var(--body)}
+#gSpec th{font:700 10px var(--disp);letter-spacing:.06em;text-transform:uppercase;color:var(--mute);text-align:left;padding:2px 4px}
+#gSpec td{padding:3px 4px;white-space:nowrap}#gSpec td.n{max-width:130px;overflow:hidden;text-overflow:ellipsis}
+#gSpec tr.me td.n{color:var(--amber)}#gSpec tr.me{background:rgba(255,176,46,.1)}
+#gSpec .bar{display:inline-block;vertical-align:middle;width:44px;height:6px;border-radius:3px;background:rgba(255,255,255,.14);margin-right:4px;overflow:hidden}#gSpec .bar i{display:block;height:100%;background:var(--amber)}
+#gSpec p{margin:6px 0 0;font:11px var(--body);color:var(--mute)}
+#pinBody .pk{display:flex;align-items:center;gap:10px;flex-wrap:wrap;border:1px solid var(--line);border-radius:12px;padding:10px 12px;background:rgba(255,255,255,.04)}
+#pinBody .pk b{font:700 15px var(--disp);flex:1;min-width:130px}#pinBody .pk small{display:block;font:600 11px var(--body);color:var(--mute);margin-top:2px}
+#pinBody .pk a,#pinBody .pk button{display:inline-block;padding:7px 12px;border-radius:999px;background:var(--amber);color:#1a1205;font:700 12px var(--disp);letter-spacing:.05em;text-transform:uppercase;text-decoration:none;border:0;cursor:pointer}
+#pinBody .redeem{display:flex;gap:8px;flex-wrap:wrap}#pinBody .redeem input{flex:1;min-width:150px;padding:9px 12px;border-radius:10px;border:1px solid var(--line);background:rgba(0,0,0,.3);color:#fff;font:700 14px var(--body);letter-spacing:.08em;text-transform:uppercase}
+#pinBody .okmsg{font:700 13px var(--body);color:#7bd88f}#pinBody .errmsg{font:700 13px var(--body);color:#ff8a7a}
 #gBuy{position:sticky;top:0;z-index:2;display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:8px 10px;margin:4px 0 8px;border:1px solid var(--amber);border-radius:12px;background:rgba(10,16,12,.96);font:700 13px var(--body)}
 #gBuy[hidden]{display:none}
 #mi.prevOn #gar>*:not(#gBuy):not(.lvact){display:none!important}#mi.prevOn #gar{max-height:none}#mi.prevOn #gBuy{position:static;margin:0 0 6px}#gBuyT{flex:1;min-width:140px}
@@ -127,7 +141,8 @@ button{font-family:inherit;color:inherit;cursor:pointer}
 @keyframes offp{to{background:rgba(200,50,30,.9)}}
 #cd{position:absolute;left:50%;top:38%;transform:translate(-50%,-50%);font:800 clamp(90px,24vw,170px)/1 var(--disp);color:var(--amber);text-shadow:0 4px 24px rgba(0,0,0,.6)}
 #prompt{position:absolute;left:50%;bottom:26px;transform:translateX(-50%);display:none}
-#prompt.on{display:block;border-color:var(--amber);color:var(--amber)}
+#prompt.on{display:block}
+#prompt{background:none!important;border:0!important;box-shadow:none!important;padding:0;color:#fff!important;font:700 15px var(--disp);letter-spacing:.06em;text-transform:uppercase;text-shadow:0 1px 3px #000,0 0 12px rgba(0,0,0,.7);pointer-events:none;white-space:nowrap;backdrop-filter:none!important}
 #keys{position:absolute;left:max(14px,env(safe-area-inset-left,0px));bottom:14px;font-size:13px;color:var(--mute);text-shadow:0 1px 6px #000}
 .touch #keys{display:none}
 .touch #board{display:none}
@@ -285,7 +300,24 @@ html,body{position:fixed;inset:0;width:100%;height:100%;overscroll-behavior:none
 #hlpX{position:absolute;right:10px;top:10px;width:36px;height:36px;border-radius:50%;border:1px solid rgba(255,255,255,.5);background:rgba(0,0,0,.35);color:#fff;font-size:16px;z-index:2}
 #rgHang,.rgf select{width:100%;padding:10px 12px;border-radius:10px;border:1px solid var(--line);background:rgba(255,255,255,.06);color:var(--paper);font:600 14px var(--disp)}#rgHang option{color:#111}
 .rgn{margin:2px 18px 6px;font-size:12px;color:var(--mute)}#rgRec{margin:6px 18px 8px;display:grid;gap:6px}#rgRec[hidden],#rgMine[hidden]{display:none}#rgMine{display:grid;gap:6px}#rgRec label{font-size:12px;color:var(--mute)}.rgrow{display:flex;gap:6px}.rgrow input{flex:1;min-width:0;padding:8px 10px;border-radius:9px;border:1px solid var(--line);background:rgba(255,255,255,.06);color:var(--paper);font:12px monospace}
-.newshd{display:flex;align-items:center;justify-content:space-between;gap:8px}.newsbtn{font:inherit;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:#ffb02e;background:rgba(255,176,46,.12);border:1px solid rgba(255,176,46,.45);border-radius:99px;padding:3px 10px;cursor:pointer}
+.cn{white-space:nowrap}.cn i{display:inline-block;width:.88em;height:.88em;margin:0 .16em -.08em 0;border-radius:50%;vertical-align:baseline;background:radial-gradient(circle at 34% 30%,#fff6c2 0 14%,#ffd84a 30%,#e8a90c 62%,#9c6500 100%);box-shadow:inset 0 0 0 .07em #8a5600,0 1px 2px rgba(0,0,0,.35)}
+.cams #bPho,.cams #bRadio{padding-left:9px;padding-right:9px}.cams #bRadio.on{background:var(--amber);color:#1a1205}
+#stk{position:absolute;left:50%;top:calc(env(safe-area-inset-top,0px) + 58px);transform:translateX(-50%);width:min(440px,92vw);background:rgba(20,16,10,.9);border:2px solid var(--amber);border-radius:14px;padding:10px 12px;z-index:9;pointer-events:auto;text-align:center}
+#stk b{display:block;font:800 17px var(--disp);text-transform:uppercase;letter-spacing:.06em;color:var(--amber)}#stk p{margin:4px 0 8px;font-size:13px;line-height:1.35}#stk .row{display:flex;gap:6px;justify-content:center;flex-wrap:wrap}#stk .chip{font-size:12px;padding:6px 10px}#stk .chip.lock{opacity:.6}
+#pho{position:absolute;inset:0;z-index:40}#phoPad{position:absolute;inset:0;touch-action:none;cursor:grab}
+.phobar{position:absolute;left:50%;bottom:max(18px,env(safe-area-inset-bottom,0px));transform:translateX(-50%);display:flex;gap:14px;align-items:center}
+#phoShot{width:72px;height:72px;border-radius:50%;border:5px solid #fff;background:var(--amber);box-shadow:0 4px 18px rgba(0,0,0,.5);cursor:pointer}
+.phohint{position:absolute;left:50%;top:max(14px,env(safe-area-inset-top,0px));transform:translateX(-50%);font:700 12px var(--disp);letter-spacing:.08em;text-transform:uppercase;color:#fff;text-shadow:0 1px 6px #000;pointer-events:none}
+#phoV{position:absolute;inset:0;background:rgba(5,10,8,.88);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:16px}#phoV[hidden]{display:none}
+#phoV img{max-width:min(92vw,520px);max-height:72vh;border-radius:10px;box-shadow:0 10px 40px rgba(0,0,0,.6)}#phoV .row{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
+#hub76{margin-top:14px}#hub76 .eyebrow{margin-bottom:6px}.h76g{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.h76c{background:rgba(12,20,16,.78);border:1px solid var(--line);border-radius:14px;padding:12px;display:flex;flex-direction:column;gap:5px;min-width:0}
+.h76c em{font:700 11px var(--disp);letter-spacing:.1em;text-transform:uppercase;color:var(--amber);font-style:normal}.h76c b{font:800 15px/1.25 var(--disp)}.h76c p{margin:0;font-size:12.5px;line-height:1.4;opacity:.85}.h76c small{font-size:11.5px;opacity:.7}
+.h76c .dots{display:flex;gap:5px}.h76c .dots i{width:14px;height:14px;border-radius:50%;border:2px solid rgba(255,255,255,.35)}.h76c .dots i.on{background:var(--amber);border-color:var(--amber)}.h76c .dots i.now{border-color:var(--amber)}
+.h76c ol{margin:0;padding:0;list-style:none;font-size:12.5px;display:flex;flex-direction:column;gap:3px}.h76c li{display:flex;justify-content:space-between;gap:8px}.h76c li span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.h76c .chip{align-self:flex-start;margin-top:auto;font-size:12px;padding:6px 12px}
+.lvOpen #hub76{display:none}@media (max-width:760px){.h76g{grid-template-columns:1fr}}@media (max-height:430px) and (orientation:landscape){.h76g{grid-template-columns:repeat(3,1fr)}.h76c{padding:8px}.h76c b{font-size:13px}}
+.newshd{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap}.newsbtn{font:inherit;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:#ffb02e;background:rgba(255,176,46,.12);border:1px solid rgba(255,176,46,.45);border-radius:99px;padding:3px 10px;cursor:pointer}
 #pin{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(5,10,8,.7);z-index:31;padding:12px}#pin[hidden]{display:none}
 #pinX{position:absolute;right:10px;top:10px;width:36px;height:36px;border-radius:50%;border:1px solid rgba(255,255,255,.5);background:rgba(0,0,0,.35);color:#fff;font-size:16px;z-index:2}
 .pinbox{width:min(760px,100%);max-height:calc(100vh - 24px);overflow-y:auto;text-align:left}.pinvt canvas{display:block;width:100%;max-height:20vh;object-fit:cover;background:#0b1424}.ipc>div{text-align:left}
@@ -298,6 +330,8 @@ html,body{position:fixed;inset:0;width:100%;height:100%;overscroll-behavior:none
 .ipc .acts{display:flex;gap:6px;flex-wrap:wrap}.ipc .acts a,.ipc .acts button{display:inline-block;padding:6px 12px;border-radius:999px;background:var(--amber);color:#1a1205;font:700 12px var(--disp);letter-spacing:.06em;text-transform:uppercase;text-decoration:none;border:0;cursor:pointer}.ipc .acts button.alt{background:transparent;color:var(--paper);border:1px solid var(--line)}
 .ncard{border:1px solid var(--line);border-radius:12px;padding:12px 14px;background:rgba(255,255,255,.04)}.ncard em{font:700 10px var(--disp);font-style:normal;letter-spacing:.14em;text-transform:uppercase;color:var(--amber)}.ncard b{display:block;font:700 17px/1.2 var(--disp);margin:3px 0}.ncard p{margin:0;font-size:13px;line-height:1.4;color:var(--mute)}
 @media (max-width:560px),(max-height:430px){.ipc{grid-template-columns:120px 1fr;gap:8px}.ipc b{font-size:14px}.pinvt{display:none}}
+#redeemH{margin-top:12px}#redeemH .eyebrow{margin-bottom:6px}.rdh{display:flex;gap:8px;flex-wrap:wrap}.rdh input{flex:1;min-width:160px;max-width:320px;padding:9px 12px;border-radius:10px;border:1px solid var(--line);background:rgba(0,0,0,.3);color:#fff;font:700 14px var(--body);letter-spacing:.08em;text-transform:uppercase}.rdh button{padding:9px 16px}
+#rdhMsg{margin-top:6px;font:700 13px var(--body)}#rdhMsg.okmsg{color:#7bd88f}#rdhMsg.errmsg{color:#ff8a7a}.lvOpen #redeemH{display:none}@media (max-height:430px) and (orientation:landscape){#redeemH{display:none}}
 #news{margin-top:14px}#news .eyebrow{margin-bottom:6px}#newsG{display:grid;grid-template-columns:1.35fr 1fr;gap:10px}
 .nfeat{border:1px solid var(--line);border-radius:12px;padding:14px 16px;background:linear-gradient(135deg,rgba(31,95,208,.45),rgba(10,20,15,.75))}.nfeat em,.nit em{font:700 10px var(--disp);font-style:normal;letter-spacing:.14em;text-transform:uppercase;color:var(--amber)}
 .nfeat b{display:block;font:800 22px/1.1 var(--disp);text-transform:uppercase;margin:4px 0 6px}.nfeat p{margin:0;font-size:13px;line-height:1.4;color:#d4dde8}.nfeat small,.nit small{display:block;margin-top:6px;font-size:11px;color:var(--mute)}
@@ -355,7 +389,8 @@ h1.logoH{margin:0 0 8px;font-size:0;line-height:0}h1.logoH .logo{width:min(380px
       <div class="sec"><span>Waktu</span><div class="grp" id="setTime"><button type="button" class="chip" data-m="auto">Otomatis</button><button type="button" class="chip" data-m="day">Siang</button><button type="button" class="chip" data-m="dusk">Sore</button><button type="button" class="chip" data-m="night">Malam</button></div></div>
       <div class="sec"><span>Tampilkan di layar</span><div class="chk" id="setHud"></div></div></div></div>
     <div class="cams" id="towRow" hidden style="top:calc(env(safe-area-inset-top,0px) + 54px)"><button class="chip" id="bTow" type="button">Panggil derek · 🪙500</button></div>
-    <div class="cams" id="camRow" hidden><button class="chip" id="bCam" type="button">Kamera</button><button class="chip" id="bLook" type="button">Belakang</button></div>
+    <div class="cams" id="camRow" hidden><button class="chip" id="bCam" type="button">Kamera</button><button class="chip" id="bLook" type="button">Belakang</button><button class="chip" id="bPho" type="button" aria-label="Mode foto">📷</button><button class="chip" id="bRadio" type="button" aria-label="Radio">📻</button></div>
+    <div id="stk" hidden role="alert"><b id="stkT">Terjebak</b><p id="stkP"></p><div class="row"><button class="chip" id="stkW" type="button">Pakai winch</button><button class="chip" id="stkH" type="button">Minta tolong</button><button class="chip" id="stkD" type="button">Panggil derek</button></div></div>
     <div id="chat" hidden><div id="chatL"></div><form id="chatF" autocomplete="off"><input id="chatI" maxlength="200" placeholder="Ketik pesan…" enterkeyhint="send"><button class="chip" type="submit">Kirim</button></form></div>
     <div id="cd"></div>
     <div id="toast"></div>
@@ -388,7 +423,9 @@ h1.logoH{margin:0 0 8px;font-size:0;line-height:0}h1.logoH .logo{width:min(380px
         <button class="card" id="msBtn" type="button"><b>Misi</b><span>Antar paket, derek mobil mogok, berburu foto.</span></button>
         <button class="card" id="garBtn" type="button"><b>Garasi</b><span>Kustom warna, plat nomor, velg, dan aksesori mobilmu.</span></button>
       </div>
-      <section id="news" aria-label="Kabar Sibiru"><div class="eyebrow newshd">Kabar Sibiru<button type="button" id="newsInfo" class="newsbtn">Info &amp; pasang iklan</button></div><div id="newsG"></div></section>
+      <section id="hub76" aria-label="Aktivitas"><div class="eyebrow">Aktivitas</div><div class="h76g"><div class="h76c" id="dcC"></div><div class="h76c" id="lbC"></div><div class="h76c" id="kvC"></div></div></section>
+      <section id="news" aria-label="Kabar Sibiru"><div class="eyebrow newshd">Kabar Sibiru<button type="button" id="newsInfo" class="newsbtn">Info &amp; pasang iklan</button><button type="button" id="newsCoin" class="newsbtn">Beli koin &amp; Premium</button></div><div id="newsG"></div></section>
+      <section id="redeemH" aria-label="Tebus kode"><div class="eyebrow">Tebus kode koin / Premium</div><div class="rdh"><input id="rdhIn" placeholder="SIBIRU-XXXX-XXXX" maxlength="20" autocomplete="off" aria-label="Kode tebus"><button type="button" id="rdhGo" class="newsbtn">Tebus</button></div><div id="rdhMsg"></div></section>
       <div id="lv" hidden>
         <div class="eyebrow">Balapan vs Komputer · pilih level</div>
         <div id="lvGrid" class="lvgrid"></div>
@@ -414,9 +451,11 @@ h1.logoH{margin:0 0 8px;font-size:0;line-height:0}h1.logoH .logo{width:min(380px
       </div>
       <div id="gar" hidden>
         <div class="eyebrow" id="gEy">Garasi · kustom mobilmu</div>
+        <div id="gWal"></div>
         <div id="gHint"></div>
         <div id="gBuy" hidden><span id="gBuyT"></span><button class="chip sel" id="gBuyGo" type="button">Beli</button><button class="chip" id="gBuyNo" type="button">Batal</button></div>
         <div class="garrow"><label>Mobil</label><div id="gCar" class="carbtns"></div></div>
+        <div id="gSpec" hidden></div>
         <div class="garrow"><label>Warna</label><div id="gCol" class="sw"></div><input type="color" id="gColIn" aria-label="Warna bebas"></div>
         <div class="garrow"><label>Plat nomor</label><input id="gPlate" maxlength="8" autocomplete="off" spellcheck="false"></div>
         <div class="garrow"><label>Bentuk velg</label><div id="gShape" class="carbtns"></div></div>
@@ -424,6 +463,7 @@ h1.logoH{margin:0 0 8px;font-size:0;line-height:0}h1.logoH .logo{width:min(380px
         <div class="garrow"><label>Aksesori</label><div id="gExt" class="carbtns"></div></div>
         <div class="garrow"><label>Performa</label><div id="gPerf" class="carbtns"></div></div>
         <div class="garrow"><label>Warna stiker</label><div id="gStk" class="sw"></div></div>
+        <div class="garrow"><label>Hadiah level</label><div id="gLv" class="carbtns"></div></div>
         <div class="garrow" id="gSvcRow"><label>Servis</label><div class="carbtns"><button class="chip" id="gSvc" type="button"></button></div></div>
         <div class="garrow" id="gFuelRow"><label>Bensin</label><div class="carbtns"><button class="chip" id="gFuel" type="button"></button></div></div>
         <div class="row lvact"><button class="chip main" id="gDone" type="button">Selesai</button><button class="chip" id="gReset" type="button">Reset</button></div>
@@ -432,6 +472,8 @@ h1.logoH{margin:0 0 8px;font-size:0;line-height:0}h1.logoH .logo{width:min(380px
     </div>
   </div>
 
+  <div id="pho" hidden><div id="phoPad"></div><div class="phobar"><button class="chip" id="phoX" type="button">Tutup</button><button class="chip" id="phoOut" type="button" aria-label="Jauhkan">－</button><button id="phoShot" type="button" aria-label="Ambil foto"></button><button class="chip" id="phoIn" type="button" aria-label="Dekatkan">＋</button></div><div class="phohint">Geser layar untuk memutar kamera</div>
+    <div id="phoV" hidden><img id="phoImg" alt="Foto Jimny-mu"><div class="row"><button class="chip" id="phoBack" type="button">Foto lagi</button><button class="chip" id="phoSave" type="button">Simpan</button><button class="chip sel" id="phoShare" type="button">Bagikan ke Instagram</button></div></div></div>
   <div id="cfm" hidden role="dialog" aria-modal="true"><div class="box"><b id="cfmT">Konfirmasi pembelian</b><p id="cfmP"></p><div class="row"><button class="chip" id="cfmNo" type="button">Batal</button><button class="chip sel" id="cfmOk" type="button">OK, beli</button></div></div></div>
 
   <div id="cin" hidden><div class="cb bt"></div><div class="cb bb"></div><div id="cinT"></div><button class="chip" id="cinS" type="button">Lewati</button></div>
@@ -468,7 +510,7 @@ h1.logoH{margin:0 0 8px;font-size:0;line-height:0}h1.logoH .logo{width:min(380px
   <div id="pin" hidden role="dialog" aria-modal="true" aria-labelledby="pinT"><div class="shopbox pinbox">
     <button id="pinX" type="button" aria-label="Tutup">✕</button>
     <div class="shophd" style="background:#0e2a52"><b id="pinT">Pusat Informasi</b><span>Kabar terbaru, peta, dan info pasang iklan</span></div>
-    <div class="pinvt"><canvas id="pinVT" width="512" height="256"></canvas></div>
+    <div class="pinvt" style="display:none"><canvas id="pinVT" width="512" height="256"></canvas></div>
     <div id="pinTabs"></div><div id="pinBody"></div>
   </div></div>
 
@@ -522,10 +564,9 @@ const KC={};const kc=h=>KC[h]||(KC[h]=new T.Color(h).convertSRGBToLinear());
    products: [{n:'nama produk', p:'harga', d:'keterangan'}]
    link: alamat website (https://...) · wa: nomor WhatsApp format 62812xxxx · empty:true = ruko disewakan. Untuk mengisi: hapus empty:true, ganti name, tag, col, desc, products. */
 const ADS=[
- {name:'RUKO DISEWAKAN',tag:'Hubungi via WhatsApp',col:'#5f6f7a',empty:true,wa:'6289683046641'},
- {name:'RUKO DISEWAKAN',tag:'Hubungi via WhatsApp',col:'#5f6f7a',empty:true,wa:'6289683046641'},
- {name:'RUKO DISEWAKAN',tag:'Hubungi via WhatsApp',col:'#5f6f7a',empty:true,wa:'6289683046641'},
- {name:'RUKO DISEWAKAN',tag:'Hubungi via WhatsApp',col:'#5f6f7a',empty:true,wa:'6289683046641'},
+ {name:'BENGKEL 2',desc:'Bengkel cabang di Deretan Ruko. Ganti oli dan servis tanpa harus ke garasi.',tag:'Ganti oli & servis · cepat',col:'#c0392b',acts:[{label:'Ganti oli & servis',id:'gSvc'}]},
+ {name:'BENSIN ECERAN',desc:'Bensin eceran dekat jalan. Ketuk Isi bensin untuk mengisi sampai penuh.',tag:'Isi bensin literan',col:'#e08a00',acts:[{label:'Isi bensin',id:'gFuel'}]},
+ {name:'WARKOP',desc:'Warkop langganan para pengemudi. Ngopi dulu, dengar kabar jalanan.',tag:'Kopi, mie, dan kabar jalanan',col:'#6b4a2f',acts:[{label:'Ngopi · 🪙30',id:'warkop'}]},
  {name:'RUKO DISEWAKAN',tag:'Hubungi via WhatsApp',col:'#5f6f7a',empty:true,wa:'6289683046641'},
  {name:'RUKO DISEWAKAN',tag:'Hubungi via WhatsApp',col:'#5f6f7a',empty:true,wa:'6289683046641'},
  {name:'RUKO DISEWAKAN',tag:'Hubungi via WhatsApp',col:'#5f6f7a',empty:true,wa:'6289683046641'},
@@ -539,6 +580,7 @@ const roadD=(v,P)=>Math.abs(((v+P/2)%P+P)%P-P/2);
 const JKT={parks:[[30,-30,23]]},BDG={parks:[[30,-30,23],[-30,-30,23]]};
 function cityCol(x,z,t,o){
   const P=60,d=Math.min(roadD(x,P),roadD(z,P));
+  if(o===BDG&&Math.abs(x+150)<23.5&&Math.abs(z-30)<23.5){t.copy(kc(0x8d6b47));return;}   /* Taman Offroad Sibiru: tanah */
   for(const k of o.parks)if(Math.abs(x-k[0])<k[2]&&Math.abs(z-k[1])<k[2]){t.copy(kc(0x5f8a42));return;}
   if(MAP.fly){const f=MAP.fly,dx=Math.abs(x-f.x);
     if(dx<f.hw+6.5&&z>f.z0-8&&z<f.z1+8){
@@ -639,7 +681,7 @@ const MAPS={
   trees:{n:0,nT:0,dens:()=>0,hsl:[0.3,0.05,0.4,0.04,0.03]},
   rockN:1,smallP:0.5,houses:0,
   mounts:[[-60,-660,150,460,230,0x4f6a72],[400,-580,20,320,150,0x56736b],[-500,-400,16,300,140,0x4e6659],[560,200,14,280,115,0x56705c],[-420,480,18,300,120,0x587263]],smoke:null,
-  city:{pitch:60,hMin:7,hMax:24,core:[0,0],park:0.1,res:true,pal:[0xf0e6cc,0xd9cfae,0xe4ccb5,0xc4d0c0,0xe8d8c0],skip:[[30,-30],[-30,-30],[30,30],[-30,30],[90,30],[90,-30],[30,-90],[-30,-90],[90,-90],[-90,-90],[30,90],[-90,30]]},
+  city:{pitch:60,hMin:7,hMax:24,core:[0,0],park:0.1,res:true,pal:[0xf0e6cc,0xd9cfae,0xe4ccb5,0xc4d0c0,0xe8d8c0],skip:[[30,-30],[-30,-30],[30,30],[-30,30],[90,30],[90,-30],[30,-90],[-30,-90],[90,-90],[-90,-90],[30,90],[-90,30],[-150,30]]},
   lm:[['sate',30,-30,'Gedung Sate',34],['masjid',-30,-30,'Masjid Raya Bandung',50],['braga',-100,0,'Jl. Braga',16],['taman',-30,30,'Taman Kota',10],['cafe',90,30,'Kafe Kopdar',10],['camp',90,-30,'Campground Lembang',10],['bengkel',30,-90,'Bengkel Sibiru',10],['salon',-30,-90,'Salon Mobil Kinclong',10],['showroom',90,-90,'Showroom Mobil Second',10],['pom',-90,-90,'Pom Bensin Sibiru',10],['kuliner',-90,30,'Pujasera Sibiru',10],['bantuan',30,90,'Pusat Bantuan',10]],
   rnames:['Asia Afrika','Braga Lurus','Putaran Alun-alun','Tanjakan Dago','Cihampelas Padat','Riau Cepat','Pasteur Berliku','Sirkuit Gedung Sate','Setiabudi Curam','Neraka Bandung'],
   lvn:['Pemanasan Asia Afrika','Kebut Braga','Putaran Alun-alun','Tanjakan Dago','Adu Konsisten','Turbo Muncul','Kejar-kejaran','Sirkuit Gedung Sate','Final Eliminasi','Sang Juara']}
@@ -650,9 +692,13 @@ try{if(location.hash==='#dev')localStorage.setItem('jimnyDev','1');DEV=localStor
 const MAPOPEN={lembang:true,bandung:true};
 function lvKey(id,b){return b+(id==='lembang'?'':'_'+id);}
 function lvFor(id){let u=1;try{u=parseInt(localStorage.getItem(lvKey(id,'jimnyLv')))||1;}catch(_){}return Math.max(1,Math.min(10,u));}
+const SOON=['Mekah','Turki','Amerika'];
 const RORD=['lembang','jakarta','merapi','bromo','sumba','lombok'];
-function raceOpen(id){if(DEV||id==='lembang'||id==='bandung')return true;const i=RORD.indexOf(id);return i>0&&lvFor(RORD[i-1])>=10;}
-function freeOpen(id){return !!(MAPOPEN[id]||DEV||lvFor(id)>=2);}
+function premUntil(){try{return parseInt(localStorage.getItem('jimnyPrem'))||0;}catch(e){return 0;}}
+function PREM(){return premUntil()>Date.now();}
+const pb=m=>PREM()?Math.round(m*1.25):m;
+function raceOpen(id){if(DEV||PREM()||id==='lembang'||id==='bandung')return true;const i=RORD.indexOf(id);return i>0&&lvFor(RORD[i-1])>=10;}
+function freeOpen(id){return !!(MAPOPEN[id]||DEV||PREM()||lvFor(id)>=2);}
 let CLOTS=[];const TWG=[],HOUSES=[],CAMPF=[],CAMPERS=[],LMS=[],HGRID=new Map(),TWRS=[],APTS=[],APTB=[],USEDB=new Set();
 const PK={on:false,t:-1};
 try{if(location.hash.slice(1)==='bandung'||!location.hash.slice(1)){const pj=JSON.parse(localStorage.getItem('jimnyPark')||'null');if(pj&&pj.t>=0){PK.on=true;PK.t=pj.t;}}}catch(e){}
@@ -702,13 +748,14 @@ function angDiff(a,b){let d=(a-b)%(Math.PI*2);if(d>Math.PI)d-=Math.PI*2;if(d<-Ma
 const C=h=>new T.Color(h).convertSRGBToLinear();
 const SM=(hex,rough,metal,extra)=>new T.MeshStandardMaterial(Object.assign({color:C(hex),roughness:rough===undefined?0.85:rough,metalness:metal||0},extra||{}));
 const CARL=[
- {id:'jimny',n:'Suzuki Jimny Sibiru',price:0,ac:1,mv:1,fu:1,d:'Mobil pertamamu. Lincah dan irit.'},
- {id:'fj40',n:'Land Cruiser FJ40 klasik',price:20000000,ac:1.06,mv:1.04,fu:1.08,d:'Klasik tahun 70-an, tangguh dan sedikit lebih bertenaga.'},
- {id:'wrangler',n:'Jeep Wrangler',price:30000000,ac:1.12,mv:1.08,fu:1.15,d:'Ikon offroad Amerika. Tenaga lebih besar, bensin lebih boros.'},
- {id:'defender',n:'Land Rover Defender',price:40000000,ac:1.2,mv:1.1,fu:1.25,d:'Badak Inggris, kuat menanjak. Cukup boros.'},
- {id:'cruiser',n:'Toyota Land Cruiser 70',price:50000000,ac:1.3,mv:1.16,fu:1.35,d:'Raja gunung. Tenaga terbesar, paling boros.'},
- {id:'sierra',n:'Suzuki Jimny Sierra Canvas',price:65000000,ac:1.4,mv:1.2,fu:1.15,star:1,d:'EDISI KOLEKTOR. Jimny Sierra pickup klasik dengan bak kap kanvas. Ringan, lincah, dan irit.'},
- {id:'caribian',n:'Suzuki Jimny Caribian',price:80000000,ac:1.5,mv:1.24,fu:1.2,star:1,d:'EDISI KOLEKTOR. Jimny Caribian sasis panjang dengan extra cab dan bak rangka. Tenaga terbaik dan tetap irit.'}];
+ {id:'jimny',n:'Suzuki Jimny Sibiru',price:0,ac:1,mv:1,fu:1,md:1,cl:1,hd:1,d:'Mobil pertamamu. Lincah dan irit.'},
+ {id:'fj40',n:'Land Cruiser FJ40 klasik',price:20000000,ac:1.06,mv:1.04,fu:1.08,md:1.08,cl:1.1,hd:0.9,d:'Klasik tahun 70-an. Berat dan kokoh, kuat di lumpur tapi kurang lincah.'},
+ {id:'wrangler',n:'Jeep Wrangler',price:30000000,ac:1.12,mv:1.08,fu:1.15,md:1.12,cl:1.16,hd:1.0,d:'Ikon offroad Amerika. Tenaga besar dan panjat batu mantap, bensin lebih boros.'},
+ {id:'defender',n:'Land Rover Defender',price:40000000,ac:1.2,mv:1.1,fu:1.25,md:1.22,cl:1.24,hd:0.88,d:'Badak Inggris. Menanjak dan menembus lumpur dengan kuat, tapi besar dan cukup boros.'},
+ {id:'cruiser',n:'Toyota Land Cruiser 70',price:50000000,ac:1.3,mv:1.16,fu:1.35,md:1.32,cl:1.32,hd:0.85,d:'Raja gunung. Tenaga dan daya tanjak terbesar, paling boros dan paling berat dibelokkan.'},
+ {id:'corsica',n:'Suzuki Jimny Corsica',price:20000000,ac:1.12,mv:1.1,fu:0.95,md:1.14,cl:1.12,hd:1.06,star:1,d:'EDISI KOLEKTOR. Katana Corsica 3 pintu hardtop buatan karoseri Alexander Graha: strip biru diagonal, bull bar, panoramic roof (atap kaca lebar), ban serep berselubung putih. Irit, lincah, dan kuat di lumpur.'},
+ {id:'sierra',n:'Suzuki Jimny Sierra Canvas',price:65000000,ac:1.4,mv:1.2,fu:1.15,md:1.1,cl:1.22,hd:1.14,star:1,d:'EDISI KOLEKTOR. Jimny Sierra pickup klasik dengan bak kap kanvas. Ringan, paling lincah, dan irit.'},
+ {id:'caribian',n:'Suzuki Jimny Caribian',price:80000000,ac:1.5,mv:1.24,fu:1.2,md:1.22,cl:1.34,hd:1.04,star:1,d:'EDISI KOLEKTOR. Jimny Caribian sasis panjang dengan extra cab dan bak rangka. Tenaga dan daya tanjak terbaik, tetap lincah.'}];
 const CARM={};CARL.forEach(c=>CARM[c.id]=c);
 function shade(g,cast){g.traverse(o=>{if(o.isMesh){o.castShadow=cast!==false;o.receiveShadow=true;}});return g;}
 
@@ -859,6 +906,7 @@ const PUD=[];
 function hRange(x,z,R){let lo=H0(x,z),hi=lo;for(let k=0;k<8;k++){const v=H0(x+Math.cos(k*0.785)*R,z+Math.sin(k*0.785)*R);if(v<lo)lo=v;if(v>hi)hi=v;}return hi-lo;}
 function addPud(x,z,r,dep){const y=H0(x,z);PUD.push({x,z,r,dep,y,lvl:y-0.14});}
 if(!MAP.city)[0.5,2.5,4.5,6.5].forEach(u=>{let bp=null,br=1e9;for(const du of [0,0.25,-0.25,0.5,-0.5,0.8,-0.8,1.2,-1.2]){const p=pathAt(u+du),rg=hRange(p[0],p[1],12.8);if(rg<br){br=rg;bp=p;}if(rg<0.7)break;}if(br<1.6)addPud(bp[0],bp[1],7.5,0.62);});
+if(MAP.id==='bandung')addPud(-141,22,8,0.9);   /* Taman Offroad Sibiru: kubangan dalam */
 for(let k=0;k<400&&PUD.length<MAP.pud;k++){
   const x=(rnd()*2-1)*225,z=(rnd()*2-1)*225,r=5+rnd()*6;
   if(Math.hypot(x,z)<62||trackDist(x,z)<r+12||nearRuko(x,z,r+8)||nearGate(x,z,r)||Math.hypot(x-HILLS[1].x,z-HILLS[1].z)<75)continue;
@@ -872,9 +920,11 @@ function H(x,z){
   return h;
 }
 const MUDZ=[];   /* per-route mud patches [x,z,r] */
+const PMUD=MAP.id==='bandung'?[[-160,40,8.5],[-163,22,6],[-148,44,5.5],[-133,40,5]]:[];   /* lumpur permanen Taman Offroad */
 function mud(x,z){
   if(MAP.mud&&Math.sin(x*0.045+1.3)*Math.sin(z*0.05+0.4)>0.78&&Math.hypot(x,z)>40)return true;
   for(let i=0;i<MUDZ.length;i++){const m=MUDZ[i],dx=x-m[0],dz=z-m[1];if(dx*dx+dz*dz<m[2]*m[2])return true;}
+  for(let i=0;i<PMUD.length;i++){const m=PMUD[i],dx=x-m[0],dz=z-m[1];if(dx*dx+dz*dz<m[2]*m[2])return true;}
   return false;
 }
 const SF={t:0,d:0};   /* surface type: 0 dry, 1 mud, 2 water (+depth) */
@@ -1255,20 +1305,20 @@ if(CITY){
    mk(g,BX(34,6.4,8),SM(0xefe9dd,0.75),0,3.2,-14);mk(g,BX(35,0.8,9),SM(0x2a2f36,0.7),0,6.8,-14);
    mk(g,BX(30,3.8,0.2),SM(0x7fb8e8,0.15,0.3,{emissive:C(0x9fd2ff),emissiveIntensity:0.22}),0,2.3,-9.9);
    for(const px of[-17,17])mk(g,BX(0.6,6.4,0.6),SM(0xc0392b,0.6),px,3.2,-9.7);
-   const sgn=label('SHOWROOM',0,8.8,-9.6);sgn.scale.set(13,2.8,1);g.add(sgn);
+   const sgn=label('SHOWROOM',0,8.8,-9.6);sgn.scale.set(8.5,1.8,1);g.add(sgn);
    const cols=[0x3a6b3a,0xb8322a,0xe8e4d8,0x2d3a5e];
    ['fj40','wrangler','defender','cruiser'].forEach((k,i)=>{const px=-13.5+i*9,pm=new T.MeshStandardMaterial({color:C(cols[i]),roughness:0.3,metalness:0.4}),pl2=new T.MeshStandardMaterial({color:0xf4f4f0,roughness:0.6}),car=makeAlt(k,pm,pl2);
     mk(g,new T.CylinderGeometry(3.4,3.6,0.3,24),SM(0xd9d4c8,0.6),px,0.2,-2);
     car.position.set(px,0.35,-2);car.rotation.y=(i%2?-1:1)*0.5;g.add(car);obs.push([x+px,z-2,2.6]);
-    const c=CARM[k],tg=label(({fj40:'FJ40',wrangler:'Wrangler',defender:'Defender',cruiser:'LC70'})[k]+' · '+Math.round(c.price/1e6)+' jt',px,3.9,-2);tg.scale.set(6.4,1.45,1);g.add(tg);});
+    const c=CARM[k],tg=label(({fj40:'FJ40',wrangler:'Wrangler',defender:'Defender',cruiser:'LC70'})[k]+' · '+Math.round(c.price/1e6)+' jt',px,3.3,-2);tg.scale.set(3.8,0.86,1);g.add(tg);});
    /* dua mobil unggulan di panggung emas depan showroom */
-   [['sierra',-6,0x7a9a4a,'JIMNY SIERRA CANVAS'],['caribian',6,0xd0a03a,'JIMNY CARIBIAN']].forEach(([k,px,col,nm],i)=>{
+   [['sierra',-12,0x7a9a4a,'JIMNY SIERRA CANVAS'],['corsica',0,0x3f6b4a,'JIMNY CORSICA'],['caribian',12,0xd0a03a,'JIMNY CARIBIAN']].forEach(([k,px,col,nm],i)=>{
     const pm=new T.MeshStandardMaterial({color:C(col),roughness:0.3,metalness:0.4}),pl2=new T.MeshStandardMaterial({color:0xf4f4f0,roughness:0.6}),car=makeAlt(k,pm,pl2);
     mk(g,new T.CylinderGeometry(3.9,4.1,0.5,28),SM(0xf2c14e,0.3,0.7,{emissive:C(0x8a6a10),emissiveIntensity:0.35}),px,0.25,8);
     mk(g,new T.CylinderGeometry(3.3,3.3,0.52,28),SM(0x3a2d0f,0.5),px,0.26,8);
-    car.position.set(px,0.55,8);car.rotation.y=(i?-1:1)*0.6;g.add(car);obs.push([x+px,z+8,2.9]);
-    const tg=label('★ '+nm+' · '+Math.round(CARM[k].price/1e6)+' jt',px,4.4,8);tg.scale.set(9.5,1.7,1);g.add(tg);
-    const st=label('EDISI KOLEKTOR',px,5.9,8);st.scale.set(6.5,1.2,1);g.add(st);});
+    car.position.set(px,0.55,8);car.rotation.y=(i-1)*0.6||0.3;g.add(car);obs.push([x+px,z+8,2.9]);
+    const tg=label('★ '+nm+' · '+Math.round(CARM[k].price/1e6)+' jt',px,3.7,8);tg.scale.set(5.6,1.0,1);g.add(tg);
+    const st=label('EDISI KOLEKTOR',px,4.5,8);st.scale.set(3.4,0.62,1);g.add(st);});
    obs.push([x-8,z-14,5],[x,z-14,5],[x+8,z-14,5],[x-14,z-14,4],[x+14,z-14,4]);
    ly=11;
   }else if(type==='pom'){
@@ -1397,7 +1447,7 @@ const RUKOS=[],GATES=[];
  const iconTex=(ad)=>{const c=cv(96,96),g=c.getContext('2d');g.fillStyle=ad.empty?'#7d858c':'#ffb02e';g.beginPath();g.arc(48,48,40,0,7);g.fill();g.lineWidth=5;g.strokeStyle='#fff';g.stroke();
   g.fillStyle='#1a1205';g.textAlign='center';g.textBaseline='middle';g.font='bold 52px Arial';g.fillText(ad.empty?'+':'i',48,52);return new T.CanvasTexture(c);};
  ADS.forEach((ad,i)=>{
-  const rowB=i>=6,k=i%6,lx=(k-2.5)*7.5,lz=rowB?14:-14;
+  const rowB=i%2===1,k=i>>1,lx=(k-(Math.ceil(ADS.length/2)-1)/2)*7.5,lz=rowB?14:-14;
   const g=new T.Group(),add=(geo,m,x,y,z)=>{const o=new T.Mesh(geo,m);o.position.set(x,y,z);g.add(o);return o;};
   const face=new T.Color(ad.col);
   add(BX(7.2,10,11),SM(face.getHex(),0.85),0,5,0);
@@ -1407,11 +1457,19 @@ const RUKOS=[],GATES=[];
   const sg=add(new T.PlaneGeometry(6.8,1.7),new T.MeshBasicMaterial({map:signTex(ad),toneMapped:false}),0,5.05,5.58);
   for(const y of[7.0,9.0])for(const x of[-2.3,0,2.3])add(BX(1.3,1.2,0.1),glassM,x,y,5.55);
   const sp=new T.Sprite(new T.SpriteMaterial({map:iconTex(ad),fog:false,transparent:true}));sp.scale.set(2.6,2.6,1);sp.position.set(0,13.2,5.5);g.add(sp);
+  /* muka belakang = muka depan juga (ruko bolak-balik) */
+  {const bk=(o,rz)=>{o.position.z=-o.position.z;o.position.x=-o.position.x;o.rotation.y=Math.PI;return o;};
+   bk(add(BX(6.2,3.6,0.12),glassM,0,2.0,5.55));bk(add(BX(1.3,3.0,0.14),SM(0x3a2a1c,0.7),2.1,1.6,5.58));
+   const aw2=bk(add(BX(7.4,0.14,1.7),SM(0xf4f1e8,0.8),0,4.15,6.2));aw2.rotation.x=-0.32;
+   bk(add(new T.PlaneGeometry(6.8,1.7),new T.MeshBasicMaterial({map:signTex(ad),toneMapped:false}),0,5.05,5.58));
+   for(const y of[7.0,9.0])for(const x of[-2.3,0,2.3])bk(add(BX(1.3,1.2,0.1),glassM,x,y,5.55));
+   const sp2=new T.Sprite(new T.SpriteMaterial({map:iconTex(ad),fog:false,transparent:true}));sp2.scale.set(2.6,2.6,1);sp2.position.set(0,13.2,-5.5);g.add(sp2);}
   const w=toW(lx,lz);g.position.set(w[0],RUKO.y-0.15,w[1]);g.rotation.y=th+(rowB?Math.PI:0);
   g.traverse(o=>{if(o.isMesh)o.userData.shop=i;});shade(g);scene.add(g);
   const fd=toW(lx,rowB?lz-8:lz+8);
   const ents=[[0,-2.6],[0,2.6]].map(o=>{const p=toW(lx,lz+(rowB?-o[1]:o[1]));return addOb(p[0],p[1],4.0);});
-  RUKOS.push({ad,i,g,ents,x:w[0],z:w[1],dx:fd[0],dz:fd[1],on:true});
+  const fd2=toW(lx,rowB?lz+8:lz-8);
+  RUKOS.push({ad,i,g,ents,x:w[0],z:w[1],dx:fd[0],dz:fd[1],dx2:fd2[0],dz2:fd2[1],on:true});
  });
  /* street details: two benches + lamps */
  for(const lx of[-14,14]){const p=toW(lx,0),pl2=new T.Mesh(new T.CylinderGeometry(0.1,0.12,5,8),darkM);pl2.position.set(p[0],RUKO.y+2.4,p[1]);scene.add(pl2);
@@ -1444,7 +1502,7 @@ const RUKOS=[],GATES=[];
   }else if(sl[0]==='ad2'){
    g.fillStyle='#e8761a';g.fillRect(0,0,W,Hh);g.fillStyle='rgba(0,0,0,.18)';for(let i=0;i<12;i++){g.fillRect(i*90+((t*40)%90)-90,0,45,Hh);}
    g.textAlign='center';g.fillStyle='#fff';g.font='bold 126px Arial';g.fillText('RUKO',W/2,150);g.fillText('DISEWAKAN',W/2,282);
-   g.font='600 36px Arial';g.fillStyle='#2a1500';g.fillText('12 ruko di Deretan Ruko · tampilkan brand dan usahamu',W/2,376);g.font='28px Arial';g.fillText('Ketuk papan ruko untuk chat WhatsApp',W/2,420);
+   g.font='600 36px Arial';g.fillStyle='#2a1500';g.fillText('9 ruko masih kosong · tampilkan brand dan usahamu',W/2,376);g.font='28px Arial';g.fillText('Ketuk papan ruko untuk chat WhatsApp',W/2,420);
   }else{
    const bg=g.createLinearGradient(0,0,0,Hh);bg.addColorStop(0,'#15233a');bg.addColorStop(1,'#0c1220');g.fillStyle=bg;g.fillRect(0,0,W,Hh);
    g.fillStyle='#ff8a1f';g.fillRect(150,70,724,330);g.fillStyle='#1d5fd6';g.beginPath();g.moveTo(150,260);for(let x=150;x<=874;x+=40){g.lineTo(x,260+((x/40)%2?42:6));}g.lineTo(874,400);g.lineTo(150,400);g.fill();
@@ -1695,8 +1753,10 @@ applyRoute(0);
 
 /* ---------- models ---------- */
 const WB=1.13,TRK=0.72;   /* half wheelbase, half track */
-function plateTex(txt){const c=document.createElement('canvas');c.width=128;c.height=40;const x=c.getContext('2d');x.fillStyle='#f4f4f0';x.fillRect(0,0,128,40);x.strokeStyle='#111';x.lineWidth=3;x.strokeRect(2,2,124,36);
-  x.fillStyle='#111';x.font='bold 26px Arial, sans-serif';x.textAlign='center';x.textBaseline='middle';x.fillText(txt,64,21,112);const t=new T.CanvasTexture(c);t.encoding=T.sRGBEncoding;return t;}
+function plateTex(txt,st){const c=document.createElement('canvas');c.width=128;c.height=40;const x=c.getContext('2d');st=st|0;
+  if(st===2){const g=x.createLinearGradient(0,0,128,40);g.addColorStop(0,'#f6dc7a');g.addColorStop(0.5,'#d4af37');g.addColorStop(1,'#9c7a1c');x.fillStyle=g;}else x.fillStyle=st===1?'#121315':'#f4f4f0';
+  x.fillRect(0,0,128,40);x.strokeStyle=st===1?'#9aa1a6':st===2?'#5a4208':'#111';x.lineWidth=3;x.strokeRect(2,2,124,36);
+  x.fillStyle=st===1?'#f2f2ee':st===2?'#2a1c00':'#111';x.font='bold 26px Arial, sans-serif';x.textAlign='center';x.textBaseline='middle';x.fillText(txt,64,21,112);const t=new T.CanvasTexture(c);t.encoding=T.sRGBEncoding;return t;}
 function badgeTex(){const c=document.createElement('canvas');c.width=c.height=64;const x=c.getContext('2d');
   x.fillStyle='#c9ced2';x.beginPath();x.moveTo(8,40);x.lineTo(22,8);x.lineTo(56,8);x.lineTo(42,40);x.lineTo(30,34);x.lineTo(22,52);x.lineTo(8,52);x.closePath();
   x.fillStyle='#d8dde1';x.font='italic 900 56px Arial, sans-serif';x.textAlign='center';x.textBaseline='middle';x.clearRect(0,0,64,64);x.fillText('S',32,34);
@@ -1789,6 +1849,7 @@ function makeAlt(kind,paint,pm){
    defender:{W:1.0,WZ:1.4,Lf:2.45,Lr:2.55,hf:1.1,hh:1.22,xw:.95,xr:.85,xb:-2.4,hr:1.97,rh:1.97,rcol:null,hl:0,gr:'bar',bm:0,spare:1,rack:1,flare:1},
    sierra:{W:.78,WZ:1.08,Lf:1.72,Lr:1.78,hf:.92,hh:1.0,xw:.5,xr:.4,xb:-1.62,hr:.96,rh:1.6,rcol:0xd9cfae,hl:0,gr:'classic',bm:0,spare:1,flare:1},
    caribian:{W:.78,WZ:1.32,Lf:1.95,Lr:2.1,hf:.9,hh:.98,xw:.55,xr:.43,xb:-1.2,hr:.94,rh:1.52,rcol:null,hl:0,gr:'classic',bm:0,spare:0,flare:1},
+   corsica:{W:.78,WZ:1.1,Lf:1.76,Lr:1.84,hf:.92,hh:1.0,xw:.5,xr:.41,xb:-1.7,hr:1.52,rh:1.7,rcol:0xe9e4d4,hl:0,gr:'classic',bm:0,spare:0,flare:1,bull:1},
    cruiser:{W:.95,WZ:1.37,Lf:2.5,Lr:2.5,hf:1.14,hh:1.28,xw:.9,xr:.76,xb:-2.35,hr:1.95,rh:1.95,rcol:null,hl:1,gr:'chrome',bm:1,rack:1,bull:1,flare:1}}[kind];
   const g=new T.Group(),{W,Lf,Lr,hf,hh,xw,xr,xb,hr,rh,WZ}=P,BY=0.5,AR=0.47,wagon=hr>1.5;
   const blk=SM(0x17191c,0.7),dark=SM(0x0a0b0c,0.95),glass=SM(0x2a3a44,0.06,0.5,{side:T.DoubleSide,transparent:true,opacity:0.3,depthWrite:false}),chrome=SM(0xe2e6e9,0.18,0.95),steel=SM(0x30343a,0.45,0.7);
@@ -1938,6 +1999,31 @@ function makeAlt(kind,paint,pm){
     }
     add(B(2*W-0.1,0.07,0.06),chrome,0,rh-0.02,xr+0.03);
   }
+  if(kind==='corsica'){
+    /* Suzuki Katana Corsica (Alexander Graha): 3 pintu hardtop, atap dengan panel kaca, strip biru diagonal, bull bar, ban serep berselubung putih di pintu belakang */
+    const bl2=SM(0x2f7fd0,0.45),wh=SM(0xf2f0e8,0.7);
+    for(const sx of[-1,1]){
+      for(let i=0;i<5;i++){const st=add(B(0.006,0.05,0.26),bl2,sx*(W+0.013),BY+0.5+i*0.05,0.28-i*0.17);st.rotation.x=-0.5;}   /* strip biru diagonal */
+      for(let i=0;i<3;i++){const st=add(B(0.006,0.05,0.22),bl2,sx*(W+0.013),BY+0.38+i*0.05,-0.62-i*0.17);st.rotation.x=-0.5;}
+      
+    }
+    /* atap jenong (tinggi, menggembung); panoramic roof = kaca miring di bahu atap, di atas jendela belakang (tidak sampai ke tengah atap) */
+    {const pl=xr-xb-0.4,pz=(xr+xb)/2-0.02,pg=SM(0x16222c,0.05,0.7,{transparent:true,opacity:0.75}),pf=SM(0x1a1c1f,0.6,0.4);
+     const g0=xb+0.12,g1=-0.25,gl=g1-g0,gz=(g0+g1)/2;                                       /* bentang kaca: dari tiang C sampai tengah kabin */
+     add(B(2*W-0.12,0.14,pl+0.1),paint,0,rh+0.07,pz);                                       /* kap atap jenong */
+     for(const sx of[-1,1]){
+       const sl=add(B(0.2,0.14,pl+0.1),paint,sx*(W-0.1),rh+0.05,pz);sl.rotation.z=-sx*0.55;           /* bahu miring */
+       const gs=add(B(0.16,0.035,gl),pg,sx*(W-0.17),rh+0.125,gz);gs.rotation.z=-sx*0.55;             /* kaca panoramic di atas jendela belakang */
+       const fr=add(B(0.03,0.04,gl+0.06),pf,sx*(W-0.1),rh+0.1,gz);fr.rotation.z=-sx*0.55;           /* bingkai bawah kaca */
+       for(const zz of[g0,g1])add(B(0.2,0.04,0.03),pf,sx*(W-0.17),rh+0.125,zz).rotation.z=-sx*0.55;
+     }}
+    add(B(2*W-0.1,0.07,0.26),paint,0,rh+0.1,xr+0.05);                                       /* visor depan atap */
+    /* ban serep dengan selubung putih di pintu belakang, sisi kanan */
+    const tr=add(new T.CylinderGeometry(0.36,0.36,0.22,22),SM(0x111214,0.9),0.3,1.0,-Lr-0.3);tr.rotation.x=Math.PI/2;
+    const cv=add(new T.CylinderGeometry(0.33,0.33,0.1,22),wh,0.3,1.0,-Lr-0.43);cv.rotation.x=Math.PI/2;
+    add(B(0.16,0.06,0.04),SM(0x8a8f94,0.6),0.3,1.0,-Lr-0.49);
+    add(B(0.05,0.55,0.12),dark,0.3,1.0,-Lr-0.14);                                            /* braket ban serep */
+  }
   const plate=add(new T.PlaneGeometry(0.5,0.16),pm,0,BY+0.08,-Lr-0.226);plate.rotation.y=Math.PI;
   return shade(g);
 }
@@ -2000,7 +2086,7 @@ function buildPerson(g,shC,cpC,skC,opt){
 const carMesh=makeJimny(0x1f5fd0,'SIBIRU');scene.add(carMesh);
 /* ---- cockpit (driver's seat, right-hand drive) with live gauges and a rear-view mirror ---- */
 const CK={on:false,back:0,eye:new T.Vector3(-0.36,1.5,-0.16)};
-const CUSTD={car:'jimny',col:0x1f5fd0,plate:'SIBIRU',shape:0,rim:0,stk:0,ext:{bar:false,rack:false,stripe:false,snorkel:false,lamp:false,flare:false,winch:false,flag:false,jerry:false,eng1:false,eng2:false,tire:false,tank:false}};
+const CUSTD={car:'jimny',col:0x1f5fd0,plate:'SIBIRU',shape:0,rim:0,stk:0,ext:{bar:false,rack:false,stripe:false,snorkel:false,lamp:false,flare:false,winch:false,flag:false,jerry:false,eng1:false,eng2:false,tire:false,tank:false,lift:false}};
 let CUST=Object.assign({},CUSTD,{ext:Object.assign({},CUSTD.ext)});
 let PREV=null;
 try{const sv=JSON.parse(localStorage.getItem('jimnyCust')||'null');if(sv&&typeof sv==='object')CUST=Object.assign({},CUSTD,sv,{ext:Object.assign({},CUSTD.ext,sv.ext||{})});}catch(e){}
@@ -2071,8 +2157,8 @@ const CUSTCOL=[0x1f5fd0,0xc0392b,0x4a6b3a,0xe0b020,0xeeeeee,0x1a1a1c,0xe8731a,0x
 const RIMC=[{n:'Standar',c:0xb9bec2,s:0x8a9096},{n:'Hitam',c:0x17191c,s:0x3a3e44},{n:'Emas',c:0xd4a63a,s:0xb88a24},{n:'Putih',c:0xeceef0,s:0xc4c8cc},{n:'Merah',c:0xc03020,s:0x901f14},{n:'Krom',c:0xe2e6e9,s:0xaeb4b9},{n:'Biru',c:0x2f6fd0,s:0x1f4f9a},{n:'Hijau',c:0x3f9a4a,s:0x2b6f34},{n:'Oranye',c:0xe8731a,s:0xb4560f},{n:'Perunggu',c:0x9c6b3a,s:0x74502a}];
 const SHAPES=['Velg kaleng','Velg racing'];
 const STKC=[0xffffff,0x111111,0xffcc00,0xd62828,0x1f9bd6,0xff8c1a,0x39b54a,0x8e44ad,0xff6f91];
-const EXTRA=[['bar','Bumper tangguh'],['rack','Rak atap'],['stripe','Stiker samping'],['snorkel','Snorkel'],['lamp','Lampu atap'],['flare','Spakbor lebar'],['winch','Winch'],['flag','Bendera antena'],['jerry','Jerigen']];
-const PERF=[['eng1','Mesin Stage 1 (+tenaga)'],['eng2','Mesin Stage 2 (+++)'],['tire','Ban offroad (lumpur)'],['tank','Tangki besar (+50%)']];
+const EXTRA=[['bar','Bumper tangguh'],['rack','Rak atap'],['stripe','Stiker samping'],['snorkel','Snorkel · tembus kubangan dalam'],['lamp','Lampu atap'],['flare','Spakbor lebar'],['winch','Winch · tarik keluar saat terjebak'],['flag','Bendera antena'],['jerry','Jerigen']];
+const PERF=[['eng1','Mesin Stage 1 (+tenaga)'],['eng2','Mesin Stage 2 (+++)'],['tire','Ban offroad · tidak mudah terjebak'],['lift','Lift kit · lebih jago di batu & air'],['tank','Tangki besar (+50%)']];
 const XF={};
 (function(){
   const bd=carMesh.userData.body,blk=SM(0x15171a,0.5,0.6),zin=SM(0x9aa1a6,0.4,0.8),add=(g,geo,m,x,y,z)=>{const o=new T.Mesh(geo,m);o.position.set(x,y,z);g.add(o);return o;},B=(w,h,d)=>new T.BoxGeometry(w,h,d);
@@ -2101,7 +2187,7 @@ function applyCust(){
   if(!PREV&&CUST.car&&CUST.car!=='jimny'&&ownGet()&&!ownHas('car:'+CUST.car))CUST.car='jimny';
   setVeh();
   const ud=carMesh.userData,col=C(CUST.col);ud.paint.color.copy(col);ud.base.copy(col);
-  if(ud.pm.map)ud.pm.map.dispose();ud.pm.map=plateTex(CUST.plate||'SIBIRU');ud.pm.needsUpdate=true;
+  if(ud.pm.map)ud.pm.map.dispose();ud.pm.map=plateTex(CUST.plate||'SIBIRU',CUST.pst);ud.pm.needsUpdate=true;
   const rc=RIMC[CUST.rim]||RIMC[0],sh=CUST.shape|0;
   ud.rimM.color.copy(C(sh===0?rc.c:0x15171a));ud.ringM.color.copy(C(rc.s));ud.raceM.color.copy(C(rc.c));
   for(const w of ud.wheels){w.can.forEach(m=>m.visible=sh===0);w.race.forEach(m=>m.visible=sh===1);const tr=!!CUST.ext.tire;w.tread.forEach(m=>m.visible=tr);w.spin.scale.set(tr?1.3:1,1,1);}
@@ -2125,9 +2211,14 @@ function tapRuko(cx,cy){
   const hit=ray.intersectObjects(RUKOS.filter(k=>k.on).map(k=>k.g).concat(INFOC?[INFOC.g]:[]),true)[0];if(!hit)return false;
   if(hit.object.userData.info){if(Math.hypot(pl.x-INFOC.dx,pl.z-INFOC.dz)<16)openInfo();else toast('Dekati Pusat Informasi dulu, lalu ketuk lagi',1600);return true;}
   const i=hit.object.userData.shop;if(i===undefined)return false;const k=RUKOS[i];
-  if(Math.hypot(pl.x-k.dx,pl.z-k.dz)<14)openShop(k.ad);else toast('Dekati ruko dulu, lalu ketuk lagi',1600);return true;
+  if(Math.min(Math.hypot(pl.x-k.dx,pl.z-k.dz),Math.hypot(pl.x-k.dx2,pl.z-k.dz2))<14)openShop(k.ad);else toast('Dekati ruko dulu, lalu ketuk lagi',1600);return true;
 }
-function tapUp(e){if(!tapT||e.pointerId!==tapT.id)return;const d=Math.hypot(e.clientX-tapT.x,e.clientY-tapT.y),el=performance.now()-tapT.t;tapT=null;if(d<12&&el<350){if(S.inCar){if(tapCar(e.clientX,e.clientY))toggleCam();}else if(S.mode==='free'&&!S.shopOpen)tapRuko(e.clientX,e.clientY);}}
+function tapBill(cx,cy){if(!BILLS.length||S.shopOpen||(R.on&&!R.done))return false;
+  const r=renderer.domElement.getBoundingClientRect();ndc.set((cx-r.left)/r.width*2-1,-((cy-r.top)/r.height*2-1));ray.setFromCamera(ndc,cam);
+  const gs=BILLS.filter(b=>b.g&&b.g.visible!==false&&Math.hypot(b.x-cam.position.x,b.z-cam.position.z)<140);if(!gs.length)return false;
+  const ms=[];gs.forEach(b=>b.g.traverse(o=>{if(o.isMesh){o.userData.bill=b;ms.push(o);}}));
+  const hit=ray.intersectObjects(ms,false)[0];if(!hit)return false;openShop(hit.object.userData.bill.ad);return true;}
+function tapUp(e){if(!tapT||e.pointerId!==tapT.id)return;const d=Math.hypot(e.clientX-tapT.x,e.clientY-tapT.y),el=performance.now()-tapT.t;tapT=null;if(d<12&&el<350){if(tapBill(e.clientX,e.clientY))return;if(S.inCar){if(tapCar(e.clientX,e.clientY))toggleCam();}else if(S.mode==='free'&&!S.shopOpen)tapRuko(e.clientX,e.clientY);}}
 ['gl','joyzone'].forEach(id=>{const el=$(id);el.addEventListener('pointerdown',tapDown);el.addEventListener('pointerup',tapUp);});
 const CAMO={yaw:0,pit:0,id:null,x:0,y:0,t:0};
 {const g=$('gl');
@@ -2357,14 +2448,17 @@ function stepCar(dt,thr,str,brake){
   }
   c.onR=rl>0.3;c.kick=(c.kick||0)*Math.max(0,1-1.2*dt);
   const fm=S.mode==='free',e2=fm&&CUST.ext.eng2,e1=fm&&CUST.ext.eng1,tf=(fm&&CUST.ext.tire)?0.6:1,cv=fm?(CARM[CUST.car]||CARM.jimny):CARM.jimny;
-  const maxV=(st===1?(aw?24:15):st===2?(aw?18:13):(aw?25:27))*(e2?1.1:e1?1.05:1)*cv.mv*((fm||R.on)&&svcBad()?0.6:1);
+  const maxV=(st===1?(aw?24:15):st===2?(aw?18:13):(aw?25:27))*(e2?1.1:e1?1.05:1)*cv.mv*(st===1?(1+((cv.md||1)-1)*0.5):1)*((fm||R.on)&&svcBad()?0.6:1);
   let a=0;
   if(thr>0.05){a=vf<-0.3?26*thr:(st===1?(aw?15:9):(aw?13.5:15))*thr*Math.max(0,1-vf/(maxV+3));
     if(!aw){const sl=Math.sin(c.pitch);if(sl>0.16)a*=1-clamp((sl-0.16)*2.6,0,0.85);}
-    if(onRock)a*=aw?0.75:0.4;
+    if(onRock)a*=aw?(fm&&CUST.ext.lift?0.85:0.75):(fm&&CUST.ext.lift?0.62:0.4);
+    if(a>0&&st===1)a*=(cv.md||1);
+    if(a>0){const sl2=Math.sin(c.pitch);if(sl2>0.08)a*=1+((cv.cl||1)-1)*clamp(sl2*4,0,1);}
     if(a>0)a*=(e2?1.35:e1?1.18:1)*cv.ac*((fm||R.on)&&svcBad()?0.55:1);}
   else if(thr<-0.05)a=vf>0.5?26*thr:9*thr*Math.max(0,1-(-vf)/8);
   vf+=a*dt;
+  if(BOG.on||BOG.win){vf*=Math.max(0,1-14*dt);vl*=Math.max(0,1-14*dt);}
   vf-=vf*(0.07+tf*((st===1?(aw?0.32:0.75):0)+(st===2?(0.6+wd*2.4)*(aw?0.75:1):0)))*dt;
   if(Math.abs(thr)<0.05)vf-=Math.sign(vf)*Math.min(Math.abs(vf),2.5*dt);
   if(brake)vf-=Math.sign(vf)*Math.min(Math.abs(vf),30*dt);
@@ -2378,7 +2472,7 @@ function stepCar(dt,thr,str,brake){
   if(onRock&&aw){if(vf<9)vf=clamp(vf,-2.5,Math.max(1.8,4.6-1.2*rl));else vf-=vf*(0.25+0.15*rl)*dt;}   /* slow = crawl, fast = launch off the rock */
   else if(aw&&vf>6.5&&vf<11&&rockAhead(c.x,c.z,s,co))vf=Math.max(6.5,vf-26*dt);   /* low-range crawl when a climbable boulder is ahead */
   c.vx=s*vf+co*vl;c.vz=co*vf-s*vl;c.v=vf;
-  const ms=0.6/(1+Math.abs(vf)/6.5);
+  const ms=0.6*(cv.hd||1)/(1+Math.abs(vf)/6.5);
   c.steer+=(str*ms-c.steer)*Math.min(1,dt*8);
   const yr=-vf*Math.tan(c.steer)/(WB*2);
   c.h+=yr*dt;
@@ -2764,13 +2858,13 @@ function msFree(minR,maxR,avoid,a0,a1){
 function msTarget(name,pt,hex){MI.tn=name;MI.tx=pt[0];MI.tz=pt[1];setBeacon(pt[0],pt[1],hex);WPT={name,x:pt[0],z:pt[1],keep:true};}
 function msReset(){MI.on=false;beacon.visible=false;stuck.visible=false;rope.visible=false;NPK1.visible=NPK2.visible=PBOX.visible=false;if(WPT&&WPT.keep)WPT=null;}
 function ptsGet(){let n=0;try{n=parseInt(localStorage.getItem('jimnyPts'))||0;}catch(e){}return n;}
-function updPts(){const e=$('ptsLine');if(e)e.textContent='Poin: '+ptsGet()+' · Koin: '+rp(monGet());}
+function updPts(){const e=$('ptsLine');if(!e)return;let l='Poin: '+ptsGet();try{l=lvLine();}catch(_){}e.textContent=l+' · Koin: '+rp(monGet())+(PREM()?' · ★ Premium':'');}
 /* mata uang game: Koin (disimpan dalam satuan lama, ditampilkan dibagi 100) */
 function rp(n){const v=Math.round(n/100);return '🪙\u2060'+(v<0?'-':'')+Math.abs(v).toString().replace(/\B(?=(\d{3})+(?!\d))/g,'.');}
 function monGet(){let n=0;try{n=parseInt(localStorage.getItem('jimnyMoney'))||0;}catch(e){}return n;}
 function monAdd(n){try{localStorage.setItem('jimnyMoney',String(Math.max(0,monGet()+Math.round(n))));}catch(e){}updPts();netSave();}
-function ptsAdd(n,m){try{localStorage.setItem('jimnyPts',String(ptsGet()+n));}catch(e){}monAdd(m!==undefined?m:n*250);updPts();netSave();}
-const PRICE={col:150000,shape:350000,rim:75000,stk:50000,ext:{bar:500000,rack:500000,stripe:100000,snorkel:120000,lamp:180000,flare:150000,winch:600000,flag:40000,jerry:60000,eng1:350000,eng2:800000,tire:300000,tank:250000}};
+function ptsAdd(n,m){try{localStorage.setItem('jimnyPts',String(ptsGet()+n));}catch(e){}monAdd(m!==undefined?m:n*250);updPts();netSave();try{wkAdd(n);lvCheck();renderHub();}catch(e){}}
+const PRICE={col:150000,shape:350000,rim:75000,stk:50000,ext:{bar:500000,rack:500000,stripe:100000,snorkel:120000,lamp:180000,flare:150000,winch:600000,flag:40000,jerry:60000,eng1:350000,eng2:800000,tire:300000,tank:250000,lift:450000}};
 function ownGet(){let o=null;try{o=JSON.parse(localStorage.getItem('jimnyOwn')||'null');}catch(e){}return Array.isArray(o)?o:null;}
 function ownSet(o){try{localStorage.setItem('jimnyOwn',JSON.stringify(o));}catch(e){}netSave();}
 function ownKeys(c){const k=['col:'+c.col,'shape:'+c.shape,'rim:'+c.rim,'stk:'+c.stk];for(const e in c.ext)if(c.ext[e])k.push('ext:'+e);return k;}
@@ -2863,12 +2957,12 @@ function startMission(type,lvl,cont){
 }
 function msStars(ok,f){return ok?(f>=0.75?3:f>=0.4?2:1):0;}
 function msEnd(ok,title,desc,stars){
-  const type=MI.type,lvl=MI.lvl;msReset();
+  const type=MI.type,lvl=MI.lvl;try{dHook('ms',{ok,type,t:MI.t});}catch(e){}msReset();
   let next={label:'Coba lagi',fn:()=>startMission(type,lvl)},extra='';
   if(ok){misSet(type,Math.min(5,lvl+1));
     if(lvl<5)next={label:'Lanjut Level '+(lvl+1),fn:()=>startMission(type,lvl+1,true)};
     else{next={label:'Ulangi dengan titik baru',fn:()=>startMission(type,5)};extra=' Level maksimum tamat! Ulangi kapan saja, titik misinya berbeda tiap kali, untuk terus cari koin.';}}
-  const pts=ok?40+lvl*20+stars*25:10,mon=ok?5000+lvl*3000+stars*1500:1000;ptsAdd(pts,mon);
+  const pts=ok?40+lvl*20+stars*25:10,mon=pb(ok?5000+lvl*3000+stars*1500:1000);ptsAdd(pts,mon);
   if(ok&&lvl<5&&type!=='foto'){CH={type,lvl:lvl+1,t:3.6};toast('Level '+lvl+' selesai '+('★'.repeat(stars)+'☆'.repeat(3-stars))+' · +'+rp(mon)+' · lanjut Level '+(lvl+1),3400);return;}
   if(ok)fbMaybe(3200);
   openShop({name:title,photos:type==='foto'&&ok?MI.photos:[],tag:(stars?('★'.repeat(stars)+'☆'.repeat(3-stars))+' · ':'')+MISN[type]+' Level '+lvl,col:ok?'#2f7d4f':'#a8402f',desc:desc+' +'+pts+' poin dan +'+rp(mon)+' (koinmu '+rp(monGet())+').'+extra,products:[],next});
@@ -2951,8 +3045,8 @@ function buildPlaces(){
   L.push({n:'Deretan Ruko',x:RUKO.x,z:RUKO.z,t:'Ruko disewakan'});
   if(MAP.lm)MAP.lm.forEach(l=>L.push({n:l[3],x:l[1],z:l[2],t:'Landmark',k:l[0]}));
   if(MAP.fly)L.push({n:'Flyover Semanggi',x:MAP.fly.x,z:(MAP.fly.z0+MAP.fly.z1)/2,t:'Arena balap'});
-  L.push({n:'Batu Tantangan',x:ROCKC[0],z:ROCKC[1],t:'Medan batu'});
-  L.push({n:'Arena Berat',x:ROCKB[0],z:ROCKB[1],t:'Medan batu'});
+  if(MAP.id==='bandung')L.push({n:'Taman Offroad Sibiru',x:-150,z:30,t:'Lumpur & kubangan'});
+  if(!MAP.city){L.push({n:'Batu Tantangan',x:ROCKC[0],z:ROCKC[1],t:'Medan batu'});L.push({n:'Arena Berat',x:ROCKB[0],z:ROCKB[1],t:'Medan batu'});}
   const direct={};GATES.forEach(G=>{direct[G.id]=G;});
   const idx=MORDER.indexOf(MAP.id);
   for(let k=1;k<MORDER.length;k++){const id=MORDER[(idx+k)%MORDER.length],d=MAPS[id],G=direct[id],open=mapOpen(id);
@@ -3006,16 +3100,16 @@ function updateWpt(){
 let RG={mode:'new',step:1,email:''};
 const rgMsg=(t)=>{$('rgErr').textContent=t||'';};
 function rgView(){
-  const m=RG.mode,st=RG.step,s1=st===1;
-  $('rgS1').hidden=!s1;$('rgS2').hidden=s1;
-  $('rgFName').hidden=!(m==='new'||m==='edit');$('rgFCity').hidden=!(m==='new'||m==='edit');$('rgFHang').hidden=!(m==='new'||m==='edit');$('rgNote').hidden=!(m==='new'||m==='edit');
-  $('rgFMail').hidden=m==='edit';
-  $('rgT').textContent=m==='login'?'Masuk dengan email':m==='link'?'Tautkan email ke akunmu':m==='edit'?'Akunmu':'Daftar pemain';
-  $('rgSub').textContent=m==='login'?'Masukkan email yang kamu pakai saat daftar. Kami kirim kode 6 angka, lalu akunmu terbuka di perangkat ini.':m==='link'?'Tautkan email supaya kamu bisa masuk dari HP atau laptop lain hanya dengan kode dari emailmu.':m==='edit'?(ME.email?'Terhubung dengan '+ME.email+'. Untuk masuk di perangkat lain, pakai email ini.':'Akunmu belum terhubung email.'):'Cukup tulis username Instagram dan emailmu. Kamu otomatis punya rumah dan garasi di Sibiru Residence, Kota Bandung, lalu langsung custom mobilmu.';
-  $('rgGo').textContent=m==='edit'?'Simpan':s1?(m==='login'?'Kirim kode':m==='link'?'Kirim kode':'Kirim kode ke email'):(m==='login'?'Masuk':m==='link'?'Tautkan':'Daftar dan mulai main');
+  const m=RG.mode,st=RG.step,prof=m==='edit'||(m==='new'&&(st===3||!ONL));
+  $('rgS1').hidden=st===2;$('rgS2').hidden=st!==2;
+  $('rgFName').hidden=!(prof&&m!=='edit');$('rgFCity').hidden=!prof;$('rgFHang').hidden=!prof;$('rgNote').hidden=!prof;
+  $('rgFMail').hidden=m==='edit'||st===3||(m==='new'&&!ONL);
+  $('rgT').textContent=m==='login'?'Masuk dengan email':m==='link'?'Tautkan email ke akunmu':m==='edit'?'Akunmu':st===3?'Lengkapi profilmu':'Masuk atau daftar';
+  $('rgSub').textContent=m==='login'?'Masukkan email yang kamu pakai saat daftar. Kami kirim kode, lalu akunmu terbuka di perangkat ini.':m==='link'?'Tautkan email supaya kamu bisa masuk dari HP atau laptop lain hanya dengan kode dari emailmu.':m==='edit'?(ME.email?'Terhubung dengan '+ME.email+'. Untuk masuk di perangkat lain, pakai email ini.':'Akunmu belum terhubung email.'):st===3?'Email ini belum terdaftar. Tulis username Instagram dan asal kotamu, lalu kamu otomatis punya rumah dan garasi di Sibiru Residence, Kota Bandung.':!ONL?'Tulis username Instagram dan asal kotamu untuk mulai main.':'Cukup masukkan emailmu. Sudah punya akun? Langsung masuk setelah memasukkan kode. Belum punya? Kami tanya username Instagram-mu sesudahnya.';
+  $('rgGo').textContent=m==='edit'?'Simpan':st===1?'Kirim kode':st===2?(m==='link'?'Tautkan':'Lanjut'):'Daftar dan mulai main';
   if(!ONL)$('rgGo').textContent='Mulai main';
-  const sw=$('rgSwap');sw.hidden=!ONL||m==='link'||(m==='edit'&&!!ME.email)||(ME.reg&&m!=='edit');sw.textContent=m==='edit'?'Tautkan email ke akunmu':m==='login'?'Belum punya akun? Daftar baru':'Sudah punya akun? Masuk dengan email';
-  if(!s1)$('rgOtpN').textContent='Kode dikirim ke '+RG.email+'. Cek folder Spam kalau belum masuk.';
+  const sw=$('rgSwap');sw.hidden=!ONL||m!=='edit'||!!ME.email;sw.textContent='Tautkan email ke akunmu';
+  if(st===2)$('rgOtpN').textContent='Kode dikirim ke '+RG.email+'. Cek folder Spam kalau belum masuk.';
 }
 function rgNeedMail(){const em=$('rgMail').value.trim().toLowerCase();if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(em)){rgMsg('Isi alamat email yang benar.');return null;}return em;}
 async function rgSend(em){
@@ -3031,15 +3125,12 @@ async function rgVerify(){
   try{const v=await ONL.auth.verifyOtp({email:RG.email,token:code,type:'email'});
     if(v.error||!v.data||!v.data.session){rgMsg('Kode salah atau sudah kedaluwarsa. Minta kode baru.');return;}
     let r;
-    if(RG.mode==='new'){const nm=$('rgName').value.trim().replace(/^@+/,'').toLowerCase(),ct=$('rgCity').value.trim().replace(/\s+/g,' ').slice(0,24),hg=$('rgHang').value||'cafe';
-      r=await ONL.rpc('register_player_mail',{p_name:nm,p_city:ct,p_hang:hg,p_avatar:AVA?AVA.cur():null});
-      if(r.error||!r.data){const m=(r.error&&r.error.message)||'';rgMsg(/nama_dipakai/.test(m)?'Username itu sudah terdaftar, cek lagi ejaannya.':/email_terdaftar/.test(m)?'Email ini sudah terdaftar. Pilih "Masuk dengan email".':'Gagal mendaftar, coba lagi.');if(/email_terdaftar|nama_dipakai/.test(m)){RG.step=1;rgView();}return;}
-      const d=r.data;try{localStorage.setItem('jimnyTok',d.token);}catch(e){}finishReg(d.name,d.email||RG.email,d.slot,d.cluster,d.id,ct,hg);return;}
     if(RG.mode==='link'){r=await ONL.rpc('link_mail',{p_token:TOK});
       if(r.error||!r.data){const m=(r.error&&r.error.message)||'';rgMsg(/email_terdaftar/.test(m)?'Email itu sudah dipakai akun lain.':'Gagal menautkan email, coba lagi.');return;}
       const d=r.data;try{localStorage.setItem('jimnyTok',d.token);}catch(e){}finishReg(d.name,d.email||RG.email,d.slot,d.cluster,d.id,d.city||ME.city,d.hang||ME.hang);return;}
     r=await ONL.rpc('login_mail');
-    if(r.error||!r.data){rgMsg(r.error?'Gagal masuk, coba lagi.':'Email ini belum terdaftar. Pilih "Daftar baru".');return;}
+    if(r.error){rgMsg('Gagal masuk, coba lagi.');return;}
+    if(!r.data){if(RG.mode==='new'){RG.step=3;rgMsg('');rgView();setTimeout(()=>{try{$('rgName').focus();}catch(e){}},50);return;}rgMsg('Email ini belum terdaftar.');return;}
     try{Object.keys(localStorage).filter(k=>/^jimny/.test(k)&&k!=='jimnyDev').forEach(k=>localStorage.removeItem(k));localStorage.setItem('jimnyTok',r.data.token);sessionStorage.clear();}catch(e){}location.reload();
   }catch(e){rgMsg('Gagal, cek sinyal lalu coba lagi.');}finally{bt.disabled=false;}
 }
@@ -3049,10 +3140,7 @@ function saveReg(){
     try{const u=JSON.parse(localStorage.getItem('jimnyUser')||'{}');u.city=ct;u.hang=hg;localStorage.setItem('jimnyUser',JSON.stringify(u));}catch(e){}ME.city=ct;ME.hang=hg;if(ONL)ONL.rpc('set_hang',{p_token:TOK,p_city:ct,p_hang:hg});$('reg').hidden=true;toast('Tersimpan. Karaktermu akan terlihat di tempat itu saat offline.',2600);return;}
   if(ONL){
     if(RG.step===2){rgVerify();return;}
-    if(RG.mode==='login'||RG.mode==='link'){const em=rgNeedMail();if(em)rgSend(em);return;}
-    const nm=$('rgName').value.trim().replace(/^@+/,'').toLowerCase();
-    if(!/^[a-z0-9._]{2,30}$/.test(nm)){rgMsg('Isi username Instagram-mu (huruf, angka, titik, garis bawah).');return;}
-    if($('rgCity').value.trim().length<2){rgMsg('Isi asal kotamu dulu ya.');return;}
+    if(RG.step===3){rgRegister();return;}
     const em=rgNeedMail();if(em)rgSend(em);return;}
   /* mode offline (tanpa server) */
   const nm=$('rgName').value.trim().replace(/^@+/,'').toLowerCase(),ct=$('rgCity').value.trim().replace(/\s+/g,' ').slice(0,24),hg=$('rgHang').value||'cafe';
@@ -3060,6 +3148,16 @@ function saveReg(){
   if(ct.length<2){rgMsg('Isi asal kotamu dulu ya.');return;}
   let slot=ME.slot;if(!ME.reg){let h=0;for(const ch of nm.toLowerCase())h=(h*31+ch.charCodeAt(0))>>>0;slot=h%1000;}
   finishReg(nm,ME.email||'',slot,0,null,ct,hg);
+}
+async function rgRegister(){
+  const nm=$('rgName').value.trim().replace(/^@+/,'').toLowerCase(),ct=$('rgCity').value.trim().replace(/\s+/g,' ').slice(0,24),hg=$('rgHang').value||'cafe';
+  if(!/^[a-z0-9._]{2,30}$/.test(nm)){rgMsg('Isi username Instagram-mu (huruf, angka, titik, garis bawah).');return;}
+  if(ct.length<2){rgMsg('Isi asal kotamu dulu ya.');return;}
+  const bt=$('rgGo');bt.disabled=true;rgMsg('Mendaftarkan…');
+  try{const r=await ONL.rpc('register_player_mail',{p_name:nm,p_city:ct,p_hang:hg,p_avatar:AVA?AVA.cur():null});
+    if(r.error||!r.data){const m=(r.error&&r.error.message)||'';rgMsg(/nama_dipakai/.test(m)?'Username itu sudah dipakai pemain lain, cek lagi ejaannya.':/session|jwt|auth/i.test(m)?'Sesi kode habis. Masukkan emailmu lagi untuk kode baru.':'Gagal mendaftar, coba lagi.');if(/session|jwt|auth/i.test(m)){RG.step=1;rgView();}return;}
+    const d=r.data;try{localStorage.setItem('jimnyTok',d.token);}catch(e){}finishReg(d.name,d.email||RG.email,d.slot,d.cluster,d.id,ct,hg);
+  }catch(e){rgMsg('Gagal, cek sinyal lalu coba lagi.');}finally{bt.disabled=false;}
 }
 function finishReg(nm,em,slot,cluster,id,ct,hg){
   try{if(!ME.reg)localStorage.setItem('jimnyAfter','garage');localStorage.setItem('jimnyUser',JSON.stringify({name:nm,email:em,slot,cluster,id,city:ct||'',hang:hg||''}));
@@ -3128,6 +3226,8 @@ $('avSave').addEventListener('click',avSave);$('avSave').addEventListener('keydo
 $('meBtn').addEventListener('click',()=>showReg());
 if(ME.reg){$('welBtn').hidden=false;$('welBtn').addEventListener('click',()=>needHub('welcome',()=>startWelcome(false)));$('meBtn').hidden=false;$('meBtn').textContent='Halo, '+ME.name+' · akun';}
 function goGarage(shop,mode){PREV=null;GAR.shop=!!shop;GAR.mode=shop?(mode||'bengkel'):'home';toMenu();$('gar').hidden=false;$('mi').classList.add('lvOpen');renderGar();}
+function warkop(){const T=['Tips: oli habis = performa turun. Servis di bengkel sebelum balap.','Kabarnya Lembang lagi rame, tanjakannya licin habis hujan.','Pak Ujang bilang: turunin tekanan ban biar lumpur gampang dilewatin.','Jangan lupa bensin! Kalau habis, derek bayar maksimal 🪙500.','Juara 1 balap hadiahnya 5x lipat kerja kurir, coba aja!'];
+  if(monGet()<3000){toast('Koin kurang buat ngopi',1600);return;}monAdd(-3000);toast('☕ '+T[Math.floor(Math.random()*T.length)],3600);}
 function openShop(ad){
   S.shopOpen=true;$('shop').hidden=false;
   $('shopName').textContent=ad.name;$('shopTag').textContent=ad.tag||'';$('shopHd').style.background=ad.col;
@@ -3136,6 +3236,7 @@ function openShop(ad){
   (ad.photos||[]).forEach(ph=>{const d=document.createElement('div');d.className='prod';const im=document.createElement('img');im.src=ph.src;im.alt=ph.cap;const sp=document.createElement('span');sp.textContent=ph.cap;d.append(im,sp);gd.appendChild(d);});
   (ad.products||[]).forEach(p=>{const d=document.createElement('div');d.className='prod';const b=document.createElement('b');b.textContent=p.n;const i=document.createElement('i');i.textContent=p.p||'';const sp=document.createElement('span');sp.textContent=p.d||'';d.append(b,i,sp);gd.appendChild(d);});
   const ac=$('shop').querySelector('#shopAct');ac.innerHTML='';
+  (ad.acts||[]).forEach(q=>{const a=document.createElement('a');a.setAttribute('role','button');a.textContent=q.label;a.style.cursor='pointer';a.addEventListener('click',()=>{if(q.id==='warkop')warkop();else $(q.id).click();});ac.appendChild(a);});
   if(ad.next){const a=document.createElement('a');a.setAttribute('role','button');a.textContent=ad.next.label;a.style.cursor='pointer';a.addEventListener('click',()=>{closeShop();ad.next.fn();});ac.appendChild(a);}
   if(ad.link){const a=document.createElement('a');a.href=ad.link;a.target='_blank';a.rel='noopener noreferrer';a.textContent='Kunjungi';ac.appendChild(a);}
   if(ad.wa){const a=document.createElement('a');a.href='https://wa.me/'+ad.wa+(ad.empty?'?text='+encodeURIComponent(ad.msg||'Assalamualaikum bro, mau info untuk Ruko yang disewakan di game Jimny Adventure'):'');a.target='_blank';a.rel='noopener noreferrer';a.textContent='Chat WhatsApp';ac.appendChild(a);}
@@ -3148,10 +3249,10 @@ function pvCache(k,fn){if(!PVC[k]){const c=document.createElement('canvas');c.wi
 function pvLabel(g,txt,sub){g.fillStyle='rgba(8,14,22,.82)';g.fillRect(0,206,520,54);g.fillStyle='#fff';g.font='bold 26px Arial';g.textAlign='left';g.textBaseline='middle';g.fillText(txt,16,225,490);if(sub){g.font='17px Arial';g.fillStyle='#ffd37a';g.fillText(sub,16,247,490);}}
 function pvRuko(i){return pvCache('r'+i,(g,W,Hh)=>{
   g.fillStyle='#b9c6b0';g.fillRect(0,0,W,Hh);g.fillStyle='#5d6268';g.fillRect(0,96,W,72);g.fillStyle='rgba(255,255,255,.75)';for(let x=8;x<W;x+=44)g.fillRect(x,130,22,3);
-  ADS.forEach((ad,k)=>{const row=k>=6,kk=k%6,x=34+kk*75,y=row?172:22;g.fillStyle=ad.col;g.fillRect(x,y,68,72);g.fillStyle='rgba(0,0,0,.25)';g.fillRect(x,row?y:y+60,68,12);
+  ADS.forEach((ad,k)=>{const row=k%2===1,kk=k>>1,x=34+kk*75,y=row?172:22;g.fillStyle=ad.col;g.fillRect(x,y,68,72);g.fillStyle='rgba(0,0,0,.25)';g.fillRect(x,row?y:y+60,68,12);
     g.fillStyle='#fff';g.font='bold 15px Arial';g.textAlign='center';g.textBaseline='middle';g.fillText(String(k+1),x+34,y+(row?40:30));
     if(k===i){g.strokeStyle='#ffb02e';g.lineWidth=6;g.strokeRect(x-3,y-3,74,78);}});
-    g.fillStyle='rgba(8,14,22,.82)';g.fillRect(0,0,W,0);pvLabel(g,'Ruko No. '+(i+1)+(i>=6?' · deret selatan':' · deret utara'),'Deretan Ruko, Kota Bandung');});}
+    g.fillStyle='rgba(8,14,22,.82)';g.fillRect(0,0,W,0);pvLabel(g,'Ruko No. '+(i+1)+(i%2?' · deret selatan':' · deret utara'),'Deretan Ruko, Kota Bandung');});}
 function pvTower(){return pvCache('t'+(PVC._k=Math.floor(Date.now()/60000)),(g,W,Hh)=>{
   const sk=g.createLinearGradient(0,0,0,Hh);sk.addColorStop(0,'#10243f');sk.addColorStop(1,'#6d93bd');g.fillStyle=sk;g.fillRect(0,0,W,Hh);g.fillStyle='#5d6268';g.fillRect(0,196,W,64);
   g.fillStyle='#2b3138';g.fillRect(150,30,220,90);const vc=document.getElementById('pinVT')?null:null;try{g.drawImage(VT_C(),156,36,208,78);}catch(e){}
@@ -3162,42 +3263,92 @@ function pvArena(){return pvCache('a',(g,W,Hh)=>{
   g.fillStyle='rgba(8,14,22,.25)';g.fillRect(0,0,W,Hh);g.fillStyle='#30343a';g.fillRect(300,130,6,60);g.fillRect(430,130,6,60);g.fillStyle='#10202e';g.fillRect(280,70,176,64);g.strokeStyle='#ffb02e';g.lineWidth=4;g.strokeRect(282,72,172,60);
   g.fillStyle='#ffb02e';g.font='bold 22px Arial';g.textAlign='center';g.textBaseline='middle';g.fillText('SPACE',368,92);g.fillStyle='#f3f0e4';g.fillText('AVAILABLE',368,116);
   pvLabel(g,'Billboard Arena Balap','Di samping garis start · terlihat semua pembalap');});}
-function pvBill(b){return pvCache('b'+b.n,(g,W,Hh)=>{
-  const sc=2,cx=b.x,cz=b.z,mx=x=>(x-cx)*sc+W/2,mz=z=>(z-cz)*sc+Hh/2,P=MAP.city.pitch;
-  g.fillStyle='#d9d4c6';g.fillRect(0,0,W,Hh);
-  MAP.city.skip.forEach(q=>{g.fillStyle='#9fcf93';g.fillRect(mx(q[0]-23),mz(q[1]-23),46*sc,46*sc);});
-  g.fillStyle='#5d6268';for(let x=Math.floor((cx-130)/P)*P;x<cx+140;x+=P)g.fillRect(mx(x-7),0,14*sc,Hh);for(let z=Math.floor((cz-70)/P)*P;z<cz+80;z+=P)g.fillRect(0,mz(z-7),W,14*sc);
-  g.fillStyle='rgba(255,255,255,.7)';for(let x=Math.floor((cx-130)/P)*P;x<cx+140;x+=P)for(let z=cz-70;z<cz+70;z+=10)g.fillRect(mx(x)-1,mz(z),3,12);
-  for(const l of(MAP.lm||[])){if(Math.abs(l[1]-cx)<130&&Math.abs(l[2]-cz)<70){g.fillStyle=LMC[l[0]]||'#555';g.beginPath();g.arc(mx(l[1]),mz(l[2]),8,0,7);g.fill();g.fillStyle='#1b1b1b';g.font='bold 14px Arial';g.textAlign='center';g.fillText(l[3],mx(l[1]),mz(l[2])-13,150);}}
-  const px=mx(b.x),pz=mz(b.z);g.fillStyle='#ffb02e';g.strokeStyle='#fff';g.lineWidth=4;g.beginPath();g.arc(px,pz-14,15,0,7);g.fill();g.stroke();g.beginPath();g.moveTo(px-9,pz-6);g.lineTo(px,pz+8);g.lineTo(px+9,pz-6);g.fill();g.fillStyle='#1a1205';g.font='bold 15px Arial';g.textBaseline='middle';g.fillText(String(b.n),px,pz-14);
-  pvLabel(g,'Papan Iklan Kota No. '+b.n,b.near);});}
+function pvBill(b){return pvCache('b'+(b?b.n:0)+(b&&b.lt||''),(g,W,Hh)=>{
+  const lt=b&&b.lt||'',sk=g.createLinearGradient(0,0,0,Hh);sk.addColorStop(0,'#7fb2de');sk.addColorStop(1,'#d7e6f2');g.fillStyle=sk;g.fillRect(0,0,W,Hh);
+  const R=(c,x,y,w,h)=>{g.fillStyle=c;g.fillRect(x,y,w,h);},win=(x,y,w,h,c)=>{g.fillStyle=c||'rgba(255,255,255,.4)';for(let yy=y;yy<y+h-6;yy+=14)for(let xx=x;xx<x+w-6;xx+=12)g.fillRect(xx+2,yy+2,6,7);};
+  const tree=(x,y,s2)=>{R('#6b4a2f',x-3*s2,y-14*s2,6*s2,14*s2);g.fillStyle='#3f8f4a';g.beginPath();g.arc(x,y-26*s2,15*s2,0,7);g.fill();};
+  const ground=()=>{R('#8fbf7a',0,196,W,20);R('#5d6268',0,214,W,46);g.fillStyle='rgba(255,255,255,.75)';for(let x=8;x<W;x+=48)g.fillRect(x,236,24,3);};
+  /* latar sesuai lokasi */
+  if(lt==='sate'){R('#d9c9a8',300,110,200,86);R('#c0392b',300,100,200,14);R('#d9c9a8',380,60,40,50);R('#e8dcc0',392,28,16,34);g.fillStyle='#c0392b';g.beginPath();g.moveTo(386,64);g.lineTo(400,24);g.lineTo(414,64);g.fill();win(310,120,180,70,'rgba(60,70,90,.6)');}
+  else if(lt==='masjid'){R('#efe9da',300,110,190,86);g.fillStyle='#2e9d6a';g.beginPath();g.arc(395,110,46,Math.PI,0);g.fill();R('#efe9da',470,40,16,156);g.fillStyle='#2e9d6a';g.beginPath();g.moveTo(466,42);g.lineTo(478,16);g.lineTo(490,42);g.fill();R('#b9a98a',320,150,30,46);R('#b9a98a',440,150,30,46);}
+  else if(lt==='taman'||lt==='camp'||lt==='komplek'){for(let i=0;i<6;i++)tree(300+i*40,200,1+((i%3)*0.18));if(lt==='camp'){g.fillStyle='#e67e22';g.beginPath();g.moveTo(330,196);g.lineTo(370,140);g.lineTo(410,196);g.fill();g.fillStyle='#2f9e8f';g.beginPath();g.moveTo(420,196);g.lineTo(455,150);g.lineTo(490,196);g.fill();}}
+  else if(lt==='cafe'||lt==='kuliner'){R('#8d5a3a',300,120,190,76);R('#d4a017',296,112,198,14);for(let i=0;i<8;i++)R(i%2?'#fff':'#c0392b',296+i*24.7,126,24.7,10);win(310,140,170,50,'rgba(255,230,160,.6)');R('#fff',350,150,16,12);}
+  else if(lt==='bengkel'||lt==='salon'||lt==='showroom'){R(lt==='bengkel'?'#e67e22':lt==='salon'?'#e84a9a':'#7a52cc',300,110,190,86);R('#2a2f36',296,100,198,12);R('#9fd2ff',320,130,150,50);R('#fff',360,132,70,8);if(lt==='bengkel')R('#222',400,150,50,46);}
+  else if(lt==='pom'){R('#d62828',290,90,210,10);R('#f3f0e4',300,100,8,96);R('#f3f0e4',482,100,8,96);for(const x of[340,420]){R('#d62828',x,150,26,46);R('#222',x+4,158,18,14);}}
+  else if(lt==='bantuan'){R('#1f7fd6',300,110,190,86);R('#fff',380,126,30,8);R('#fff',391,115,8,30);win(310,150,170,40);}
+  else if(lt==='braga'){R('#c9b38a',290,120,70,76);R('#a9744f',360,100,70,96);R('#d8c7a0',430,130,70,66);win(296,130,58,60);win(366,110,58,80);win(436,140,58,50);R('#6b4a2f',286,114,78,8);}
+  else{[[300,70,60,126,'#9aa6b2'],[370,40,60,156,'#8794a2'],[440,60,60,136,'#a4afba']].forEach(q=>{R(q[4],q[0],q[1],q[2],q[3]);win(q[0],q[1],q[2],q[3]);});}
+  ground();
+  R('#30343a',60,120,7,84);R('#30343a',237,120,7,84);
+  R('#10202e',14,40,276,92);g.strokeStyle='#ffb02e';g.lineWidth=5;g.strokeRect(17,43,270,86);
+  g.textAlign='center';g.textBaseline='middle';g.fillStyle='#ffb02e';g.font='bold 40px Arial';g.fillText('SPACE',152,72);g.fillStyle='#f3f0e4';g.fillText('AVAILABLE',152,108);
+  pvLabel(g,b&&b.n?'Papan Iklan Kota No. '+b.n:'Papan Iklan Kota',b&&b.near?b.near:'Sudut jalan Kota Bandung');});}
 function VT_C(){return INFOC&&INFOC.vt?INFOC.vt:document.createElement('canvas');}
 function adSpots(){
   const L=[],sec=(t)=>L.push({sec:t});
   sec('Billboard');
   L.push({id:'ar',title:'Billboard Arena Balap',st:'Tersedia',ok:1,loc:'Di samping garis start arena balap (ada di setiap peta balap)',desc:'Satu-satunya billboard di arena. Dilihat semua pembalap setiap kali start dan lewat garis finis.',img:pvArena(),msg:ARENAAD.msg});
   if(MAP.city){const bl=cityBills();bl.forEach(b=>L.push({id:'b'+b.n,title:'Papan Iklan Kota No. '+b.n,st:'Tersedia',ok:1,loc:b.near,desc:'Papan Space Available di sudut jalan '+MAP.label+'. Ketuk E di depan papan untuk chat langsung.',img:pvBill(b),msg:'Assalamualaikum, saya tertarik pasang iklan di *Papan Iklan Kota No. '+b.n+'* ('+b.near+', '+MAP.label+') game Jimny Adventure by Cerita Sibiru. Boleh minta info harga per bulan, ukuran papan, dan ketentuan materi iklannya?'}));}
-  else L.push({id:'bk',title:'Papan Iklan Kota',st:'Di Kota Bandung',ok:0,loc:'Sudut jalan Kota Bandung',desc:'Papan Space Available di sudut-sudut jalan ada di Kota Bandung. Buka peta Bandung untuk melihat lokasi tepatnya.',img:pvRuko(-1),msg:'Assalamualaikum, saya tertarik pasang iklan di *Papan Iklan Kota Bandung* game Jimny Adventure by Cerita Sibiru. Boleh minta info harga dan lokasi yang masih tersedia?'});
+  else L.push({id:'bk',title:'Papan Iklan Kota',st:'Di Kota Bandung',ok:0,loc:'Sudut jalan Kota Bandung',desc:'Papan Space Available di sudut-sudut jalan ada di Kota Bandung. Buka peta Bandung untuk melihat lokasi tepatnya.',img:pvBill(null),msg:'Assalamualaikum, saya tertarik pasang iklan di *Papan Iklan Kota Bandung* game Jimny Adventure by Cerita Sibiru. Boleh minta info harga dan lokasi yang masih tersedia?'});
   sec('Ruko (12 unit di Deretan Ruko)');
-  ADS.forEach((ad,i)=>{const kosong=!!ad.empty;L.push({id:'r'+i,title:'Ruko No. '+(i+1)+(kosong?'':' · '+ad.name),st:kosong?'Disewakan':'Terisi',ok:kosong?1:0,loc:'Deretan Ruko, '+(i>=6?'deret selatan':'deret utara')+' · slot '+((i%6)+1),
+  ADS.forEach((ad,i)=>{const kosong=!!ad.empty;L.push({id:'r'+i,title:'Ruko No. '+(i+1)+(kosong?'':' · '+ad.name),st:kosong?'Disewakan':'Terisi',ok:kosong?1:0,loc:'Deretan Ruko, '+(i%2?'deret selatan':'deret utara')+' · slot '+((i%6)+1),
     desc:kosong?'Ruko kosong yang bisa kamu isi dengan brand, usaha, atau promosimu. Muka ruko dengan papan nama, etalase, dan ikon info.':'Sudah ditempati '+ad.name+'. Ingin tampil di ruko ini nanti atau kerja sama? Chat saja.',img:pvRuko(i),
-    msg:kosong?'Assalamualaikum, saya tertarik menyewa *Ruko No. '+(i+1)+'* (Deretan Ruko, '+(i>=6?'deret selatan':'deret utara')+') di game Jimny Adventure by Cerita Sibiru. Boleh minta info harga sewa per bulan, ukuran papan nama, dan syarat sewanya?':'Assalamualaikum, saya ingin tanya kerja sama iklan terkait *Ruko No. '+(i+1)+'* ('+ad.name+') di game Jimny Adventure by Cerita Sibiru. Boleh minta info paket dan harganya?'});});
+    msg:kosong?'Assalamualaikum, saya tertarik menyewa *Ruko No. '+(i+1)+'* (Deretan Ruko, '+(i%2?'deret selatan':'deret utara')+') di game Jimny Adventure by Cerita Sibiru. Boleh minta info harga sewa per bulan, ukuran papan nama, dan syarat sewanya?':'Assalamualaikum, saya ingin tanya kerja sama iklan terkait *Ruko No. '+(i+1)+'* ('+ad.name+') di game Jimny Adventure by Cerita Sibiru. Boleh minta info paket dan harganya?'});});
   return L;
 }
 function cityBills(){
   const sk=(MAP.city&&MAP.city.skip)||[],fl=MAP.fly,out=[];
   sk.forEach((q,n)=>{const sgn=n%2?-1:1,bx=q[0]+(n%3-1)*9,bz=q[1]+sgn*19.5;if(fl&&Math.abs(bx-fl.x)<fl.hw+14)return;
     let best=null,bd=1e9;for(const l of(MAP.lm||[])){const d=Math.hypot(l[1]-bx,l[2]-bz);if(d<bd){bd=d;best=l;}}
-    out.push({n:out.length+1,x:bx,z:bz,near:best?'Dekat '+best[3]:'Sudut jalan'});});
+    out.push({n:out.length+1,x:bx,z:bz,lt:best?best[0]:'',near:best?'Dekat '+best[3]:'Sudut jalan'});});
   return out;
 }
+const COINPK=[{n:'Paket Receh',c:120000,r:10000},{n:'Paket Hemat',c:300000,r:25000},{n:'Paket Lumayan',c:600000,r:50000},{n:'Paket Sultan',c:1200000,r:100000},{n:'Paket Juragan',c:3000000,r:250000,t:'Paling banyak'}];
+const PREMPK=[{n:'Premium 3 bulan',d:90,r:29000},{n:'Premium 1 tahun',d:365,r:99000,t:'Hemat 15%'},{n:'Premium 2,5 tahun',d:912,r:199000,t:'Paling hemat'}];
+const PREMBEN=[['Semua peta dan level balap terbuka','Tanpa harus menamatkan Level 10 dulu.'],['Bonus koin 25%','Dari setiap misi dan balapan.'],['Derek gratis','Mobil mogok atau kehabisan bensin ditarik tanpa biaya.'],['Lencana ★ Premium','Tampil di berandamu.']];
+const idr=n=>'Rp'+n.toString().replace(/\B(?=(\d{3})+(?!\d))/g,'.');
+const cn=n=>'🪙⁠'+n.toString().replace(/\B(?=(\d{3})+(?!\d))/g,'.');
+function whoAmI(){return (ME&&ME.name?ME.name:'pemain')+(ME&&ME.reg?'':' (belum daftar)');}
+function renderShopCoin(bd,el,tab){
+  const wa=(txt)=>{const a=el('a','','Chat WhatsApp');a.href=waLink(txt);a.target='_blank';a.rel='noopener noreferrer';return a;};
+  if(tab==='koin'){
+    bd.appendChild(el('p','ipsec','Beli Koin'));
+    const intro=el('div','ncard');intro.append(el('b','','Malas nunggu hasil misi? Beli koin langsung'),el('p','','Pilih paket lalu ketuk Chat WhatsApp, pesan sudah terisi, tinggal kirim. Setelah pembayaran dikonfirmasi, kamu menerima KODE. Masukkan kode di kolom bawah dan koin langsung masuk. Pembayaran manual lewat chat.'));bd.appendChild(intro);
+    COINPK.forEach(p=>{const c=el('div','pk'),d=el('div');d.append(el('b','',cn(p.c)+' · '+p.n),el('small','',idr(p.r)+(p.t?' · '+p.t:'')));d.style.flex='1';c.append(d,wa('Assalamualaikum bro, saya mau beli koin Jimny Adventure.\nPaket: '+p.n+' ('+cn(p.c)+') '+idr(p.r)+'\nNama/username di game: '+whoAmI()+'\nMohon info cara pembayarannya ya.'));bd.appendChild(c);});
+  }else{
+    const on=PREM(),u=premUntil();
+    bd.appendChild(el('p','ipsec','Premium'));
+    const intro=el('div','ncard');intro.append(el('b','',on?'★ Premium aktif sampai '+new Date(u).toLocaleDateString('id-ID',{day:'numeric',month:'long',year:'numeric'}):'Upgrade Premium'),el('p','','Keuntungan yang kamu dapat:'));
+    PREMBEN.forEach(q=>{const p=el('p','','✓ '+q[0]+' · '+q[1]);intro.appendChild(p);});bd.appendChild(intro);
+    PREMPK.forEach(p=>{const c=el('div','pk'),d=el('div');d.append(el('b','',p.n),el('small','',idr(p.r)+(p.t?' · '+p.t:'')));d.style.flex='1';c.append(d,wa('Assalamualaikum bro, saya mau '+(on?'perpanjang':'upgrade')+' Premium Jimny Adventure.\nPaket: '+p.n+' '+idr(p.r)+'\nNama/username di game: '+whoAmI()+'\nMohon info cara pembayarannya ya.'));bd.appendChild(c);});
+  }
+  bd.appendChild(el('p','ipsec','Punya kode?'));
+  const rd=el('div','redeem'),inp=el('input');inp.placeholder='SIBIRU-XXXX-XXXX';inp.maxLength=20;inp.autocomplete='off';inp.setAttribute('aria-label','Kode tebus');const go=el('button','','Tebus');go.type='button';rd.append(inp,go);bd.appendChild(rd);
+  const msg=el('div','');bd.appendChild(msg);
+  go.addEventListener('click',()=>redeemCode(inp.value,msg,go,()=>renderInfo()));
+  inp.addEventListener('keydown',e=>{if(e.key==='Enter')go.click();});
+}
+function redeemCode(code,msg,btn,done){
+  code=String(code||'').trim();msg.className='';msg.textContent='';
+  if(code.length<6){msg.className='errmsg';msg.textContent='Masukkan kodenya dulu ya.';return;}
+  if(!ONL||!ME.reg){msg.className='errmsg';msg.textContent='Daftar atau login dulu (dan pastikan online) supaya kode bisa ditebus.';return;}
+  btn.disabled=true;msg.textContent='Memeriksa kode…';
+  ONL.rpc('redeem_code',{p_token:TOK,p_code:code}).then(({data,error})=>{btn.disabled=false;
+    if(error||!data){const m=String(error&&error.message||'');msg.className='errmsg';msg.textContent=/terpakai/.test(m)?'Kode ini sudah pernah dipakai.':/tidak_valid/.test(m)?'Kode tidak ditemukan. Cek lagi penulisannya.':'Gagal terhubung. Coba lagi sebentar lagi.';return;}
+    let t=[];if(data.coins>0){monAdd(data.coins*100);t.push('+'+cn(data.coins));}
+    if(data.premium_until){try{localStorage.setItem('jimnyPrem',String(Date.parse(data.premium_until)||0));}catch(e){}t.push('Premium aktif');}
+    updPts();try{renderHub();}catch(e){}msg.className='okmsg';msg.textContent='Berhasil! '+t.join(' · ');toast('Kode berhasil ditebus · '+t.join(' · '),3200);
+    setTimeout(()=>{if(done)done();},1200);});
+}
+function premSync(){if(!ONL||!ME.reg)return;try{ONL.rpc('premium_status',{p_token:TOK}).then(({data,error})=>{if(error||!data)return;const u=data.premium_until?Date.parse(data.premium_until):0;try{localStorage.setItem('jimnyPrem',String(u||0));}catch(e){}updPts();});}catch(e){}}
 let PIT='kabar';
 function openInfo(){S.shopOpen=true;$('pin').hidden=false;PIT='kabar';renderInfo();}
 function renderInfo(){
   const tb=$('pinTabs');tb.innerHTML='';
-  [['kabar','Kabar'],['iklan','Pasang Iklan'],['peta','Peta']].forEach(t=>{const b=document.createElement('button');b.type='button';b.className='chip'+(PIT===t[0]?' sel':'');b.textContent=t[1];b.addEventListener('click',()=>{PIT=t[0];renderInfo();$('pinBody').scrollTop=0;});tb.appendChild(b);});
+  [['kabar','Kabar'],['koin','Beli Koin'],['prem','Premium'],['iklan','Pasang Iklan'],['peta','Peta']].forEach(t=>{const b=document.createElement('button');b.type='button';b.className='chip'+(PIT===t[0]?' sel':'');b.textContent=t[1];b.addEventListener('click',()=>{PIT=t[0];renderInfo();$('pinBody').scrollTop=0;});tb.appendChild(b);});
   const bd=$('pinBody');bd.innerHTML='';const el=(tag,cls,txt)=>{const e=document.createElement(tag);if(cls)e.className=cls;if(txt!==undefined)e.textContent=txt;return e;};
   if(PIT==='kabar'){NEWS.forEach(n=>{const c=el('div','ncard');c.append(el('em','',n.tag+' · '+n.date),el('b','',n.title),el('p','',n.txt));bd.appendChild(c);});}
+  else if(PIT==='koin'||PIT==='prem'){renderShopCoin(bd,el,PIT);}
   else if(PIT==='iklan'){
     bd.appendChild(el('p','ipsec','Info pasang iklan'));
     const intro=el('div','ncard');intro.append(el('b','','Tampilkan brand-mu di dunia Jimny Adventure'),el('p','','Setiap kartu di bawah punya foto lokasi dan template pesan WhatsApp sendiri. Ketuk Chat WhatsApp, pesan sudah terisi, tinggal kirim.'));bd.appendChild(intro);
@@ -3213,10 +3364,13 @@ function renderInfo(){
       const ac=el('div','acts');
       if(!here){const b=el('button','',open?'Pergi ke peta':'Buka dengan Upgrade');b.type='button';b.addEventListener('click',()=>{if(!open){closeShop();showUpgrade();return;}try{localStorage.setItem('jimnyMap',id);}catch(e){}location.hash=id;location.reload();});ac.appendChild(b);}
       d.appendChild(ac);c.append(im,d);bd.appendChild(c);});
+    SOON.forEach(n=>{const c=el('div','ipc'),d=el('div');d.append(el('span','ips no','Segera'),el('b','',n));c.appendChild(d);bd.appendChild(c);});
   }
 }
 $('pinX').addEventListener('click',closeShop);
 $('newsInfo').addEventListener('click',()=>openInfo());
+$('rdhGo').addEventListener('click',()=>redeemCode($('rdhIn').value,$('rdhMsg'),$('rdhGo'),()=>{$('rdhIn').value='';}));$('rdhIn').addEventListener('keydown',e=>{if(e.key==='Enter')$('rdhGo').click();});
+$('newsCoin').addEventListener('click',()=>{openInfo();PIT='koin';renderInfo();});
 /* beranda: kabar */
 {const g=$('newsG');if(g){const f=NEWS[0],fe=document.createElement('div');fe.className='nfeat';fe.innerHTML='<em></em><b></b><p></p><small></small>';fe.children[0].textContent=f.tag;fe.children[1].textContent=f.title;fe.children[2].textContent=f.txt;fe.children[3].textContent=f.date;g.appendChild(fe);
   const l=document.createElement('div');l.className='nlist';NEWS.slice(1,4).forEach(n=>{const d=document.createElement('div');d.className='nit';d.innerHTML='<em></em><b></b><small></small>';d.children[0].textContent=n.tag;d.children[1].textContent=n.title;d.children[2].textContent=n.date;l.appendChild(d);});g.appendChild(l);}}
@@ -3248,6 +3402,7 @@ function renderHelp(){
     card('Balapan','Peta balap terbuka bertahap: Lembang, lalu Jakarta, Merapi, Bromo, Sumba, Lombok. Selesaikan Level 10 di satu peta untuk membuka peta berikutnya, atau Upgrade untuk membuka semuanya sekaligus. Jelajah bebas di kota lain terbuka setelah kamu sampai Level 2 balapan di kota itu, atau lewat Upgrade.');
     RORD.forEach((id,ix)=>{const m=MAPS[id],open=raceOpen(id),c=document.createElement('button');c.type='button';c.className='chip'+(open?'':' lock');c.textContent=(ix+1)+'. '+m.label+(open?' · Level '+lvFor(id)+'/10':' · terkunci (selesaikan '+MAPS[RORD[ix-1]].label+' Level 10 atau Upgrade)');
       c.addEventListener('click',()=>{if(!open){closeShop();showUpgrade();return;}try{localStorage.setItem('jimnyMap',m.id);localStorage.setItem('jimnyAfter',HRM);}catch(e){}if(m===MAP){closeShop();toMenu();S.pend=HRM;showLv(true);return;}location.hash=m.id;location.reload();});bd.appendChild(c);});
+    SOON.forEach(n=>{const c=document.createElement('button');c.type='button';c.className='chip lock';c.disabled=true;c.textContent=n+' · Segera';bd.appendChild(c);});
   }else{
     buildPlaces();
     card('Ke kota lain','Kota lain ada di balik gerbang peta. Tandai gerbangnya di bawah, lalu ikuti panah di layar. Jakarta, Merapi, Bromo, Sumba, dan Lombok terbuka lewat balapan Level 10 di peta sebelumnya atau Upgrade. Untuk kota yang belum punya gerbang langsung, lewati gerbang terdekat dulu.');
@@ -3258,7 +3413,8 @@ $('hlpX').addEventListener('click',closeShop);
 function callTow(){
   unparkQuiet();
   const m=LMS.find(q=>q.t==='pom');if(!m||S.mode!=='free')return;
-  const fee=Math.min(50000,monGet());if(fee>0)monAdd(-fee);
+  try{bogClear();}catch(e){}
+  const fee=PREM()?0:Math.min(50000,monGet());if(fee>0)monAdd(-fee);
   S.inCar=true;person.visible=false;car.x=m.x+4;car.z=m.z+17;car.h=Math.PI;car.vx=car.vz=0;car.v=0;settle();camSnap=true;
   toast('Derek mengantar mobilmu ke Pom Bensin'+(fee?' · '+rp(fee):' · gratis'),3200);
 }
@@ -3269,7 +3425,7 @@ $('shop').addEventListener('pointerdown',e=>{if(e.target===$('shop'))closeShop()
 addEventListener('keydown',e=>{if(e.code==='Escape'&&S.shopOpen)closeShop();});
 const svg=s=>'<svg viewBox="0 0 64 48" width="64" height="48" aria-hidden="true">'+s+'</svg>';
 const ICO={
- car:id=>{const d={fj40:['#4f7a3f',44,16,0],wrangler:['#c0392b',46,18,1],defender:['#d9d4c8',48,22,0],cruiser:['#2d3a5e',52,22,0],jimny:['#1f5fd0',40,20,0],sierra:['#8a9a5b',40,16,0],caribian:['#c89b3c',52,16,0]}[id],w=d[1],h=d[2],x0=32-w/2;
+ car:id=>{const d={fj40:['#4f7a3f',44,16,0],wrangler:['#c0392b',46,18,1],defender:['#d9d4c8',48,22,0],cruiser:['#2d3a5e',52,22,0],jimny:['#1f5fd0',40,20,0],sierra:['#8a9a5b',40,16,0],corsica:['#3f6b4a',42,17,0],caribian:['#c89b3c',52,16,0]}[id],w=d[1],h=d[2],x0=32-w/2;
   return svg('<rect x="'+x0+'" y="'+(34-h)+'" width="'+w+'" height="'+(h-6)+'" rx="3" fill="'+d[0]+'"/><rect x="'+(x0+w*0.18)+'" y="'+(36-h)+'" width="'+(w*0.55)+'" height="'+(h*0.4)+'" fill="#0c1318" opacity="0.85"/><circle cx="'+(x0+9)+'" cy="34" r="6" fill="#16181b"/><circle cx="'+(x0+w-9)+'" cy="34" r="6" fill="#16181b"/><circle cx="'+(x0+9)+'" cy="34" r="2.5" fill="#9aa1a6"/><circle cx="'+(x0+w-9)+'" cy="34" r="2.5" fill="#9aa1a6"/>');},
  shape0:c=>svg('<circle cx="32" cy="24" r="20" fill="#16181b"/><circle cx="32" cy="24" r="15" fill="'+c+'"/><circle cx="32" cy="24" r="5" fill="#2a2d31"/>'+[0,60,120,180,240,300].map(a=>'<circle cx="'+(32+9*Math.cos(a*Math.PI/180)).toFixed(1)+'" cy="'+(24+9*Math.sin(a*Math.PI/180)).toFixed(1)+'" r="2.4" fill="#16181b"/>').join('')),
  shape1:c=>svg('<circle cx="32" cy="24" r="20" fill="#16181b"/><circle cx="32" cy="24" r="15" fill="#0f1012"/>'+[0,72,144,216,288].map(a=>'<path d="M32 24L'+(32+15*Math.cos((a-14)*Math.PI/180)).toFixed(1)+' '+(24+15*Math.sin((a-14)*Math.PI/180)).toFixed(1)+'L'+(32+15*Math.cos((a+14)*Math.PI/180)).toFixed(1)+' '+(24+15*Math.sin((a+14)*Math.PI/180)).toFixed(1)+'Z" fill="'+c+'"/>').join('')+'<circle cx="32" cy="24" r="4" fill="#bbb"/>'),
@@ -3284,6 +3440,7 @@ const ICO={
  jerry:()=>svg('<rect x="16" y="12" width="32" height="30" rx="4" fill="#3a7d2a"/><rect x="38" y="6" width="9" height="8" fill="#2b5f1f"/><rect x="22" y="18" width="14" height="4" rx="2" fill="#285a1c"/><rect x="22" y="26" width="20" height="3" fill="#285a1c"/>'),
  eng1:()=>svg('<rect x="10" y="14" width="44" height="26" rx="4" fill="#4d5a66"/><rect x="16" y="8" width="8" height="8" fill="#9aa1a6"/><rect x="28" y="8" width="8" height="8" fill="#9aa1a6"/><rect x="40" y="8" width="8" height="8" fill="#9aa1a6"/><path d="M30 20L24 30H32L28 38L40 26H32L36 20Z" fill="#ffb02e"/>'),
  eng2:()=>svg('<rect x="10" y="14" width="44" height="26" rx="4" fill="#3a2d33"/><rect x="16" y="8" width="8" height="8" fill="#c0392b"/><rect x="28" y="8" width="8" height="8" fill="#c0392b"/><rect x="40" y="8" width="8" height="8" fill="#c0392b"/><path d="M24 20L18 30H26L22 38L34 26H26L30 20Z" fill="#ffb02e"/><path d="M42 20L36 30H44L40 38L52 26H44L48 20Z" fill="#ffb02e"/>'),
+ lift:()=>svg('<rect x="8" y="8" width="48" height="14" rx="4" fill="#3d8bff"/><rect x="14" y="22" width="5" height="14" fill="#ffb02e"/><rect x="45" y="22" width="5" height="14" fill="#ffb02e"/><circle cx="16" cy="40" r="7" fill="#16181b"/><circle cx="48" cy="40" r="7" fill="#16181b"/><path d="M32 30v-8m-4 4 4-4 4 4" stroke="#fff" stroke-width="3" fill="none"/>'),
  tire:()=>svg('<circle cx="32" cy="24" r="21" fill="#16181b"/>'+Array.from({length:12},(_,i)=>'<rect x="30" y="1" width="4" height="7" fill="#3a3e44" transform="rotate('+(i*30)+' 32 24)"/>').join('')+'<circle cx="32" cy="24" r="11" fill="#b9bec2"/><circle cx="32" cy="24" r="3" fill="#555"/>'),
  tank:()=>svg('<rect x="12" y="10" width="40" height="30" rx="8" fill="#c0392b"/><rect x="26" y="5" width="12" height="7" rx="2" fill="#333"/><rect x="18" y="20" width="28" height="9" rx="2" fill="#fff" opacity=".85"/><path d="M32 14V36" stroke="#222" stroke-width="0"/>')
 };
@@ -3315,25 +3472,35 @@ const GVIEW={def:{off:0.9,h:1.9,r:6.4,ly:0.85},side:{off:1.45,h:1.3,r:6.6,ly:1.0
 const GCAM={on:false,a:0,y:1.75,rr:6.6,off:0.9,h:1.9,r:6.4,ly:0.85};
 function garFocus(k){const t=k.split(':')[0],id=k.split(':')[1];let v='def';
   if(t==='shape'||t==='rim')v='side';
-  else if(t==='ext')v={bar:'front',winch:'front',rack:'top',lamp:'top',flag:'top',stripe:'side',flare:'side',tire:'side',snorkel:'sideF',jerry:'rear',tank:'rear',eng1:'engine',eng2:'engine'}[id]||'def';
+  else if(t==='ext')v={bar:'front',winch:'front',rack:'top',lamp:'top',flag:'top',stripe:'side',flare:'side',tire:'side',lift:'side',snorkel:'sideF',jerry:'rear',tank:'rear',eng1:'engine',eng2:'engine'}[id]||'def';
   Object.assign(GCAM,GVIEW[v]);}
 function renderGar(){const g=$('gar'),m=$('menu'),gb=$('gBuy'),gt=g.scrollTop,mt=m.scrollTop,bh=gb.hidden?0:gb.offsetHeight+12;renderGar0();const bh2=gb.hidden?0:gb.offsetHeight+12;g.scrollTop=gt+(gt>0?bh2-bh:0);m.scrollTop=mt;}
+const SPECS=[['mv','Kecepatan','km/j',c=>Math.round(90*c.mv)],['ac','Tenaga','%',c=>Math.round(c.ac*100)],['md','Lumpur','%',c=>Math.round(c.md*100)],['cl','Tanjakan','%',c=>Math.round(c.cl*100)],['hd','Lincah','%',c=>Math.round(c.hd*100)],['fu','Irit','%',c=>Math.round(100/c.fu)]];
+function renderSpec(show){const e=$('gSpec');if(!e)return;e.hidden=!show;if(!show)return;e.innerHTML='';
+  const h=document.createElement('h4');h.textContent='Spesifikasi mobil · bandingkan';e.appendChild(h);
+  const t=document.createElement('table'),hr=t.insertRow();['Mobil'].concat(SPECS.map(q=>q[1])).forEach(x=>{const th=document.createElement('th');th.textContent=x;hr.appendChild(th);});
+  const val=(c,q)=>q[0]==='fu'?1/c.fu:c[q[0]],mn={},mx={};SPECS.forEach(q=>{const v=CARL.map(c=>val(c,q));mn[q[0]]=Math.min(...v)-0.1;mx[q[0]]=Math.max(...v);});
+  CARL.forEach(c=>{const r=t.insertRow();if(c.id===CUST.car)r.className='me';const n=r.insertCell();n.className='n';n.textContent=c.n.replace('Suzuki ','').replace('Toyota ','').replace('Land Rover ','');n.title=c.n+' · '+(c.price?rp(c.price):'gratis')+(ownHas('car:'+c.id)||!c.price?' · dimiliki':'');
+    SPECS.forEach(q=>{const td=r.insertCell(),v=val(c,q),w=Math.max(8,Math.round((v-mn[q[0]])/(mx[q[0]]-mn[q[0]])*100));td.innerHTML='<span class="bar"><i style="width:'+w+'%"></i></span>'+q[3](c)+(q[2]==='km/j'?'':'%');});});
+  e.appendChild(t);const p=document.createElement('p');p.textContent='Kecepatan = batas laju di jalan datar (km/j). Persen dibanding Jimny standar (100%). Tenaga = tarikan awal; Lumpur = cengkeraman di lumpur; Tanjakan = kekuatan naik bukit; Lincah = mudah dibelokkan; Irit = jarak per bensin.';e.appendChild(p);}
 function renderGar0(){
   const hx=v=>'#'+('000000'+v.toString(16)).slice(-6),first=ownFirst();
   const gm=GAR.mode||'home',isB=gm==='bengkel',isS=gm==='salon',isV=gm==='showroom',isP=gm==='pom',vis=(id,on)=>{$(id).parentElement.style.display=on?'':'none';};
   $('gEy').textContent=isP?'Pom Bensin Sibiru · isi bensin':isV?'Showroom Mobil Second · beli mobil baru':isB?'Bengkel Sibiru · performa dan aksesori tangguh':(isS?'Salon Mobil Kinclong · cat, velg, stiker, tampilan':'Garasi · kustom mobilmu');
   const home=gm==='home',sty=home||isS;vis('gCar',home||isV);vis('gCol',sty);vis('gPlate',sty);vis('gShape',sty);vis('gRim',sty);vis('gStk',sty);vis('gPerf',home||isB);vis('gExt',home||isB||isS);
   $('gHint').textContent=first?'Mobil standar. Warna pertama gratis. Modifikasi lain dibeli pakai koin hasil misi.':(isP?'Koinmu '+rp(monGet())+'. Bensin '+rp(FUELP)+' per 1%. Tekan tombol di bawah untuk mengisi.':'Koinmu '+rp(monGet())+'. Ketuk barang untuk pratinjau, lalu tekan Beli.')+(isP?'':isB?'':(isS?' Performa ada di Bengkel Sibiru.':(isV?' Mobil yang dibeli bisa dipilih di Garasi rumahmu.':' Bensin diisi di Pom Bensin. Mobil baru dibeli di Showroom.')))+(CUST.car&&CUST.car!=='jimny'?' '+CARM[CUST.car].d:'');
+  $('gWal').textContent='Koinmu: '+rp(monGet())+(PREM()?' · ★ Premium':'');
+  renderSpec(home||isV);
   $('mi').classList.toggle('prevOn',!!PREV);
   $('gBuy').hidden=!PREV;if(PREV)$('gBuyT').textContent='Pratinjau: '+PREV.name+' · '+rp(PREV.price)+(monGet()<PREV.price?' · koin kurang '+rp(PREV.price-monGet()):' · tekan BELI untuk membeli');
   const sw=(id,list,cur,fn,kf,price,nmS)=>{const b=$(id);b.innerHTML='';list.forEach((c,i)=>{const k=kf(c,i),own=ownHas(k),e=document.createElement('button');e.type='button';e.style.background=hx(c);e.className=((c===cur||i===cur&&typeof cur==='number')?'sel':'')+(own?'':' lock');e.setAttribute('aria-label','Warna '+(i+1)+(own?'':' · '+rp(price)));e.title=own?'':rp(price);e.addEventListener('click',()=>garPick(k,price,nmS,()=>fn(c,i)));b.appendChild(e);});};
   sw('gCol',CUSTCOL,CUST.col,c=>{CUST.col=c;},c=>'col:'+c,PRICE.col,'Cat warna baru');$('gColIn').value=hx(CUST.col);$('gColIn').style.display=first?'':'none';
-  sw('gStk',STKC,CUST.stk,(c,i)=>{CUST.stk=i;},(c,i)=>'stk:'+i,PRICE.stk,'Stiker warna baru');
+  sw('gStk',STKC.slice(0,9),CUST.stk,(c,i)=>{CUST.stk=i;},(c,i)=>'stk:'+i,PRICE.stk,'Stiker warna baru');
   const cards=(id,items,isOn,fn,kf,pf,icf)=>{const b=$(id);b.innerHTML='';items.forEach((n,i)=>{const k=kf(i),own=ownHas(k),on=isOn(i),e=document.createElement('button');e.type='button';e.className='pcard'+(on?' sel':'')+(own?'':' lock');
     const pic=document.createElement('span');pic.className='pic';pic.innerHTML=icf(i);const nm=document.createElement('b');nm.textContent=n;const st=document.createElement('i');st.textContent=on?'Terpasang':(own?'Dimiliki':rp(pf(i)));
     e.append(pic,nm,st);e.addEventListener('click',()=>garPick(k,pf(i),n,()=>fn(i)));b.appendChild(e);});};
   const _gc=()=>{[...$('gCar').children].forEach((e,i)=>{if(CARL[i]&&CARL[i].star){e.classList.add('star');const t=document.createElement('u');t.textContent='★ UNGGULAN';e.prepend(t);}});};
-  cards('gCar',CARL.map(c=>c.n),i=>CUST.car===CARL[i].id,i=>{CUST.car=CARL[i].id;},i=>'car:'+CARL[i].id,i=>CARL[i].price,i=>ICO.car(CARL[i].id));if(!isV)[...$('gCar').children].forEach((b,i)=>{if(!ownHas('car:'+CARL[i].id)){b.querySelector('i').textContent='Beli di Showroom';}});_gc();
+  cards('gCar',CARL.map(c=>c.n),i=>CUST.car===CARL[i].id,i=>{CUST.car=CARL[i].id;},i=>'car:'+CARL[i].id,i=>CARL[i].price,i=>ICO.car(CARL[i].id));if(!isV)[...$('gCar').children].forEach((b,i)=>{if(!ownHas('car:'+CARL[i].id)){b.querySelector('i').textContent=rp(CARL[i].price)+' · beli di Showroom';}});_gc();
   cards('gShape',SHAPES,i=>CUST.shape===i,i=>{CUST.shape=i;},i=>'shape:'+i,i=>i>0?PRICE.shape:0,i=>ICO['shape'+i](hx((RIMC[CUST.rim]||RIMC[0]).c)));
   cards('gRim',RIMC.map(r=>r.n),i=>CUST.rim===i,i=>{CUST.rim=i;},i=>'rim:'+i,i=>PRICE.rim,i=>ICO.shape0(hx(RIMC[i].c)));
   const EX=EXTRA.filter(e=>gm==='home'||(isS===SALONX.includes(e[0])));
@@ -3342,6 +3509,7 @@ function renderGar0(){
   if(document.activeElement!==$('gPlate'))$('gPlate').value=CUST.plate;
   const fr=$('gFuelRow');fr.style.display=isP?'':'none';
   {const sr=$('gSvcRow');sr.style.display=(home||isB)?'':'none';const f=svcFrac();$('gSvc').textContent='Ganti oli & servis · '+rp(svcPrice())+' · terpakai '+Math.min(100,Math.round(f*100))+'% · ODO '+odoCar().km.toFixed(1)+' km';}
+  try{lvRender();}catch(e){}
   const need=Math.ceil(100-FUEL),cost=need*FUELP;$('gFuel').textContent='Bensin '+Math.round(FUEL)+'% · '+(need>0?'isi penuh '+rp(cost):'sudah penuh');
 }
 $('gSvc').addEventListener('click',()=>{const o=odoCar();if(o.svc<SVC_KM*0.05){toast('Mobil masih prima, belum perlu servis',1600);return;}
@@ -3366,6 +3534,7 @@ function renderMaps(){
   RORD.map(id=>MAPS[id]).forEach(m=>{const open=raceOpen(m.id),b=document.createElement('button');b.type='button';b.className='chip'+(m===MAP?' sel':'')+(open?'':' lock');
     b.innerHTML=m.label+(open?'':'<i class="tag">Upgrade</i>');
     b.addEventListener('click',()=>{if(!open){showUpgrade();return;}if(m===MAP){proceedRace();return;}try{localStorage.setItem('jimnyMap',m.id);localStorage.setItem('jimnyAfter',S.pend||'race');}catch(e){}location.hash=m.id;location.reload();});bx.appendChild(b);});
+  SOON.forEach(n=>{const b=document.createElement('button');b.type='button';b.className='chip lock';b.disabled=true;b.innerHTML=n+'<i class="tag">Segera</i>';bx.appendChild(b);});
 }
 renderMaps();
 {let tn=0,tt=0;document.querySelector('#mi h1').addEventListener('click',()=>{const n=performance.now();tn=n-tt<900?tn+1:1;tt=n;
@@ -3380,8 +3549,10 @@ function renderLv(){
   $('lvInfo').innerHTML=h;
 }
 function showLv(v){$('lv').hidden=!v;const ey=document.querySelector('#lv .eyebrow');if(ey)ey.textContent=(S.pend==='ghost'?'Balapan vs Pemain':'Balapan vs Komputer')+' · pilih level';$('lvGo').textContent=S.pend==='ghost'?'Mulai balapan':'Mulai level';$('mi').classList.toggle('lvOpen',v);if(v){selLv=clamp(selLv,1,getUnlocked());renderLv();}}
+/* hadiah balap: dibandingkan bayaran misi setara (level misi = level balap / 2, bintang 2): juara 1 = 5x, juara 2 = 2x, juara 3 = 1x */
+function raceMon(L,rank){const m=5000+Math.ceil(L/2)*3000+3000;return rank===1?m*5:rank===2?m*2:rank===3?m:2500;}
 function finish(){
-  let pts=0;
+  let pts=0,mon=null;
   R.done=true;ring.visible=false;$('next').hidden=true;$('endList').innerHTML='';$('next').textContent='Level berikutnya';$('again').textContent='Main lagi';$('next').classList.remove('main');$('again').classList.add('main');
   if(R.type==='qual'){
     const L=R.level,qt=qualTimes(L),lv=LV[L-1];
@@ -3395,7 +3566,8 @@ function finish(){
   }else if(R.type==='race'||R.type==='ghost'){
     const gm=R.type==='ghost',L=R.level,rows=standings(true),rank=rows.findIndex(r=>r.you)+1,total=rows.length;
     saveBest(L,rank,R.clock);
-    pts=([100,70,50][rank-1]||25)+L*10;const adv=gm?L<getUnlocked():rank<=2;if(!gm&&adv&&L<10&&L>=getUnlocked())setUnlocked(L+1);submitRun();
+    pts=([100,70,50][rank-1]||25)+L*10;mon=raceMon(L,rank);const adv=gm?L<getUnlocked():rank<=2;if(!gm&&adv&&L<10&&L>=getUnlocked())setUnlocked(L+1);submitRun();
+    try{dHook('race',{rank,type:R.type});}catch(e){}
     $('endT').textContent=rank===1?'Juara 1!':rank<=3?'Podium!':'Finish';
     $('endA').textContent='Level '+L+' · Posisi '+rank+' dari '+total+' · '+fmt(R.clock);
     $('endB').textContent=gm?'Balapan vs bayangan pemain':adv?(L<10?'Level '+(L+1)+' terbuka':'Semua level tamat!'):'Finis 2 besar untuk lanjut';
@@ -3405,15 +3577,15 @@ function finish(){
     let best=null;try{best=parseFloat(localStorage.getItem(bestKey()));}catch(_){}
     const isBest=!(best>0)||R.clock<best;
     if(isBest){try{localStorage.setItem(bestKey(),String(R.clock));}catch(_){}best=R.clock;}
-    pts=40+(isBest?30:0);$('endT').textContent='Selesai!';
+    pts=40+(isBest?30:0);$('endT').textContent='Selesai!';if(R.type==='rally')try{dHook('rally',{nb:!R.brk});}catch(e){}
     $('endA').textContent=fmt(R.clock);
     $('endB').textContent=(isBest?'Rekor baru: ':'Terbaik: ')+fmt(best);
   }
-  if(pts){ptsAdd(pts);$('endB').textContent+=' · +'+pts+' poin · +'+rp(pts*250)+' (koinmu '+rp(monGet())+')';}
+  if(pts){const mv=pb(mon!=null?mon:pts*250);ptsAdd(pts,mv);$('endB').textContent+=' · +'+pts+' poin · +'+rp(mv)+' (koinmu '+rp(monGet())+')';}
   $('end').hidden=false;fbMaybe(2600);
 }
 function needHub(after,fn){if(MAP.id==='bandung'){fn();return;}try{localStorage.setItem('jimnyMap','bandung');localStorage.setItem('jimnyAfter',after);}catch(e){}location.hash='bandung';location.reload();}
-function showUpgrade(){openShop({name:'Upgrade Premium',tag:'Buka semua peta dan fitur',col:'#b8860b',desc:'Peta balap terbuka bertahap sesuai kemajuanmu (Lembang, Jakarta, Merapi, Bromo, Sumba, Lombok). Jelajah bebas Kota Bandung dan Lembang gratis; kota lain terbuka otomatis kalau kamu sudah sampai Level 2 balapan di kota itu. Mau langsung buka semua peta dan fitur tanpa menyelesaikan balapan? Upgrade. Pembayaran lewat WhatsApp: ketuk tombol Chat WhatsApp di bawah (belum ada pembayaran otomatis).',products:[{n:'Jakarta',p:'',d:'Jalan kota besar. Urutan balap kedua.'},{n:'Merapi',p:'',d:'Lereng gunung dan pasir vulkanik.'},{n:'Bromo',p:'',d:'Lautan pasir dan kawah.'},{n:'Sumba',p:'',d:'Savana dan bukit.'},{n:'Lombok',p:'',d:'Pesisir dan bukit.'}],wa:'6289683046641'});}
+function showUpgrade(){openInfo();PIT='prem';renderInfo();}
 function showRmap(mode){S.pend=mode;$('rmap').hidden=false;$('mi').classList.add('lvOpen');renderMaps();}
 function proceedRace(){$('rmap').hidden=true;if(S.pend==='rally'){$('mi').classList.remove('lvOpen');startMode('rally');}else showLv(true);}
 $('rmBack').addEventListener('click',()=>{$('rmap').hidden=true;$('mi').classList.remove('lvOpen');});
@@ -3484,9 +3656,10 @@ function cinCam(dt){
 const TRAF=[],PEDS=[],BILLS=[];const BILLAD={name:'SPACE AVAILABLE',tag:'Papan iklan',col:'#10202e',empty:true,bill:true,wa:'6289683046641',msg:'Assalamualaikum bro, mau info untuk papan iklan Space Available di game Jimny Adventure'};let trafG=null,cityG=null,ambT=0,birdT=1,hornT=6,musT=0,musI=0,sigT=0,sigK=-1,LAMPA=null,LAMPB=null;
 const SIGC=0xff2a1a,SIGY=0xffc21a,SIGG=0x2aff6a,SIGD=[0x3a0c08,0x3a2c06,0x08331a],SIGB=[SIGC,SIGY,SIGG];
 const sigSt=(ax,t)=>{const a=ax===0?t%30:(t+15)%30;return a<12?0:a<14.5?1:2;};            /* 0 hijau, 1 kuning, 2 merah */
+const SIGSET=new Set(),isSig=(x,z)=>SIGSET.has(Math.round(x/60)+','+Math.round(z/60));   /* perempatan yang punya lampu */
 const redLeft=(ax,t)=>{const a=ax===0?t%30:(t+15)%30;return a>=14.5?30-a:0;};
 function sigPaint(){
-  if(!LAMPA)return;const sa=sigSt(0,sigT),sb=sigSt(1,sigT),key=sa*3+sb;if(key===sigK)return;sigK=key;
+  if(!LAMPA||!LAMPA.count)return;const sa=sigSt(0,sigT),sb=sigSt(1,sigT),key=sa*3+sb;if(key===sigK)return;sigK=key;
   const col=new T.Color();
   for(const [m,st] of [[LAMPA,sa],[LAMPB,sb]]){const lit=st===2?0:st===1?1:2,n=m.count/3;
     for(let k=0;k<n;k++)for(let l=0;l<3;l++)m.setColorAt(k*3+l,col.setHex(l===lit?SIGB[lit===0?0:lit===1?1:2]:SIGD[l===0?0:l===1?1:2]));
@@ -3497,7 +3670,9 @@ function cityDeco(){
   /* --- lampu lalu lintas di tiap perempatan --- */
   const pts=[],fl=MAP.fly;
   for(let i=-4;i<=4;i++)for(let j=-4;j<=4;j++){const cx=i*60,cz=j*60;if(fl&&Math.abs(cx-fl.x)<fl.hw+12&&cz>fl.z0-14&&cz<fl.z1+14)continue;
-    for(const sx of[-1,1])for(const sz of[-1,1])pts.push([cx+sx*9.6,cz+sz*9.6,sx,sz]);}
+    /* lampu hanya di perempatan jalan utama, dua tiang diagonal per perempatan */
+    if(true)continue;/* lampu lalu lintas dimatikan */SIGSET.add(i+','+j);
+    for(const q2 of[[1,1],[-1,-1]])pts.push([cx+q2[0]*9.6,cz+q2[1]*9.6,q2[0],q2[1]]);}
   const N=pts.length,d=new T.Object3D(),poleM=SM(0x2b2f33,0.6,0.5),headM=SM(0x111214,0.7);
   const poles=new T.InstancedMesh(new T.BoxGeometry(0.2,5.6,0.2),poleM,N),headA=new T.InstancedMesh(new T.BoxGeometry(0.5,1.5,0.4),headM,N),headB=new T.InstancedMesh(new T.BoxGeometry(0.4,1.5,0.5),headM,N);
   LAMPA=new T.InstancedMesh(new T.BoxGeometry(0.3,0.3,0.5),new T.MeshBasicMaterial({color:0xffffff}),N*6);
@@ -3524,14 +3699,14 @@ function cityDeco(){
     const panel=new T.Mesh(new T.BoxGeometry(11,4.8,0.3),back);panel.position.y=6.6;gb.add(panel);
     const face=new T.Mesh(new T.PlaneGeometry(10.6,4.6),front);face.position.set(0,6.6,0.17);gb.add(face);
     for(const sx of[-1,1]){const pp=new T.Mesh(new T.BoxGeometry(0.35,5.2,0.35),post);pp.position.set(sx*3.6,2.6,-0.1);gb.add(pp);addOb(bx+sx*3.6*Math.cos(gb.rotation.y),bz,0.5);}
-    cityG.add(gb);BILLS.push({x:bx,z:bz+sgn*-4,ad:BILLAD});});
+    cityG.add(gb);BILLS.push({x:bx,z:bz+sgn*-4,ad:BILLAD,g:gb});});
 }
 function trafInit(){
   if(!MAP.city||trafG)return;
   trafG=new T.Group();scene.add(trafG);
   cityDeco();
   const cols=[0xc0392b,0xf1c40f,0xecf0f1,0x2c3e50,0x27ae60,0xe67e22,0x7f8c8d,0x8e44ad,0x2e86c1,0x111111,0x9c1c1c,0x3f6b2c,0xd8cca6];
-  const kinds=['jimny','fj40','wrangler','defender','cruiser','sierra','caribian','jimny','sierra','fj40'];
+  const kinds=['jimny','fj40','wrangler','defender','cruiser','sierra','caribian','jimny','sierra','fj40','corsica'];
   const rr=(a,b)=>a+Math.random()*(b-a),L2=['D','B','F','Z','E','T'],AB='ABCDEFGHJKLMNPRSTUVWXYZ';
   const lanes=[];for(let a=0;a<2;a++)for(let k=-4;k<=4;k++)for(const dr of[1,-1])lanes.push([a,k,dr]);
   for(let i=lanes.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[lanes[i],lanes[j]]=[lanes[j],lanes[i]];}
@@ -3556,7 +3731,9 @@ function trafStep(dt){
     /* tertib: berhenti di lampu merah/kuning, jaga jarak dengan mobil di depan */
     const st=sigSt(q.ax,sigT);let tg=q.v;
     const M=q.dir>0?Math.ceil((q.s+9)/60)*60:Math.floor((q.s-9)/60)*60,dl=q.dir>0?(M-10)-q.s:q.s-(M+10);
-    if(dl>-1&&dl<60&&(st===2||(st===1&&dl>5)))tg=Math.min(tg,Math.sqrt(2*4*Math.max(dl-0.4,0)));
+    if(dl>-1&&dl<60&&(st===2||(st===1&&dl>5))&&isSig(q.ax===0?q.k*60:M,q.ax===0?M:q.k*60))tg=Math.min(tg,Math.sqrt(2*4*Math.max(dl-0.4,0)));
+    {const ix=q.ax===0?q.k*60:M,iz=q.ax===0?M:q.k*60;   /* perempatan tanpa lampu: gantian, beri jalan ke mobil dari arah lain */
+     if(dl>-1&&dl<14&&!isSig(ix,iz))for(const o of TRAF){if(o.ax===q.ax||!o.g)continue;const ox=o.g.position.x,oz=o.g.position.z;if(Math.abs(ox-ix)<11&&Math.abs(oz-iz)<11&&o.u>0.5){tg=Math.min(tg,dl<3?0:Math.sqrt(2*4*Math.max(0,dl-3)));break;}}}
     let gap=1e9;for(const o of TRAF){if(o===q||o.ax!==q.ax||o.k!==q.k||o.dir!==q.dir)continue;const gg=(o.s-q.s)*q.dir-4.6;if(gg>-1&&gg<gap)gap=gg;}
     if(gap<40)tg=Math.min(tg,gap<5.5?0:Math.sqrt(2*4*(gap-5.5)));
     if(!CIN.on){const chk=(ox,oz,w)=>{const px=q.ax===0?ox-q.k*60-q.dir*3.2:oz-q.k*60+q.dir*3.2,ps=q.ax===0?oz:ox,gp=(ps-q.s)*q.dir-4;if(Math.abs(px)<w&&gp>-1&&gp<30)tg=Math.min(tg,gp<5?0:Math.sqrt(2*4*(gp-5)));};
@@ -3573,7 +3750,7 @@ function trafStep(dt){
     /* pejalan kaki menunggu lampu hijau pejalan (lalu lintas yang memotong sedang merah) sebelum menyeberang */
     const M=q.dir>0?Math.ceil((q.s+9)/60)*60:Math.floor((q.s-9)/60)*60,de=q.dir>0?(M-9)-q.s:q.s-(M+9),inZ=Math.abs(q.s-Math.round(q.s/60)*60)<9;
     let tg=q.v;
-    if(inZ)tg=2.3;else if(de>-0.3&&de<1.4&&redLeft(1-q.ax,sigT)<10)tg=0;
+    if(inZ)tg=2.3;else if(de>-0.3&&de<1.4&&isSig(q.ax===0?q.k*60:M,q.ax===0?M:q.k*60)&&redLeft(1-q.ax,sigT)<10)tg=0;
     q.u+=Math.max(-3*dt,Math.min(3*dt,tg-q.u));
     q.s+=q.dir*q.u*dt;if(q.s>L)q.s=-L;else if(q.s<-L)q.s=L;q.ph+=dt*q.u*4.2;
     const off=q.side*8.2,x=q.ax===0?q.k*60+off:q.s,z=q.ax===0?q.s:q.k*60+off;
@@ -3594,7 +3771,7 @@ function arenaBill(){
   const panel=new T.Mesh(new T.BoxGeometry(14,5.4,0.3),SM(0x4d5258,0.8));panel.position.y=7.4;gb.add(panel);
   const face=new T.Mesh(new T.PlaneGeometry(13.6,5.2),new T.MeshBasicMaterial({map:tx2}));face.position.set(0,7.4,0.17);gb.add(face);
   for(const sx of[-1,1]){const pp=new T.Mesh(new T.BoxGeometry(0.4,8,0.4),SM(0x30343a,0.6,0.5));pp.position.set(sx*5.4,4,-0.1);gb.add(pp);addOb(bx+sx*5.4*Math.cos(r),bz-sx*5.4*Math.sin(r),0.6);}
-  shade(gb);scene.add(gb);BILLS.push({x:bx-nx*4,z:bz-nz*4,ad:ARENAAD});
+  shade(gb);scene.add(gb);BILLS.push({x:bx-nx*4,z:bz-nz*4,ad:ARENAAD,g:gb});
 }
 arenaBill();
 function hornBeep(){
@@ -3687,7 +3864,8 @@ function paintBase(c,X,sc){
       else if(USEDB.size&&!USEDB.has(cx+','+cz))col='#e9e4d4';
       c.fillStyle=col;c.fillRect(X(cx-P*0.4),X(cz-P*0.4),P*0.8*sc,P*0.8*sc);}}
   c.fillStyle='#8ec1e0';for(const p of PUD){c.beginPath();c.arc(X(p.x),X(p.z),Math.max(3,p.r*sc),0,7);c.fill();}
-  c.fillStyle='rgba(150,140,125,.75)';for(const k of[[ROCKC,12],[ROCKB,40]]){c.beginPath();c.arc(X(k[0][0]),X(k[0][1]),k[1]*sc,0,7);c.fill();}
+  if(!MAP.city){c.fillStyle='rgba(150,140,125,.75)';for(const k of[[ROCKC,12],[ROCKB,40]]){c.beginPath();c.arc(X(k[0][0]),X(k[0][1]),k[1]*sc,0,7);c.fill();}}
+  c.fillStyle='rgba(110,78,45,.85)';for(const m of PMUD){c.beginPath();c.arc(X(m[0]),X(m[1]),Math.max(2,m[2]*sc),0,7);c.fill();}
   if(MAP.lm)for(const l of MAP.lm)if(l[0]==='braga'){c.strokeStyle='#f0b04a';c.lineWidth=Math.max(2,6*sc);c.beginPath();c.moveTo(X(l[1]-75),X(l[2]));c.lineTo(X(l[1]+75),X(l[2]));c.stroke();}
   if(MAP.fly){const f=MAP.fly;c.fillStyle='#4a4d52';c.fillRect(X(f.x-f.hw),X(f.z0),f.hw*2*sc,(f.z1-f.z0)*sc);}
   if(!city){c.fillStyle='#e8dcc0';c.fillRect(X(-30),X(-30),60*sc,60*sc);}
@@ -3727,13 +3905,14 @@ function drawMap(){
   mx.restore();
 }
 function zoneName(x,z){
+  if(MAP.id==='bandung'&&Math.abs(x+150)<26&&Math.abs(z-30)<26)return 'Taman Offroad Sibiru';
   if(MAP.fly&&Math.abs(x-MAP.fly.x)<18&&z>MAP.fly.z0-12&&z<MAP.fly.z1+12)return 'Flyover Semanggi';
   for(const t of TWRS)if(Math.abs(x-t.x)<27&&Math.abs(z-t.z)<27)return 'Sibiru Tower '+t.letter;
   if(MAP.city&&HOUSES.length){let bd=900;for(const h of HOUSES){const dx=x-h.x,dz=z-h.z;if(dx*dx+dz*dz<bd){bd=dx*dx+dz*dz;var hh=h;}}if(hh)return 'Sibiru Residence';}
   if(Math.hypot(x,z)<45)return MAP.n.pos;
   if(MAP.lm)for(const l of MAP.lm){const br=l[0]==='braga';if(br?(Math.abs(x-l[1])<75&&Math.abs(z-l[2])<14):Math.hypot(x-l[1],z-l[2])<Math.max(16,l[4]*0.5))return l[3];}
-  if(Math.hypot(x-ROCKB[0],z-ROCKB[1])<46)return 'Arena Berat';
-  if(Math.hypot(x-ROCKC[0]-(-2),z-ROCKC[1]-(-7))<26)return 'Batu Tantangan';
+  if(!MAP.city&&Math.hypot(x-ROCKB[0],z-ROCKB[1])<46)return 'Arena Berat';
+  if(!MAP.city&&Math.hypot(x-ROCKC[0]-(-2),z-ROCKC[1]-(-7))<26)return 'Batu Tantangan';
   if(S.inCar&&car.wet)return 'Kubangan Lumpur';
   if(Math.hypot(x-HILLS[1].x,z-HILLS[1].z)<60)return 'Tanjakan Ekstrem';
   if(Math.hypot(x-HILLS[0].x,z-HILLS[0].z)<55)return MAP.n.climb;
@@ -3829,17 +4008,18 @@ function update(dt){
   S.t+=dt;
   for(let i=0;i<CAMPF.length;i++){const f=CAMPF[i];f.scale.set(1+0.09*Math.sin(S.t*9+i*2),1+0.22*Math.sin(S.t*13+i*1.7),1+0.09*Math.sin(S.t*11+i));}
   if(S.mode==='menu'){stepCar(dt,0,0,true);menuCam(dt);return;}
-  const inp=(S.shopOpen||CIN.on)?{thr:0,str:0,brake:false,run:false}:readInput();
+  const inp=(S.shopOpen||CIN.on||PH76.on)?{thr:0,str:0,brake:false,run:false}:readInput();
   let locked=false;
   if(R.on){if(R.cd>0){R.cd-=dt;locked=true;}else if(!R.done)R.clock+=dt;if(R.hold>0){R.hold-=dt;locked=true;}}
   const drive=S.inCar&&!locked&&!R.done,thr=(drive?inp.thr:0)*((S.mode==='free'&&FUEL<=0)?0.25:1);
   stepCar(dt,thr,drive?inp.str:0,(drive&&inp.brake)||!S.inCar||locked||R.done);
+  offTick(dt,thr,drive&&inp.brake);
   stepEngine(dt,S.inCar&&locked?inp.thr:thr);
   if(!S.inCar)stepPerson(dt,inp);
   shopN=null;
   if(INFOC&&S.mode==='free'&&!S.shopOpen&&!R.on&&(!S.inCar||Math.abs(car.v)<4)){const o=S.inCar?car:pl,d=Math.hypot(o.x-INFOC.dx,o.z-INFOC.dz);if(d<9)shopN={ad:{name:'Pusat Informasi'},d,info:true};}
   if(S.mode==='free'&&!S.shopOpen&&!R.on&&(!S.inCar||Math.abs(car.v)<4)){const o=S.inCar?car:pl;for(const b of BILLS){const d=Math.hypot(o.x-b.x,o.z-b.z);if(d<13&&(!shopN||d<shopN.d))shopN={ad:b.ad,d,bill:true};}}
-  if(!S.inCar&&S.mode==='free'&&!S.shopOpen){for(const r of RUKOS)if(r.on){const d=Math.hypot(pl.x-r.dx,pl.z-r.dz);if(d<6.5&&(!shopN||d<shopN.d))shopN={ad:r.ad,d};}}
+  if(!S.inCar&&S.mode==='free'&&!S.shopOpen){for(const r of RUKOS)if(r.on){const d=Math.min(Math.hypot(pl.x-r.dx,pl.z-r.dz),Math.hypot(pl.x-r.dx2,pl.z-r.dz2));if(d<6.5&&(!shopN||d<shopN.d))shopN={ad:r.ad,d};}}
   if(!S.inCar&&S.mode==='free'&&!S.shopOpen){for(const h of HOUSES)if(h.own){const d=Math.hypot(pl.x-h.dx,pl.z-h.dz);if(d<7&&(!shopN||d<shopN.d))shopN={ad:{name:h.apt?'Garasi Apartemenmu · Sibiru Tower':'Garasi Rumahmu · Sibiru Residence'},d,house:true};}
   }
   if(S.mode==='free'&&!S.shopOpen&&!R.on&&(!S.inCar||Math.abs(car.v)<4)){const o=S.inCar?car:pl;for(const m of LMS)if((m.t==='bengkel'||m.t==='salon'||m.t==='showroom'||m.t==='pom'||m.t==='bantuan')&&m.on){const d=Math.hypot(o.x-m.x,o.z-(m.z+6));if(d<(S.inCar?16:10)&&(!shopN||d<shopN.d))shopN={ad:{name:({salon:'Salon Mobil Kinclong',showroom:'Showroom Mobil Second',pom:'Pom Bensin Sibiru',bantuan:'Pusat Bantuan',bengkel:'Bengkel Sibiru'})[m.t]},d,bengkel:true,gm:m.t};}}
@@ -3875,7 +4055,7 @@ let fN=0;
 function frame(now){
   requestAnimationFrame(frame);
   const dt=Math.min(0.05,(now-last)/1000);last=now;
-  update(dt);fbTick(dt);if(window.__camHook)window.__camHook(cam);
+  update(dt);fbTick(dt);if(PH76.on)phoCam();if(window.__camHook)window.__camHook(cam);
   const o=(S.inCar||S.mode==='menu')?car:pl;
   sun.position.set(o.x+SUNDIR.x*150,o.y+SUNDIR.y*150,o.z+SUNDIR.z*150);sun.target.position.set(o.x,o.y,o.z);sun.target.updateMatrixWorld();
   skyG.position.copy(cam.position);
@@ -3893,6 +4073,7 @@ function frame(now){
     }
   }
   renderer.render(scene,cam);
+  if(PH76.snap){PH76.snap=false;phoCapture();}
 }
 function resize(){
   const w=app.clientWidth||innerWidth,h=app.clientHeight||innerHeight;
@@ -3926,7 +4107,7 @@ function vehApply(mesh,k){
     }
   if(CARM[k]&&k!=='jimny'&&!ud.alts[k]){const a=makeAlt(k,ud.paint,ud.pm);a.visible=false;ud.body.add(a);ud.alts[k]=a;}
   k=CARM[k]?k:'jimny';ud.jg.visible=k==='jimny';
-  {const SZ={jimny:[TRK,WB],fj40:[.74,1.16],wrangler:[.84,1.5],defender:[.9,1.4],cruiser:[.85,1.37],sierra:[.7,1.08],caribian:[.7,1.32]}[k]||[TRK,WB];ud.wheels.forEach((w,i)=>{const sx=i<2?1:-1,sz=i%2?-1:1;w.piv.position.x=sx*SZ[0];w.piv.position.z=sz*SZ[1];});}for(const q in ud.alts)ud.alts[q].visible=q===k;
+  {const SZ={jimny:[TRK,WB],fj40:[.74,1.16],wrangler:[.84,1.5],defender:[.9,1.4],cruiser:[.85,1.37],sierra:[.7,1.08],caribian:[.7,1.32],corsica:[.7,1.1]}[k]||[TRK,WB];ud.wheels.forEach((w,i)=>{const sx=i<2?1:-1,sz=i%2?-1:1;w.piv.position.x=sx*SZ[0];w.piv.position.z=sz*SZ[1];});}for(const q in ud.alts)ud.alts[q].visible=q===k;
 }
 const hid=t=>{let h=2166136261;for(const c of String(t)){h^=c.charCodeAt(0);h=Math.imul(h,16777619)>>>0;}return h;};
 const PCOL=[0xe07b22,0x2e86c1,0xc0392b,0x2e9d6a,0x8e44ad,0xe0b23a,0x16a085,0xd35486];
@@ -3940,7 +4121,7 @@ function remoteUpd(p){if(!p||!p.i||p.i===ME.id)return;let r=REM.get(p.i);
   if((p.v||'jimny')!==r.v){r.v=p.v||'jimny';vehApply(r.g,r.v);}
   if(p.io===0&&p.px!=null){r.ptx=p.px;r.ptz=p.pz;r.pth=p.ph||0;if(r.pfirst){r.pg.position.set(p.px,H(p.px,p.pz),p.pz);r.pfirst=false;}r.pg.visible=true;r.sp.visible=false;}
   else{r.pg.visible=false;r.sp.visible=true;}
-  r.seen=S.t;}
+  r.n=p.n;r.seen=S.t;}
 function remoteStep(dt){const k=Math.min(1,dt*8);for(const [id,r] of REM){
   if(S.t-r.seen>8){scene.remove(r.g);scene.remove(r.pg);REM.delete(id);continue;}
   const g=r.g;if(g.visible){g.position.x+=(r.tx-g.position.x)*k;g.position.z+=(r.tz-g.position.z)*k;g.position.y=H(g.position.x,g.position.z);
@@ -4020,6 +4201,7 @@ function netStart(){
 }
 let _lgTry=0;
 function doLogin(){ONL.rpc('login_player',{p_token:TOK}).then(({data,error})=>{if(error){if(++_lgTry<6)setTimeout(doLogin,6000);return;}
+  premSync();
   if(data){
     if(!ME.reg||ME.id!==data.id||ME.slot!==data.slot){try{localStorage.setItem('jimnyUser',JSON.stringify({name:data.name,email:data.email||'',slot:data.slot,cluster:data.cluster,id:data.id,city:data.city||'',hang:data.hang||''}));
       if(data.game&&typeof data.game==='object'){for(const k in data.game)if(k!=='ts'&&data.game[k]!=null&&GKEY.test(k)&&localStorage.getItem(k)==null)localStorage.setItem(k,String(data.game[k]));if(data.game.ts)localStorage.setItem('jimnyTs',String(data.game.ts));}
@@ -4037,7 +4219,261 @@ function doLogin(){ONL.rpc('login_player',{p_token:TOK}).then(({data,error})=>{i
 }).catch(()=>{if(++_lgTry<6)setTimeout(doLogin,6000);});}
 if(ONL)doLogin();
 
-window.__jimny={CLOTS:()=>CLOTS,BILLS,INFOC:()=>INFOC,openInfo,renderInfo,setPIT:v=>{PIT=v;},cam,vehApply,startGhost,setGHD:v=>{GHD=v;},GHS,ACT,R,startMode,standings,TWRS,PK,parkCar,unparkAt,callTow,HANGS,hangXZ,GH,REM,HN:()=>HN,setHN:v=>{HN=v;},ghostStep,carMesh,keys,inHouse,collide,garPick,garBuy,cancelPrev,getPrev:()=>PREV,scene,cam,CIN,startWelcome,endWelcome,cinCam,monGet,monAdd,ownGet,GAR,garGate,renderGar,LMS,getFuel:()=>FUEL,setFuel:v=>{FUEL=v;},NPK1,NPK2,PBOX,CAMPERS,CAMPF,update,stepMission,getCH:()=>CH,pl,fit,PS,H,PUD,HOUSES,startMission,MI,stuck,addRock,rockH,shopN:()=>shopN,openShop,RUKOS,GATES,RUKO,car,pl,S,PUD,HILLS,ROCKC,ROCKB,grid,R,WP,N,ACT,LV,RTS,stepCar,CK,setCockpit,carBumps,stepAI,applyAll,MUDZ,PS,pathAt,applyRoute,startMode};
+/*FEAT76*/
+/* ===================== FITUR v76: level, tantangan harian, terjebak & winch, foto, konvoi, radio ===================== */
+const WIB=()=>new Date(Date.now()+7*3600e3);
+const dayKey=(o)=>{const d=new Date(Date.now()+7*3600e3+(o||0)*864e5);return d.toISOString().slice(0,10);};
+const lsJ=(k,d)=>{try{const v=JSON.parse(localStorage.getItem(k)||'null');return v==null?d:v;}catch(e){return d;}};
+const lsS=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v));}catch(e){}};
+const nf=n=>String(Math.round(n)).replace(/\B(?=(\d{3})+(?!\d))/g,'.');
+
+/* ---------- 1. Level pemain ---------- */
+const PLV=[{n:'Pemula',p:0},{n:'Penjelajah',p:400},{n:'Petualang',p:1200},{n:'Ranger',p:2500},{n:'Master Offroad',p:5000}];
+function plvOf(p){let i=0;for(let k=0;k<PLV.length;k++)if(p>=PLV[k].p)i=k;return i;}
+const STKB=STKC.length;STKC.push(0xd4af37,0x39ff14);
+const LVRW=[
+  {id:'stk-gold',lv:1,n:'Stiker Emas',t:'stk',v:STKB,c:0xd4af37},
+  {id:'col-gold',lv:2,n:'Cat Emas Sibiru',t:'col',v:0xc9a227,c:0xc9a227},
+  {id:'plate-black',lv:2,n:'Plat Hitam',t:'pst',v:1,c:0x15171a},
+  {id:'col-chrome',lv:3,n:'Cat Krom',t:'col',v:0xb8c4cc,c:0xb8c4cc},
+  {id:'stk-neon',lv:3,n:'Stiker Neon',t:'stk',v:STKB+1,c:0x39ff14},
+  {id:'col-night',lv:4,n:'Cat Biru Malam',t:'col',v:0x0b1a3a,c:0x0b1a3a},
+  {id:'plate-gold',lv:4,n:'Plat Emas Master',t:'pst',v:2,c:0xd4af37}];
+function lvLine(){const p=ptsGet(),i=plvOf(p),nx=PLV[i+1];return 'Lv '+(i+1)+' '+PLV[i].n+' · Poin '+nf(p)+(nx?' / '+nf(nx.p):'');}
+function lvRender(){const b=$('gLv');if(!b)return;const gm=GAR.mode||'home';b.parentElement.style.display=(gm==='home'||gm==='salon')?'':'none';b.innerHTML='';
+  const li=plvOf(ptsGet());
+  LVRW.forEach(r=>{const open=li>=r.lv,on=(r.t==='col'&&CUST.col===r.v)||(r.t==='stk'&&CUST.stk===r.v)||(r.t==='pst'&&(CUST.pst|0)===r.v);
+    const e=document.createElement('button');e.type='button';e.className='pcard'+(on?' sel':'')+(open?'':' lock');
+    const pic=document.createElement('span');pic.className='pic';pic.innerHTML='<svg viewBox="0 0 64 48" width="64" height="48" aria-hidden="true"><rect x="6" y="8" width="52" height="32" rx="8" fill="#'+('000000'+r.c.toString(16)).slice(-6)+'" stroke="#ffb02e" stroke-width="'+(open?2:0)+'"/>'+(open?'':'<path d="M26 26v-4a6 6 0 0 1 12 0v4" stroke="#fff" stroke-width="3" fill="none"/><rect x="23" y="26" width="18" height="11" rx="2" fill="#fff"/>')+'</svg>';
+    const nm=document.createElement('b');nm.textContent=r.n;const st=document.createElement('i');st.textContent=on?'Terpasang':open?'Gratis · hadiah level':'Buka di Lv '+(r.lv+1)+' '+PLV[r.lv].n;
+    e.append(pic,nm,st);
+    e.addEventListener('click',()=>{if(!open){toast('Naik ke level '+PLV[r.lv].n+' ('+nf(PLV[r.lv].p)+' poin) untuk membuka '+r.n,2600);return;}
+      if(r.t==='col'){CUST.col=r.v;const o=ownGet()||[];if(!o.includes('col:'+r.v)){o.push('col:'+r.v);ownSet(o);}}
+      else if(r.t==='stk'){CUST.stk=r.v;}else CUST.pst=on?0:r.v;
+      applyCust();renderGar();toast(r.n+(r.t==='pst'&&on?' dilepas':' dipasang'),1400);});
+    b.appendChild(e);});}
+let LVPREV=plvOf(ptsGet());
+function lvCheck(){const i=plvOf(ptsGet());if(i>LVPREV){LVPREV=i;const rw=LVRW.filter(r=>r.lv===i).map(r=>r.n);setTimeout(()=>toast('NAIK LEVEL! Kamu sekarang '+PLV[i].n+(rw.length?' · hadiah baru: '+rw.join(', '):''),4200),1500);beep76(880,0.12);setTimeout(()=>beep76(1320,0.18),140);}}
+/* peringkat mingguan Kota Bandung */
+const LB={rows:null,t:0,mine:0};
+function wkKey(){const d=WIB(),day=(d.getUTCDay()+6)%7;const m=new Date(d.getTime()-day*864e5);return m.toISOString().slice(0,10);}
+function wkAdd(n){const w=wkKey(),o=lsJ('jimnyWk',{w:'',p:0});if(o.w!==w){o.w=w;o.p=0;}o.p+=n;lsS('jimnyWk',o);LB.mine=o.p;
+  if(ONL&&ME.reg&&n>0)try{ONL.rpc('add_week_pts',{p_token:TOK,p_n:Math.min(400,Math.round(n))}).then(({data})=>{if(data&&data.rank)LB.rank=data.rank;LB.t=0;});}catch(e){}}
+function lbFetch(){if(!ONL||S.t-LB.t<20&&LB.rows)return;LB.t=S.t;try{ONL.rpc('top_week',{p_n:10}).then(({data,error})=>{if(!error&&Array.isArray(data)){LB.rows=data;renderHub();}});}catch(e){}}
+
+/* ---------- 2. Tantangan harian ---------- */
+const DCH=[
+  {id:'pkg2',t:'Selesaikan 2 misi kurir paket',g:2},
+  {id:'pkgfast',t:'Antar paket dalam waktu kurang dari 2 menit',g:1},
+  {id:'tow1',t:'Selesaikan 1 misi derek mobil mogok',g:1},
+  {id:'foto1',t:'Selesaikan 1 misi berburu foto',g:1},
+  {id:'race1',t:'Juara 1 di balapan level berapa pun',g:1},
+  {id:'km3',t:'Tempuh 3 km di Jelajah Bebas',g:3,u:'km'},
+  {id:'mud',t:'Lewati 200 m lumpur di Taman Offroad Sibiru',g:200,u:'m'},
+  {id:'rallynb',t:'Selesaikan Rally Waktu tanpa menginjak rem',g:1},
+  {id:'photo2',t:'Ambil 2 foto Jimny-mu di mode foto',g:2}];
+function dState(){const d=dayKey();let s=lsJ('jimnyDaily',null);
+  if(!s||s.d!==d){const h=hid('jimny-'+d);const old=s||{};s={d,id:DCH[h%DCH.length].id,prog:0,done:false,streak:old.streak||0,last:old.last||''};lsS('jimnyDaily',s);}
+  if(s.last&&s.last!==d&&s.last!==dayKey(-1)&&!s.done)s.streak=0;
+  return s;}
+function dDef(s){return DCH.find(c=>c.id===s.id)||DCH[0];}
+function dProg(id,n){const s=dState();if(s.done||s.id!==id)return;const c=dDef(s);const before=s.prog;s.prog=Math.min(c.g,s.prog+n);lsS('jimnyDaily',s);
+  if(s.prog>=c.g){s.done=true;s.streak=(s.last===dayKey(-1)?s.streak:0)+1;s.last=s.d;lsS('jimnyDaily',s);
+    const day=((s.streak-1)%7)+1,bonus=day===7?100000:0,mon=20000+bonus;ptsAdd(60,mon);
+    setTimeout(()=>toast('TANTANGAN HARIAN SELESAI! +'+rp(mon)+' · +60 poin · beruntun hari ke-'+day+'/7'+(bonus?' · BONUS 7 HARI!':''),4600),600);beep76(660,0.1);setTimeout(()=>beep76(990,0.16),120);}
+  else if(c.u!=='m'&&c.u!=='km'&&Math.floor(s.prog)!==Math.floor(before))toast('Tantangan harian '+Math.floor(s.prog)+'/'+c.g,1600);
+  renderHub();}
+function dHook(k,o){
+  if(k==='ms'&&o.ok){if(o.type==='pkg'){dProg('pkg2',1);if(o.t<120)dProg('pkgfast',1);}if(o.type==='tow')dProg('tow1',1);if(o.type==='foto')dProg('foto1',1);}
+  if(k==='race'&&o.rank===1&&(o.type==='race'||o.type==='ghost'))dProg('race1',1);
+  if(k==='rally'&&o.nb)dProg('rallynb',1);}
+const D76={km:0,mud:0,save:0};
+
+/* ---------- 3 & 4. Taman Offroad, terjebak, winch, upgrade ---------- */
+const BOG={v:0,on:false,why:'',flips:0,sg:0,help:0,hint:0,win:null};
+function bogClear(){BOG.on=false;BOG.v=0;BOG.flips=0;BOG.help=0;BOG.win=null;$('stk').hidden=true;if(W76.line)W76.line.visible=false;if(W76.stake)W76.stake.visible=false;}
+const W76={line:null,stake:null};
+if(MAP.id==='bandung'){
+  /* papan nama + tiang jangkar winch */
+  const g=new T.Group(),wood=SM(0x6b4a2b,0.9),post=SM(0x3d2b1a,0.9);
+  const c=document.createElement('canvas');c.width=512;c.height=192;const x=c.getContext('2d');x.fillStyle='#2b4a1f';x.fillRect(0,0,512,192);x.strokeStyle='#ffb02e';x.lineWidth=8;x.strokeRect(6,6,500,180);
+  x.fillStyle='#fff';x.font='bold 54px Arial';x.textAlign='center';x.textBaseline='middle';x.fillText('TAMAN OFFROAD',256,70);x.fillStyle='#ffb02e';x.font='bold 34px Arial';x.fillText('SIBIRU · lumpur & kubangan',256,138);
+  const tx=new T.CanvasTexture(c);tx.encoding=T.sRGBEncoding;
+  const bd=new T.Mesh(new T.PlaneGeometry(7,2.6),new T.MeshStandardMaterial({map:tx,roughness:0.8}));bd.position.set(0,3.2,0.08);g.add(bd);
+  const back=new T.Mesh(new T.BoxGeometry(7.2,2.8,0.12),wood);back.position.set(0,3.2,0);g.add(back);
+  for(const sx of[-3.2,3.2]){const p=new T.Mesh(new T.BoxGeometry(0.25,4.6,0.25),post);p.position.set(sx,2.3,-0.1);g.add(p);}
+  g.position.set(-150,H(-150,52),52);g.rotation.y=0;shade(g);scene.add(g);addOb(-153.2,52,0.4);addOb(-146.8,52,0.4);
+  for(const a of[[-170,10],[-130,10],[-170,50],[-130,48],[-150,8]]){const p=new T.Mesh(new T.CylinderGeometry(0.22,0.28,2.2,8),post);p.position.set(a[0],H(a[0],a[1])+1.1,a[1]);shade(p);scene.add(p);addOb(a[0],a[1],0.4);}
+}
+const ANCH=MAP.id==='bandung'?[[-170,10],[-130,10],[-170,50],[-130,48],[-150,8]]:[];
+function bogStart(why){if(BOG.on)return;BOG.on=true;BOG.why=why;BOG.flips=0;BOG.help=0;BOG.sg=0;car.vx=car.vz=car.v=0;
+  toast(why==='air'?'MESIN KEMASUKAN AIR! Mobil mogok di kubangan':'TERJEBAK LUMPUR!',2600);bogUI();}
+function bogUI(){const e=$('stk');e.hidden=false;const aw=car.awd,ti=!!CUST.ext.tire;
+  $('stkT').textContent=BOG.why==='air'?'Mesin kemasukan air':'Terjebak lumpur';
+  $('stkP').textContent=BOG.why==='air'?'Genangan ini terlalu dalam tanpa snorkel. Tarik keluar pakai winch, minta tolong teman, atau panggil derek. Pasang Snorkel di Bengkel supaya bisa lewat.'
+    :(aw?'Goyang keluar: tekan GAS lalu MUNDUR bergantian.'+(ti?'':' Ban offroad bikin lebih mudah.'):'4x2 sulit keluar sendiri. Pindah ke 4x4 lalu goyang, atau pakai winch.');
+  $('stkW').textContent=CUST.ext.winch?'Pakai winch':'Winch (beli di Bengkel)';$('stkW').classList.toggle('lock',!CUST.ext.winch);
+  $('stkH').hidden=!(ONL&&NET.on);}
+function winchGo(){if(!BOG.on)return;if(!CUST.ext.winch){toast('Kamu belum punya winch. Beli di Bengkel Sibiru (Performa & aksesori).',2800);return;}
+  let best=null,bd=1e9;for(const a of ANCH){const d=Math.hypot(a[0]-car.x,a[1]-car.z);if(d<bd){bd=d;best=a;}}
+  let tx,tz;if(best&&bd<40){const L=Math.max(1,bd),k=Math.max(0,(bd-4)/L);tx=car.x+(best[0]-car.x)*k;tz=car.z+(best[1]-car.z)*k;}
+  else{const s=Math.sin(car.h),c=Math.cos(car.h);tx=car.x+s*12;tz=car.z+c*12;best=[car.x+s*16,car.z+c*16];}
+  if(!W76.line){W76.line=new T.Line(new T.BufferGeometry().setFromPoints([new T.Vector3(),new T.Vector3()]),new T.LineBasicMaterial({color:0x222222}));scene.add(W76.line);
+    W76.stake=new T.Mesh(new T.CylinderGeometry(0.12,0.12,1.2,6),SM(0x888888,0.5,0.5));scene.add(W76.stake);}
+  W76.stake.position.set(best[0],H(best[0],best[1])+0.6,best[1]);W76.stake.visible=true;W76.line.visible=true;
+  BOG.win={t:0,T:3.6,x0:car.x,z0:car.z,tx,tz,ax:best[0],az:best[1]};$('stk').hidden=true;toast('Winch menarik…',1800);beep76(140,0.5,'sawtooth',0.05);}
+function bogFree(msg){bogClear();toast(msg,2400);}
+$('stkW').addEventListener('click',winchGo);
+$('stkD').addEventListener('click',()=>{bogClear();callTow();});
+$('stkH').addEventListener('click',()=>{if(!(ONL&&NET.on)){toast('Kamu sedang offline. Pakai winch atau derek.',2200);return;}
+  const z=zoneName(car.x,car.z);try{ONL.rpc('send_message',{p_token:TOK,p_room:'bandung',p_body:'Tolong! Aku terjebak di '+z+'. Ada yang bisa tarik? Dekati mobilku ya.'}).then(({error})=>{toast(error?'Pesan gagal terkirim':'Permintaan tolong terkirim di chat. Teman yang mendekat (7 m) bisa menarikmu.',3000);});}catch(e){}});
+
+/* ---------- 5. Mode foto ---------- */
+const PH76={on:false,a:0.6,r:7,y:2.2,snap:false,drag:null,logo:null,n:0};
+{const sv=document.querySelector('h1.logoH svg.logo');if(sv){const s=new XMLSerializer().serializeToString(sv),im=new Image();im.onload=()=>{PH76.logo=im;};im.src='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(s.includes('xmlns=')?s:s.replace('<svg','<svg xmlns="http://www.w3.org/2000/svg"'));}}
+function phoOpen(){if(S.mode==='menu'||CIN.on)return;PH76.on=true;PH76.a=Math.PI+car.h+0.7;PH76.r=7.5;PH76.y=2.2;$('pho').hidden=false;$('phoV').hidden=true;hideHudBits(true);}
+function phoClose(){PH76.on=false;$('pho').hidden=true;$('phoV').hidden=true;hideHudBits(false);camSnap=true;}
+function phoCam(){const o=S.inCar?car:pl;cam.position.set(o.x+Math.sin(PH76.a)*PH76.r,o.y+PH76.y,o.z+Math.cos(PH76.a)*PH76.r);cam.lookAt(o.x,o.y+1.1,o.z);}
+{const pe=$('phoPad');pe.addEventListener('pointerdown',e=>{PH76.drag={x:e.clientX,y:e.clientY};try{pe.setPointerCapture(e.pointerId);}catch(_){}});
+  pe.addEventListener('pointermove',e=>{if(!PH76.drag)return;const dx=e.clientX-PH76.drag.x,dy=e.clientY-PH76.drag.y;PH76.drag={x:e.clientX,y:e.clientY};PH76.a-=dx*0.008;PH76.y=clamp(PH76.y+dy*0.02,0.4,9);});
+  pe.addEventListener('pointerup',()=>{PH76.drag=null;});pe.addEventListener('pointercancel',()=>{PH76.drag=null;});
+  pe.addEventListener('wheel',e=>{e.preventDefault();PH76.r=clamp(PH76.r+e.deltaY*0.01,3.5,18);},{passive:false});}
+$('phoIn').addEventListener('click',()=>{PH76.r=clamp(PH76.r-1.5,3.5,18);});$('phoOut').addEventListener('click',()=>{PH76.r=clamp(PH76.r+1.5,3.5,18);});
+$('phoX').addEventListener('click',phoClose);$('phoShot').addEventListener('click',()=>{PH76.snap=true;});
+$('phoBack').addEventListener('click',()=>{$('phoV').hidden=true;});
+function phoCapture(){
+  const src=renderer.domElement,W=1080,Hh=1350,c=document.createElement('canvas');c.width=W;c.height=Hh;const g=c.getContext('2d');
+  const sw=src.width,sh=src.height,ar=W/Hh;let cw=sw,ch=sw/ar;if(ch>sh){ch=sh;cw=sh*ar;}
+  try{g.drawImage(src,(sw-cw)/2,(sh-ch)/2,cw,ch,0,0,W,Hh);}catch(e){}
+  const gr=g.createLinearGradient(0,Hh-330,0,Hh);gr.addColorStop(0,'rgba(8,14,22,0)');gr.addColorStop(1,'rgba(8,14,22,.92)');g.fillStyle=gr;g.fillRect(0,Hh-330,W,330);
+  const gt=g.createLinearGradient(0,0,0,220);gt.addColorStop(0,'rgba(8,14,22,.55)');gt.addColorStop(1,'rgba(8,14,22,0)');g.fillStyle=gt;g.fillRect(0,0,W,220);
+  if(PH76.logo)try{g.drawImage(PH76.logo,48,40,260,178);}catch(e){}
+  g.strokeStyle='#ffb02e';g.lineWidth=10;g.strokeRect(20,20,W-40,Hh-40);
+  g.fillStyle='#ffb02e';g.font='800 30px Arial';g.textAlign='left';g.fillText(zoneName(car.x,car.z).toUpperCase(),60,Hh-200);
+  g.fillStyle='#fff';g.font='900 66px Arial';g.fillText((ME.name?'@'+String(ME.name).replace(/^@/,''):'Jimny-ku')+' · '+(CUST.plate||'SIBIRU'),60,Hh-124,W-120);
+  g.fillStyle='#cfd8e3';g.font='600 30px Arial';g.fillText('Jimny Adventure oleh Cerita Sibiru · '+lvLine().split(' · ')[0],60,Hh-70,W-120);
+  let url='';try{url=c.toDataURL('image/jpeg',0.9);}catch(e){toast('Gagal mengambil foto',1800);return;}
+  PH76.n++;PH76.url=url;$('phoImg').src=url;$('phoV').hidden=false;flash76();dProg('photo2',1);
+}
+function flash76(){const f=$('flash');if(!f)return;f.style.transition='none';f.style.opacity='0.85';requestAnimationFrame(()=>{f.style.transition='opacity .5s';f.style.opacity='0';});beep76(2400,0.05,'square',0.04);}
+$('phoSave').addEventListener('click',()=>{if(!PH76.url)return;const a=document.createElement('a');a.href=PH76.url;a.download='Jimny Adventure '+dayKey()+' '+PH76.n+'.jpg';document.body.appendChild(a);a.click();a.remove();toast('Foto disimpan',1400);});
+$('phoShare').addEventListener('click',async()=>{if(!PH76.url)return;try{const b=await (await fetch(PH76.url)).blob(),f=new File([b],'jimny-adventure.jpg',{type:'image/jpeg'});
+  if(navigator.canShare&&navigator.canShare({files:[f]})){await navigator.share({files:[f],text:'Jimny-ku di Jimny Adventure! Main gratis: https://lantangyoga.github.io/jimny-adventure/ @ceritasibiru'});}
+  else{$('phoSave').click();toast('Foto tersimpan. Unggah ke Instagram dan tag @ceritasibiru',3200);}}catch(e){if(!(e&&e.name==='AbortError'))toast('Tidak bisa membagikan, foto disimpan saja',2000);}});
+
+/* ---------- 6. Konvoi Sabtu malam ---------- */
+const KV={on:false,i:0,pts:null};
+function kvState(){const d=WIB(),dow=d.getUTCDay(),m=d.getUTCHours()*60+d.getUTCMinutes(),S0=19*60+30,S1=21*60+30;
+  if(dow===6&&m>=S0&&m<S1)return{live:true,left:(S1-m)*60e3};
+  let days=(6-dow+7)%7;if(days===0&&m>=S1)days=7;const startMs=days*864e5+(S0-m)*60e3;return{live:false,in:startMs};}
+function kvRoute(){const G=GATES.find(g=>/lembang/i.test(g.name||''))||GATES[0];if(!G)return null;
+  const gx=G.ox*GP,gz=G.oz*GP,fx=gx-G.ox*24,fz=gz-G.oz*24,pts=[[0,0]];for(let k=1;k<=4;k++)pts.push([fx*k/4,fz*k/4]);return{pts,name:G.name};}
+function kvStart(dev){if(!MAP.city||MAP.id!=='bandung'){toast('Konvoi dimulai di Kota Bandung',2000);return;}
+  const st=kvState();if(!st.live&&!dev){toast('Konvoi mulai Sabtu 19.30 WIB',2000);return;}
+  const r=kvRoute();if(!r){toast('Rute konvoi tidak ditemukan',1800);return;}
+  const go=()=>{KV.on=true;KV.i=0;KV.pts=r.pts;msTarget('Konvoi · kumpul di Alun-alun',KV.pts[0],0x3fd0ff);toast('KONVOI SABTU MALAM! Kumpul di Perempatan Alun-alun, lalu touring bareng ke gerbang Lembang',4200);};
+  if(S.mode!=='free')needHub('free',()=>{startMode('free');setTimeout(go,300);});else go();}
+function kvTick(){if(!KV.on)return;if(S.mode!=='free'||MI.on){KV.on=false;return;}
+  const p=KV.pts[KV.i],o=S.inCar?car:pl;if(Math.hypot(o.x-p[0],o.z-p[1])<16){
+    if(!S.inCar&&KV.i>0)return;
+    KV.i++;if(KV.i>=KV.pts.length){KV.on=false;beacon.visible=false;if(WPT&&WPT.keep)WPT=null;
+      const wk=wkKey();if(lsJ('jimnyKvW','')!==wk){lsS('jimnyKvW',wk);ptsAdd(100,30000);toast('KONVOI SELESAI! +'+rp(30000)+' · +100 poin. Sampai jumpa Sabtu depan!',4400);}
+      else toast('Konvoi selesai! Hadiah minggu ini sudah kamu ambil.',3000);return;}
+    const last=KV.i===KV.pts.length-1;msTarget(last?'Konvoi · gerbang Lembang':'Konvoi · titik '+KV.i+'/'+(KV.pts.length-1),KV.pts[KV.i],0x3fd0ff);
+    const n=NET.on?REM.size+1:1;toast((KV.i===1?'Konvoi berangkat! ':'Titik '+KV.i+' · ')+n+' pemain online',1800);}}
+
+/* ---------- 7. Radio mobil + suara mesin ---------- */
+const RADIO={st:0,next:0,step:0,g:null};
+const RST=[null,{n:'Sibiru FM',bpm:112},{n:'Kopdar Lo-fi',bpm:78},{n:'Dangdut Trail',bpm:128}];
+function beep76(f,d,type,vol){if(!ac||!soundOn)return;try{const t=ac.currentTime,o=ac.createOscillator(),g=ac.createGain();o.type=type||'sine';o.frequency.value=f;g.gain.setValueAtTime(0.0001,t);g.gain.linearRampToValueAtTime(vol||0.08,t+0.01);g.gain.exponentialRampToValueAtTime(0.001,t+d);o.connect(g);g.connect(A.master);o.start(t);o.stop(t+d+0.05);}catch(e){}}
+function rNote(t,f,d,type,vol,dest,glide){const o=ac.createOscillator(),g=ac.createGain();o.type=type;o.frequency.setValueAtTime(f,t);if(glide)o.frequency.exponentialRampToValueAtTime(glide,t+d);g.gain.setValueAtTime(0.0001,t);g.gain.linearRampToValueAtTime(vol,t+Math.min(0.02,d*0.2));g.gain.exponentialRampToValueAtTime(0.0008,t+d);o.connect(g);g.connect(dest);o.start(t);o.stop(t+d+0.05);}
+function rNoise(t,d,f,vol,dest,type){const s=ac.createBufferSource();s.buffer=A.buf;const fl=ac.createBiquadFilter();fl.type=type||'highpass';fl.frequency.value=f;const g=ac.createGain();g.gain.setValueAtTime(vol,t);g.gain.exponentialRampToValueAtTime(0.0008,t+d);s.connect(fl);fl.connect(g);g.connect(dest);s.start(t,Math.random()*1.5);s.stop(t+d+0.02);}
+const mtf=m=>440*Math.pow(2,(m-69)/12);
+function radioStep(t,k){const st=RADIO.st,D=RADIO.g,b=60/RST[st].bpm/2,i=k%16,bar=Math.floor(k/16)%4;
+  if(st===1){const CH=[[60,64,67],[55,59,62],[57,60,64],[53,57,60]][bar],ar=[0,1,2,1,0,2,1,2];
+    rNote(t,mtf(CH[ar[i%8]]+12),b*0.9,'triangle',0.05,D);if(i%4===0)rNote(t,mtf(CH[0]-24),b*1.8,'sawtooth',0.035,D);
+    if(i%8===0)rNote(t,120,0.25,'sine',0.16,D,45);if(i%8===4)rNoise(t,0.18,1800,0.09,D,'bandpass');if(i%2===1)rNoise(t,0.05,7000,0.035,D);
+    if(i===0){const mel=[72,74,76,79,76,74,72,67];rNote(t,mtf(mel[bar*2%8]),b*3,'square',0.018,D);}}
+  else if(st===2){const CH=[[65,69,72,76],[64,67,71,74],[62,65,69,72],[60,64,67,71]][bar];
+    if(i===0)for(const n of CH)rNote(t,mtf(n),b*15,'sine',0.022,D);if(i%4===2)rNote(t,mtf(CH[(i>>2)%4]+12),b*2.5,'triangle',0.03,D);
+    if(i===0||i===10)rNote(t,95,0.3,'sine',0.13,D,40);if(i===4||i===12)rNoise(t,0.22,1200,0.05,D,'bandpass');if(i%2===1)rNoise(t,0.04,6000,0.02,D);
+    if(i%4===0)rNote(t,mtf(CH[0]-24),b*3.5,'sine',0.06,D);}
+  else if(st===3){const sc=[57,59,60,62,64,65,68,69],ph=[0,2,4,5,4,2,1,0,4,5,7,5,4,2,0,1];
+    if(i%2===0)rNote(t,mtf(sc[ph[(i+bar*4)%16]]+12),b*1.6,'sine',0.045,D);
+    if([0,3,6,8,11,14].includes(i))rNote(t,i%8===0?160:240,0.16,'sine',0.13,D,i%8===0?70:120);
+    if([2,5,10,13].includes(i))rNoise(t,0.08,2500,0.07,D,'bandpass');if(i%4===0)rNote(t,mtf(45),b*1.5,'triangle',0.06,D);}
+}
+function radioTick(){if(!ac||!RADIO.st)return;if(!RADIO.g){RADIO.g=ac.createGain();RADIO.g.connect(A.master);}
+  const want=(soundOn&&S.mode!=='menu'&&!CIN.on)?(S.inCar?0.9:0.25):0;RADIO.g.gain.setTargetAtTime(want,ac.currentTime,0.2);
+  if(want<=0)return;const b=60/RST[RADIO.st].bpm/2;if(RADIO.next<ac.currentTime)RADIO.next=ac.currentTime+0.05;
+  while(RADIO.next<ac.currentTime+0.25){try{radioStep(RADIO.next,RADIO.step);}catch(e){}RADIO.next+=b;RADIO.step++;}}
+function radioCycle(){initAudio();RADIO.st=(RADIO.st+1)%RST.length;RADIO.step=0;RADIO.next=0;$('bRadio').classList.toggle('on',RADIO.st>0);toast(RADIO.st?'📻 '+RST[RADIO.st].n:'📻 Radio mati',1400);}
+$('bRadio').addEventListener('click',radioCycle);$('bPho').addEventListener('click',phoOpen);
+addEventListener('keydown',e=>{if(e.target&&e.target.tagName==='INPUT')return;if(e.code==='KeyR'&&S.mode!=='menu')radioCycle();if(e.code==='KeyP'&&S.mode!=='menu'){PH76.on?phoClose():phoOpen();}if(e.code==='Escape'&&PH76.on)phoClose();});
+const SND76={g:1,thr:0};
+function engineFx(thr){if(!ac||!soundOn||!S.inCar)return;if(car.gear!==SND76.g){if(car.gear>SND76.g&&thr>0.3)rNoise(ac.currentTime,0.06,900,0.06,A.master,'bandpass');SND76.g=car.gear;}
+  if(CUST.ext.eng2&&SND76.thr>0.8&&thr<0.1&&car.rpm>4200){const t=ac.currentTime;rNoise(t,0.07,300,0.18,A.master,'lowpass');rNoise(t+0.09,0.05,400,0.1,A.master,'lowpass');}
+  SND76.thr=thr;}
+
+/* ---------- tick per frame ---------- */
+function offTick(dt,thr,brk){
+  radioTick();engineFx(thr);kvTick();
+  if(R.on){if(R.clock<0.05)R.brk=false;if(brk&&R.cd<=0)R.brk=true;}
+  if(S.mode!=='free'||CIN.on){if(BOG.on)bogClear();return;}
+  if(!S.inCar){if(BOG.on&&Math.hypot(pl.x-car.x,pl.z-car.z)>60){}return;}
+  surf(car.x,car.z);const sp=Math.abs(car.v);
+  D76.km+=sp*dt/1000;if(D76.km>=0.05){dProg('km3',D76.km);D76.km=0;}
+  if(SF.t===1&&sp>1.5){D76.mud+=sp*dt;if(D76.mud>=10){dProg('mud',D76.mud);D76.mud=0;}}
+  if(BOG.win){const w=BOG.win;w.t+=dt;const k=sm(clamp(w.t/w.T,0,1));car.x=w.x0+(w.tx-w.x0)*k;car.z=w.z0+(w.tz-w.z0)*k;car.vx=car.vz=car.v=0;
+    const pos=W76.line.geometry.attributes.position;pos.setXYZ(0,car.x,car.y+0.6,car.z);pos.setXYZ(1,w.ax,H(w.ax,w.az)+1,w.az);pos.needsUpdate=true;
+    if(w.t>=w.T)bogFree('Berhasil ditarik winch!');return;}
+  if(BOG.on){car.vx*=0.5;car.vz*=0.5;
+    if(Math.abs(thr)>0.5&&S.t-BOG.hint>0.25){BOG.hint=S.t;emitDust(car.x+(Math.random()-0.5)*1.6,car.y+0.2,car.z+(Math.random()-0.5)*1.6,(Math.random()-0.5)*3,(Math.random()-0.5)*3);}
+    if(BOG.why==='mud'){const sg=thr>0.5?1:thr<-0.5?-1:0;if(sg&&sg!==BOG.sg){if(BOG.sg)BOG.flips++;BOG.sg=sg;}
+      const need=car.awd?(CUST.ext.tire?3:4):(CUST.ext.tire?6:99);
+      if(BOG.flips>=need){bogFree('Berhasil keluar dengan goyang!');car.v=4*(thr>0?1:-1);return;}}
+    if(ONL&&NET.on)for(const [id,r] of REM){if(r.g.visible&&Math.hypot(r.g.position.x-car.x,r.g.position.z-car.z)<7){BOG.help+=dt;if(BOG.help>1.5){bogFree('Ditarik oleh @'+String(r.n||'teman').replace(/^@/,'')+'! Terima kasih, sobat offroad');return;}break;}}
+    return;}
+  const lift=!!CUST.ext.lift;
+  if(SF.t===2&&SF.d>(lift?0.55:0.45)&&!CUST.ext.snorkel&&sp>0.3){bogStart('air');return;}
+  let deep=false;for(const m of PMUD)if(Math.hypot(car.x-m[0],car.z-m[1])<m[2]){deep=true;break;}
+  if(deep&&!car.air){const ti=!!CUST.ext.tire,d=car.awd?(ti?0.5:1.0):(ti?1.5:2.6);const k=Math.max(0,1-d*dt);car.vx*=k;car.vz*=k;}
+  if(SF.t===1&&Math.abs(thr)>0.3&&sp<(deep?3.5:2.5)&&!car.air){const rate=(car.awd?0.35:1)*(CUST.ext.tire?0.45:1)*(lift?0.8:1);BOG.v+=dt*rate;if(BOG.v>2.2)bogStart('mud');}
+  else BOG.v=Math.max(0,BOG.v-dt*0.8);
+}
+
+/* ---------- beranda: tantangan, peringkat, konvoi ---------- */
+function fmtDur(ms){const m=Math.max(0,Math.floor(ms/60000)),d=Math.floor(m/1440),h=Math.floor(m%1440/60),mm=m%60;return d?d+' hari '+h+' jam':h?h+' jam '+mm+' menit':mm+' menit';}
+function renderHub(){const dc=$('dcC');if(!dc)return;
+  const s=dState(),c=dDef(s),day=s.done?((s.streak-1)%7)+1:(s.last===dayKey(-1)?(s.streak%7)+1:1);
+  let dots='';for(let k=1;k<=7;k++)dots+='<i class="'+(k<day||(k===day&&s.done)?'on':k===day?'now':'')+'"></i>';
+  const pr=c.u==='km'?(+s.prog).toFixed(1)+'/'+c.g+' km':c.u==='m'?Math.floor(s.prog)+'/'+c.g+' m':Math.floor(s.prog)+'/'+c.g;
+  dc.innerHTML='<em>Tantangan hari ini</em><b></b><p></p><div class="dots">'+dots+'</div><small></small>';
+  dc.querySelector('b').textContent=c.t;dc.querySelector('p').textContent=s.done?'Selesai! Kembali besok untuk tantangan baru.':'Progres '+pr+' · hadiah '+rp(20000)+' + 60 poin';
+  dc.querySelector('small').textContent='Beruntun '+(s.done?day:day-1)+'/7 hari · hari ke-7 bonus '+rp(100000);
+  const lb=$('lbC');const w=lsJ('jimnyWk',{w:'',p:0}),mine=w.w===wkKey()?w.p:0;
+  lb.innerHTML='<em>Peringkat minggu ini · Kota Bandung</em><ol></ol><small></small>';const ol=lb.querySelector('ol');
+  if(LB.rows&&LB.rows.length)LB.rows.slice(0,5).forEach((r,i)=>{const li=document.createElement('li');li.innerHTML='<span></span><b></b>';li.children[0].textContent=(i+1)+'. @'+String(r.name).replace(/^@/,'');li.children[1].textContent=nf(r.pts);ol.appendChild(li);});
+  else{const li=document.createElement('li');li.textContent=ONL&&ME.reg?'Belum ada poin minggu ini. Jadilah yang pertama!':'Main online (daftar) untuk masuk peringkat.';ol.appendChild(li);}
+  lb.querySelector('small').textContent='Poinmu minggu ini: '+nf(mine)+' · '+lvLine();
+  const kv=$('kvC'),ks=kvState();kv.innerHTML='<em>Konvoi Sabtu malam</em><b>Alun-alun → gerbang Lembang</b><p></p><button type="button" class="chip"></button>';
+  kv.querySelector('p').textContent=ks.live?'SEDANG BERLANGSUNG · sisa '+fmtDur(ks.left)+'. Hadiah '+rp(30000)+' + 100 poin.':'Setiap Sabtu 19.30–21.30 WIB · mulai dalam '+fmtDur(ks.in);
+  const kb=kv.querySelector('button');kb.textContent=ks.live?'Ikut konvoi':(DEV?'Coba rute (dev)':'Ingatkan saya');kb.classList.toggle('sel',ks.live);
+  kb.addEventListener('click',()=>{if(ks.live||DEV)kvStart(!ks.live);else toast('Catat ya: Sabtu 19.30 WIB, kumpul di Perempatan Alun-alun',2600);});
+}
+renderHub();setInterval(()=>{if(S.mode==='menu'){lbFetch();renderHub();}},30000);setTimeout(lbFetch,2500);
+updPts();
+/* koin emas: emoji 🪙 tampil perak di sebagian perangkat, jadi diganti ikon koin emas buatan sendiri */
+{const RX=/🪙⁠?(-?[\d.]+)?/g;
+ const fixNode=n=>{const t=n.nodeValue;if(!t||t.indexOf('🪙')<0)return;const p=n.parentNode;if(!p||p.nodeType!==1||/^(OPTION|TEXTAREA|SCRIPT|STYLE|TITLE)$/.test(p.tagName))return;
+   const f=document.createDocumentFragment();let last=0;t.replace(RX,(m,num,idx)=>{if(idx>last)f.appendChild(document.createTextNode(t.slice(last,idx)));
+     const sp=document.createElement('span');sp.className='cn';sp.appendChild(document.createElement('i'));if(num)sp.appendChild(document.createTextNode(num));f.appendChild(sp);last=idx+m.length;return m;});
+   if(last<t.length)f.appendChild(document.createTextNode(t.slice(last)));p.replaceChild(f,n);};
+ const walk=r=>{if(r.nodeType===3){fixNode(r);return;}const w=document.createTreeWalker(r,NodeFilter.SHOW_TEXT);const a=[];while(w.nextNode())if(w.currentNode.nodeValue.indexOf('🪙')>=0)a.push(w.currentNode);a.forEach(fixNode);};
+ walk(document.body);
+ new MutationObserver(ms=>{for(const m of ms){if(m.type==='characterData')fixNode(m.target);else m.addedNodes.forEach(walk);}}).observe(document.body,{subtree:true,childList:true,characterData:true});}
+
+window.__jimny={PREM,premUntil,pb,renderShopCoin,redeemCode,renderSpec,COINPK,PREMPK,bogClear,PH76,BOG,KV,RADIO,dState,dProg,kvStart,kvState,bogStart,winchGo,phoOpen,phoClose,lvLine,LB,renderHub,plvOf,startMission,CLOTS:()=>CLOTS,BILLS,INFOC:()=>INFOC,openInfo,renderInfo,setPIT:v=>{PIT=v;},cam,vehApply,startGhost,setGHD:v=>{GHD=v;},GHS,ACT,R,startMode,standings,TWRS,PK,parkCar,unparkAt,callTow,HANGS,hangXZ,GH,REM,HN:()=>HN,setHN:v=>{HN=v;},ghostStep,carMesh,keys,inHouse,collide,garPick,garBuy,cancelPrev,getPrev:()=>PREV,scene,cam,CIN,startWelcome,endWelcome,cinCam,monGet,monAdd,ownGet,GAR,garGate,renderGar,LMS,getFuel:()=>FUEL,setFuel:v=>{FUEL=v;},NPK1,NPK2,PBOX,CAMPERS,CAMPF,update,stepMission,getCH:()=>CH,pl,fit,PS,H,PUD,HOUSES,startMission,MI,stuck,addRock,rockH,shopN:()=>shopN,openShop,RUKOS,GATES,RUKO,car,pl,S,PUD,HILLS,ROCKC,ROCKB,grid,R,WP,N,ACT,LV,RTS,stepCar,CK,setCockpit,carBumps,stepAI,applyAll,MUDZ,PS,pathAt,applyRoute,startMode};
 resize();
 toMenu();
 if(!ME.reg)showReg();
