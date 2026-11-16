@@ -190,7 +190,7 @@ h1 span{color:var(--blue)}
 .card[disabled]:hover{border-color:var(--line)}
 .tag{display:inline-block;font:600 11px var(--disp);letter-spacing:.12em;text-transform:uppercase;border:1px solid var(--amber);color:var(--amber);padding:1px 6px;border-radius:99px;margin-left:6px;vertical-align:middle}
 .help{margin-top:12px;font-size:13px;color:var(--mute);line-height:1.4}
-#end{z-index:50;position:absolute;inset:0;display:flex;background:rgba(8,14,11,.66);padding:20px;overflow:auto}
+#end{z-index:50;position:fixed;left:0;top:0;width:100%;height:100%;height:100dvh;box-sizing:border-box;display:flex;background:rgba(8,14,11,.66);padding:max(14px,env(safe-area-inset-top,0px)) max(14px,env(safe-area-inset-right,0px)) max(24px,env(safe-area-inset-bottom,0px)) max(14px,env(safe-area-inset-left,0px));overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;touch-action:pan-y}@media (max-height:480px){#end .panel{padding:12px 16px}#end .panel h2{font-size:30px}#end .panel p{margin:4px 0;font-size:16px}}
 #end[hidden]{display:none}#end button,#end .chip{touch-action:manipulation;position:relative;z-index:1}
 .panel{background:rgba(14,25,19,.96);border:1px solid var(--line);border-radius:14px;padding:22px 24px;text-align:center;max-width:340px;width:100%;margin:auto}
 .panel h2{margin:0;font:800 44px/1 var(--disp);text-transform:uppercase;color:var(--amber)}
@@ -430,6 +430,7 @@ h1.logoH{margin:0 0 8px;font-size:0;line-height:0}h1.logoH .logo{width:min(380px
       <h1 class="logoH"><svg class="logo" viewBox="40 130 800 546" role="img" aria-label="Logo Jimny Adventure by Cerita Sibiru"><rect x="60" y="150" width="760" height="470" rx="40" fill="#ff8a1f"/><path d="M100 150 H780 Q820 150 820 190 V400 L760 372 L700 436 L630 366 L560 440 L490 372 L420 442 L350 368 L280 438 L210 376 L140 440 L60 388 V190 Q60 150 100 150 Z" fill="#2f8cff"/><text x="440" y="346" text-anchor="middle" textLength="680" lengthAdjust="spacingAndGlyphs" font-family="'Barlow Condensed','Arial Narrow',sans-serif" font-weight="800" font-size="250" fill="#ffffff">JIMNY</text><text x="440" y="572" text-anchor="middle" textLength="680" lengthAdjust="spacingAndGlyphs" font-family="'Barlow Condensed','Arial Narrow',sans-serif" font-weight="800" font-size="150" fill="#0c1a2b">ADVENTURE</text><rect x="240" y="592" width="400" height="64" rx="32" fill="#0c1a2b" stroke="#68b3ff" stroke-width="4"/><text x="440" y="636" text-anchor="middle" textLength="330" font-family="'Barlow Condensed','Arial Narrow',sans-serif" font-weight="800" font-size="38" fill="#eef5ff">BY CERITA SIBIRU</text></svg><span class="sr">Jimny Adventure by Cerita Sibiru</span></h1>
       <button class="chip" id="meBtn" type="button" hidden></button>
       <button class="chip" id="avBtn" type="button">Avatar</button>
+      <button class="chip" id="rotBtn" type="button">Putar layar</button>
       <button class="chip" id="welBtn" type="button" hidden>Putar video sambutan</button>
       <div id="ptsLine"></div>
       <p class="lead" id="mapLead">Offroad open world ala GTA.</p>
@@ -2230,35 +2231,55 @@ function applyCust(){
   netSave();}
 }
 applyCust();
+/* ---------- putar layar (landscape palsu untuk browser Instagram) ---------- */
+let ROT=0,RW=0,RH=0;
+function SPX(e){return ROT===0?e.clientX:ROT>0?e.clientY:RH-e.clientY;}
+function SPY(e){return ROT===0?e.clientY:ROT>0?RW-e.clientX:e.clientX;}
+function RC(el){const r=el.getBoundingClientRect();if(ROT===0)return r;
+  let l,t,rr,b;if(ROT>0){l=r.top;rr=r.bottom;t=RW-r.right;b=RW-r.left;}else{l=RH-r.bottom;rr=RH-r.top;t=r.left;b=r.right;}
+  return{left:l,top:t,right:rr,bottom:b,width:rr-l,height:b-t,x:l,y:t};}
+const ROTSTY=[...document.querySelectorAll('style')].map(el=>({el,o:el.textContent}));
+function rotCss(t){const sw=f=>f.replace(/\b(max|min)-(width|height)\b/g,(m,a,d)=>a+'-'+(d==='width'?'height':'width')).replace(/orientation\s*:\s*(landscape|portrait)/g,(m,o)=>'orientation:'+(o==='landscape'?'portrait':'landscape'));
+  return t.replace(/@media([^{]+)\{/g,(m,q)=>'@media'+sw(q)+'{').replace(/(\d(?:\.\d+)?)(dvh|svh|lvh|vh|vw)\b/g,(m,n,u)=>n+(u==='vw'?'vh':'vw'));}
+function applyRot(r){const b=document.body,st=b.style;
+  if(!r){ROT=0;['position','left','top','width','height','transform','transformOrigin'].forEach(k=>st[k]='');ROTSTY.forEach(x=>{x.el.textContent=x.o;});}
+  else{const W=innerWidth,H=innerHeight;ROT=r;RW=W;RH=H;st.position='fixed';st.left='0';st.top='0';st.width=H+'px';st.height=W+'px';st.transformOrigin='0 0';
+    st.transform=r>0?'translateX('+W+'px) rotate(90deg)':'translateY('+H+'px) rotate(-90deg)';ROTSTY.forEach(x=>{x.el.textContent=rotCss(x.o);});}
+  try{localStorage.setItem('jimnyRot',String(r));}catch(e){}
+  const bt=document.getElementById('rotBtn');if(bt)bt.textContent=r>0?'Layar diputar: kanan':r<0?'Layar diputar: kiri':'Putar layar';
+  try{window.dispatchEvent(new Event('rotchange'));}catch(e){}}
+function cycleRot(){if(ROT===0&&innerWidth>innerHeight){toast('Layarmu sudah landscape',1600);return;}
+  const n=ROT===0?1:ROT>0?-1:0;applyRot(n);if(n!==0)toast('Miringkan HP. Kalau tampilan terbalik, tap tombolnya lagi',3400);}
+addEventListener('resize',()=>{if(!ROT)return;if(innerWidth>innerHeight)applyRot(0);else if(innerWidth!==RW||innerHeight!==RH)applyRot(ROT);});
 const ray=new T.Raycaster(),ndc=new T.Vector2();
 function tapCar(cx,cy){
   if(!S.inCar||S.mode==='menu')return false;
-  const r=renderer.domElement.getBoundingClientRect();
+  const r=RC(renderer.domElement);
   ndc.set((cx-r.left)/r.width*2-1,-((cy-r.top)/r.height*2-1));ray.setFromCamera(ndc,cam);
   const objs=CK.on?[cockpit]:carMesh.children.filter(c=>c!==cockpit);
   return ray.intersectObjects(objs,true).length>0;
 }
 let tapT=null;
-function tapDown(e){tapT={x:e.clientX,y:e.clientY,t:performance.now(),id:e.pointerId};}
+function tapDown(e){tapT={x:SPX(e),y:SPY(e),t:performance.now(),id:e.pointerId};}
 function tapRuko(cx,cy){
   const _o=S.inCar?car:pl;
-  const r=renderer.domElement.getBoundingClientRect();ndc.set((cx-r.left)/r.width*2-1,-((cy-r.top)/r.height*2-1));ray.setFromCamera(ndc,cam);
+  const r=RC(renderer.domElement);ndc.set((cx-r.left)/r.width*2-1,-((cy-r.top)/r.height*2-1));ray.setFromCamera(ndc,cam);
   const hit=ray.intersectObjects(RUKOS.filter(k=>k.on).map(k=>k.g).concat(INFOC?[INFOC.g]:[]),true)[0];if(!hit)return false;
   if(hit.object.userData.info){if(Math.hypot(_o.x-INFOC.dx,_o.z-INFOC.dz)<16)openInfo();else toast('Dekati Pusat Informasi dulu, lalu ketuk lagi',1600);return true;}
   const i=hit.object.userData.shop;if(i===undefined)return false;const k=RUKOS[i];
   if(S.inCar&&Math.abs(car.v)>=4){toast('Pelan dulu, lalu ketuk lagi',1400);return true;}if(Math.min(Math.hypot(_o.x-k.dx,_o.z-k.dz),Math.hypot(_o.x-k.dx2,_o.z-k.dz2))<14)openShop(k.ad);else toast('Dekati ruko dulu, lalu ketuk lagi',1600);return true;
 }
 function tapBill(cx,cy){if(!BILLS.length||S.shopOpen||(R.on&&!R.done))return false;
-  const r=renderer.domElement.getBoundingClientRect();ndc.set((cx-r.left)/r.width*2-1,-((cy-r.top)/r.height*2-1));ray.setFromCamera(ndc,cam);
+  const r=RC(renderer.domElement);ndc.set((cx-r.left)/r.width*2-1,-((cy-r.top)/r.height*2-1));ray.setFromCamera(ndc,cam);
   const gs=BILLS.filter(b=>b.g&&b.g.visible!==false&&Math.hypot(b.x-cam.position.x,b.z-cam.position.z)<140);if(!gs.length)return false;
   const ms=[];gs.forEach(b=>b.g.traverse(o=>{if(o.isMesh){o.userData.bill=b;ms.push(o);}}));
   const hit=ray.intersectObjects(ms,false)[0];if(!hit)return false;openShop(hit.object.userData.bill.ad);return true;}
-function tapUp(e){if(!tapT||e.pointerId!==tapT.id)return;const d=Math.hypot(e.clientX-tapT.x,e.clientY-tapT.y),el=performance.now()-tapT.t;tapT=null;if(d<12&&el<350){if(tapBill(e.clientX,e.clientY))return;if(S.mode==='free'&&!S.shopOpen&&!R.on&&typeof tapRemote==='function'&&tapRemote(e.clientX,e.clientY))return;if(S.mode==='free'&&!S.shopOpen&&!R.on&&tapRuko(e.clientX,e.clientY))return;if(tapRemote(e.clientX,e.clientY))return;if(S.inCar){if(tapCar(e.clientX,e.clientY))toggleCam();}}}
+function tapUp(e){if(!tapT||e.pointerId!==tapT.id)return;const d=Math.hypot(SPX(e)-tapT.x,SPY(e)-tapT.y),el=performance.now()-tapT.t;tapT=null;if(d<12&&el<350){if(tapBill(SPX(e),SPY(e)))return;if(S.mode==='free'&&!S.shopOpen&&!R.on&&typeof tapRemote==='function'&&tapRemote(SPX(e),SPY(e)))return;if(S.mode==='free'&&!S.shopOpen&&!R.on&&tapRuko(SPX(e),SPY(e)))return;if(tapRemote(SPX(e),SPY(e)))return;if(S.inCar){if(tapCar(SPX(e),SPY(e)))toggleCam();}}}
 ['gl','joyzone'].forEach(id=>{const el=$(id);el.addEventListener('pointerdown',tapDown);el.addEventListener('pointerup',tapUp);});
 const CAMO={yaw:0,pit:0,id:null,x:0,y:0,t:0};
 {const g=$('gl');
- g.addEventListener('pointerdown',e=>{if(S.mode==='menu'||CAMO.id!==null)return;CAMO.id=e.pointerId;CAMO.x=e.clientX;CAMO.y=e.clientY;try{g.setPointerCapture(e.pointerId);}catch(_){}});
- g.addEventListener('pointermove',e=>{if(e.pointerId!==CAMO.id)return;const dx=e.clientX-CAMO.x,dy=e.clientY-CAMO.y;CAMO.x=e.clientX;CAMO.y=e.clientY;CAMO.yaw-=dx*0.007;CAMO.pit=Math.max(-0.25,Math.min(0.9,CAMO.pit+dy*0.004));CAMO.t=performance.now();});
+ g.addEventListener('pointerdown',e=>{if(S.mode==='menu'||CAMO.id!==null)return;CAMO.id=e.pointerId;CAMO.x=SPX(e);CAMO.y=SPY(e);try{g.setPointerCapture(e.pointerId);}catch(_){}});
+ g.addEventListener('pointermove',e=>{if(e.pointerId!==CAMO.id)return;const dx=SPX(e)-CAMO.x,dy=SPY(e)-CAMO.y;CAMO.x=SPX(e);CAMO.y=SPY(e);CAMO.yaw-=dx*0.007;CAMO.pit=Math.max(-0.25,Math.min(0.9,CAMO.pit+dy*0.004));CAMO.t=performance.now();});
  const up=e=>{if(e.pointerId!==CAMO.id)return;CAMO.id=null;CAMO.t=performance.now();};g.addEventListener('pointerup',up);g.addEventListener('pointercancel',up);}
 function toggleCam(){if(!S.inCar)return;setCockpit(!CK.on);toast(CK.on?'Kamera dashboard':'Kamera luar',1100);}
 function setCockpit(on){
@@ -2328,9 +2349,9 @@ addEventListener('keyup',e=>{keys[e.code]=false;});
 document.addEventListener('contextmenu',e=>e.preventDefault());
 const joy={x:0,y:0};
 const jz=$('joyzone'),jb=$('joyBase'),jk=$('joyKnob');let jid=null,jo={x:0,y:0};const JR=52;
-function jMove(e){const r=jz.getBoundingClientRect();let dx=e.clientX-r.left-jo.x,dy=e.clientY-r.top-jo.y;const L=Math.hypot(dx,dy);if(L>JR){dx=dx/L*JR;dy=dy/L*JR;}joy.x=dx/JR;joy.y=-dy/JR;jk.style.transform='translate('+dx+'px,'+dy+'px)';}
+function jMove(e){const r=RC(jz);let dx=SPX(e)-r.left-jo.x,dy=SPY(e)-r.top-jo.y;const L=Math.hypot(dx,dy);if(L>JR){dx=dx/L*JR;dy=dy/L*JR;}joy.x=dx/JR;joy.y=-dy/JR;jk.style.transform='translate('+dx+'px,'+dy+'px)';}
 function jReset(){jid=null;joy.x=joy.y=0;jb.style.left='96px';jb.style.top='calc(100% - 118px)';jk.style.transform='translate(0,0)';}
-jz.addEventListener('pointerdown',e=>{if(jid!==null)return;jid=e.pointerId;try{jz.setPointerCapture(jid);}catch(_){}const r=jz.getBoundingClientRect();jo.x=e.clientX-r.left;jo.y=e.clientY-r.top;jb.style.left=jo.x+'px';jb.style.top=jo.y+'px';jMove(e);});
+jz.addEventListener('pointerdown',e=>{if(jid!==null)return;jid=e.pointerId;try{jz.setPointerCapture(jid);}catch(_){}const r=RC(jz);jo.x=SPX(e)-r.left;jo.y=SPY(e)-r.top;jb.style.left=jo.x+'px';jb.style.top=jo.y+'px';jMove(e);});
 jz.addEventListener('pointermove',e=>{if(e.pointerId===jid)jMove(e);});
 jz.addEventListener('pointerup',e=>{if(e.pointerId===jid)jReset();});
 jz.addEventListener('pointercancel',e=>{if(e.pointerId===jid)jReset();});
@@ -2354,6 +2375,11 @@ function releaseInputs(){
   ['gl','joyzone','bGas','bRev','bBrake','bLook'].forEach(id=>{const el=$(id);if(!el)return;for(let i=0;i<12;i++){try{if(el.hasPointerCapture(i))el.releasePointerCapture(i);}catch(_){}}});
 }
 /* catat galat tak terduga supaya mudah dilacak */
+{const rb=$('rotBtn');if(rb)rb.addEventListener('click',cycleRot);try{const sv=parseInt(localStorage.getItem('jimnyRot'))||0;if(sv&&innerHeight>innerWidth)applyRot(sv>0?1:-1);}catch(e){}}
+{try{const ua=navigator.userAgent||'';let sh=false;try{sh=!!sessionStorage.getItem('jimnyIgBn');}catch(e){}
+if(/Instagram|FBAN|FBAV/.test(ua)&&!sh){const d=document.createElement('div');d.id='igBn';d.style.cssText='position:fixed;left:8px;right:8px;top:calc(env(safe-area-inset-top,0px) + 8px);z-index:45;background:#1f5fd0;color:#fff;border-radius:12px;padding:10px 12px;font:600 14px/1.35 var(--body);box-shadow:0 6px 20px rgba(0,0,0,.45)';
+d.innerHTML='<b>Main lebih lancar di Safari</b><br>Browser Instagram terkunci portrait. Tap <b>Putar layar</b> lalu miringkan HP, atau buka di Safari lewat titik tiga (\u22EF) di pojok kanan atas.<div style="text-align:right;margin-top:6px"><button type="button" data-rot="1" style="font:700 13px var(--disp);letter-spacing:.06em;text-transform:uppercase;background:#ffb02e;color:#1a1205;border:0;border-radius:99px;padding:6px 14px;margin-right:8px">Putar layar</button><button type="button" style="font:700 13px var(--disp);letter-spacing:.06em;text-transform:uppercase;background:rgba(255,255,255,.2);color:#fff;border:1px solid rgba(255,255,255,.5);border-radius:99px;padding:5px 14px">Nanti saja</button></div>';
+d.querySelector('[data-rot]').addEventListener('click',()=>{d.remove();cycleRot();});d.querySelector('button:not([data-rot])').addEventListener('click',()=>{d.remove();try{sessionStorage.setItem('jimnyIgBn','1');}catch(e){}});document.body.appendChild(d);setTimeout(()=>{try{d.remove();}catch(e){}},15000);}}catch(e){}}
 {let ne=0;const logErr=m=>{try{const a=JSON.parse(localStorage.getItem('jimnyErrLog')||'[]');a.push({t:new Date().toISOString(),m:String(m).slice(0,200),mode:S.mode,ty:R.type});localStorage.setItem('jimnyErrLog',JSON.stringify(a.slice(-8)));}catch(_){}
   if(ne++<3)try{toast('Galat kecil: '+String(m).slice(0,60),3000);}catch(_){}};
  addEventListener('error',e=>logErr((e&&e.message)||'error'));addEventListener('unhandledrejection',e=>logErr((e&&e.reason&&e.reason.message)||e.reason||'promise'));}
@@ -3150,7 +3176,7 @@ function openBigMap(){
   if(S.shopOpen)return;
   buildPlaces();S.shopOpen=true;$('bigmap').hidden=false;$('bmT').textContent='Peta · '+MAP.label;renderBmList();drawBig();
 }
-bmc.addEventListener('click',e=>{const r=bmc.getBoundingClientRect(),wx=(e.clientX-r.left)/r.width*bmc.width/BS-WORLD,wz=(e.clientY-r.top)/r.height*bmc.height/BS-WORLD;
+bmc.addEventListener('click',e=>{const r=RC(bmc),wx=(SPX(e)-r.left)/r.width*bmc.width/BS-WORLD,wz=(SPY(e)-r.top)/r.height*bmc.height/BS-WORLD;
   let best=null,bd=30;BMP.forEach(q=>{const d=Math.hypot(q.x-wx,q.z-wz);if(d<bd){bd=d;best=q;}});
   if(best)setWpt(best.n,best.x,best.z);else setWpt('Titik pilihan',wx,wz);});
 $('bmClr').addEventListener('click',()=>{WPT=null;renderBmList();drawBig();});
@@ -3283,8 +3309,8 @@ function avOpen(){
 function avClose(){$('avp').hidden=true;clearInterval(avTimer);}
 $('avX').addEventListener('click',avClose);
 $('avBtn').addEventListener('click',avOpen);
-const avC=$('avC');avC.addEventListener('pointerdown',e=>{avDrag={x:e.clientX,r:avRot};try{avC.setPointerCapture(e.pointerId);}catch(_){}});
-avC.addEventListener('pointermove',e=>{if(avDrag){avRot=avDrag.r+(e.clientX-avDrag.x)*0.02;avDraw();}});
+const avC=$('avC');avC.addEventListener('pointerdown',e=>{avDrag={x:SPX(e),r:avRot};try{avC.setPointerCapture(e.pointerId);}catch(_){}});
+avC.addEventListener('pointermove',e=>{if(avDrag){avRot=avDrag.r+(SPX(e)-avDrag.x)*0.02;avDraw();}});
 avC.addEventListener('pointerup',()=>{avDrag=null;});avC.addEventListener('pointercancel',()=>{avDrag=null;});
 function avSave(){
   AV=avNorm(avWork);try{localStorage.setItem('jimnyAva',JSON.stringify(AV));}catch(e){}
@@ -4435,7 +4461,7 @@ function dmIncoming(m){if(!m||m.room!=='dm'||m.to_id!==ME.id)return;
   const L=$('chatL'),r=document.createElement('div');r.className='dmin';r.textContent='💬 '+atn(m.name||'teman')+': '+(m.body||'').slice(0,80)+' (ketuk untuk balas)';r.addEventListener('click',()=>openDm(m.player_id,m.name));L.appendChild(r);L.scrollTop=L.scrollHeight;
   NET.unread++;$('chatBtn').classList.add('new');$('chatBtn').textContent='Chat ('+NET.unread+')';toast('💬 '+atn(m.name||'teman')+': '+(m.body||'').slice(0,60),3000);}
 function tapRemote(cx,cy){if(!(ONL&&NET.on)||!REM.size)return false;
-  const r0=renderer.domElement.getBoundingClientRect();ndc.set((cx-r0.left)/r0.width*2-1,-((cy-r0.top)/r0.height*2-1));ray.setFromCamera(ndc,cam);
+  const r0=RC(renderer.domElement);ndc.set((cx-r0.left)/r0.width*2-1,-((cy-r0.top)/r0.height*2-1));ray.setFromCamera(ndc,cam);
   const o=S.inCar?car:pl;let best=null,bd=1e9;
   for(const [id,r] of REM){for(const g of [r.g,r.pg]){if(!g.visible)continue;const h=ray.intersectObject(g,true)[0];if(h&&h.distance<bd){bd=h.distance;best=[id,r];}}}
   if(!best){let md=64;for(const [id,r] of REM){for(const g of [r.pg,r.g]){if(!g.visible)continue;const v=new T.Vector3(g.position.x,g.position.y+(g===r.pg?1:1.2),g.position.z).project(cam);if(v.z>1)continue;const sx=(v.x+1)/2*r0.width+r0.left,sy=(1-v.y)/2*r0.height+r0.top,d=Math.hypot(sx-cx,sy-cy);if(d<md){md=d;best=[id,r];}}}}
@@ -4685,8 +4711,8 @@ const PH76={on:false,a:0.6,r:7,y:2.2,snap:false,drag:null,logo:null,n:0};
 function phoOpen(){if(S.mode==='menu'||CIN.on)return;PH76.on=true;PH76.a=Math.PI+car.h+0.7;PH76.r=7.5;PH76.y=2.2;$('pho').hidden=false;$('phoV').hidden=true;hideHudBits(true);}
 function phoClose(){PH76.on=false;$('pho').hidden=true;$('phoV').hidden=true;hideHudBits(false);camSnap=true;}
 function phoCam(){const o=S.inCar?car:pl;cam.position.set(o.x+Math.sin(PH76.a)*PH76.r,o.y+PH76.y,o.z+Math.cos(PH76.a)*PH76.r);cam.lookAt(o.x,o.y+1.1,o.z);}
-{const pe=$('phoPad');pe.addEventListener('pointerdown',e=>{PH76.drag={x:e.clientX,y:e.clientY};try{pe.setPointerCapture(e.pointerId);}catch(_){}});
-  pe.addEventListener('pointermove',e=>{if(!PH76.drag)return;const dx=e.clientX-PH76.drag.x,dy=e.clientY-PH76.drag.y;PH76.drag={x:e.clientX,y:e.clientY};PH76.a-=dx*0.008;PH76.y=clamp(PH76.y+dy*0.02,0.4,9);});
+{const pe=$('phoPad');pe.addEventListener('pointerdown',e=>{PH76.drag={x:SPX(e),y:SPY(e)};try{pe.setPointerCapture(e.pointerId);}catch(_){}});
+  pe.addEventListener('pointermove',e=>{if(!PH76.drag)return;const dx=SPX(e)-PH76.drag.x,dy=SPY(e)-PH76.drag.y;PH76.drag={x:SPX(e),y:SPY(e)};PH76.a-=dx*0.008;PH76.y=clamp(PH76.y+dy*0.02,0.4,9);});
   pe.addEventListener('pointerup',()=>{PH76.drag=null;});pe.addEventListener('pointercancel',()=>{PH76.drag=null;});
   pe.addEventListener('wheel',e=>{e.preventDefault();PH76.r=clamp(PH76.r+e.deltaY*0.01,3.5,18);},{passive:false});}
 $('phoIn').addEventListener('click',()=>{PH76.r=clamp(PH76.r-1.5,3.5,18);});$('phoOut').addEventListener('click',()=>{PH76.r=clamp(PH76.r+1.5,3.5,18);});
