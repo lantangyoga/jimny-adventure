@@ -532,6 +532,7 @@ h1.logoH{margin:0 0 8px;font-size:0;line-height:0}h1.logoH .logo{width:min(380px
     <div id="rgErr"></div>
     <div id="shopAct"><a id="rgGo" role="button" tabindex="0">Mulai main</a></div>
     <p class="rgn" style="text-align:center"><a id="rgSwap" role="button" tabindex="0" style="color:var(--blue2);cursor:pointer;text-decoration:underline"></a></p>
+    <p class="rgn" style="text-align:center"><a id="rgOut" role="button" tabindex="0" hidden style="color:#ff8a7a;cursor:pointer;text-decoration:underline">Keluar akun</a></p>
   </div></div>
 
   <div id="avp" hidden role="dialog" aria-modal="true" aria-labelledby="avT"><div class="shopbox avbox">
@@ -746,7 +747,7 @@ const ME=(function(){let u=null;try{u=JSON.parse(localStorage.getItem('jimnyUser
 const ONL=(window.JIMNY_ONLINE&&window.supabase)?window.supabase.createClient(window.JIMNY_ONLINE.url,window.JIMNY_ONLINE.key,{auth:{persistSession:false,autoRefreshToken:false,detectSessionInUrl:false},realtime:{params:{eventsPerSecond:12}}}):null;
 const TOK=(()=>{let t=null;try{t=localStorage.getItem('jimnyTok');if(!t||t.length<24){const a=new Uint8Array(24);crypto.getRandomValues(a);t=Array.from(a,b=>b.toString(16).padStart(2,'0')).join('');localStorage.setItem('jimnyTok',t);}}catch(e){t=t||(Math.random().toString(36).slice(2)+Math.random().toString(36).slice(2)+'0123456789abcdef');}return t;})();
 let _sv=0,_dirty=false,_busy=false,_okAt=0;
-const GKEY=/^jimny(Money|Own|Fuel|Welcomed|Gift|Mis|Pts|Park|Odo)$|^jimnyLv(Best)?(_[a-z]+)?$/;
+const GKEY=/^jimny(Money|Own|Fuel|Welcomed|Gift|Mis|Pts|Park|Odo)$|^jimny(Lv(Best)?|Qual)(_[a-z]+)?$/;
 function gameBlob(){const g={ts:Date.now()};try{for(let i=0;i<localStorage.length;i++){const k=localStorage.key(i);if(GKEY.test(k))g[k]=localStorage.getItem(k);}}catch(e){}
   if(JSON.stringify(g).length>5500)for(const k in g)if(/^jimnyLvBest/.test(k))delete g[k];return g;}
 async function netFlush(){if(!ONL||!ME.reg||_busy)return;_busy=true;clearTimeout(_sv);
@@ -2915,6 +2916,8 @@ function toMenu(){
   car.dirt=0;spawnFree();S.inCar=false;person.visible=true;applyView();if(_w)fbMaybe(2200);
 }
 function fmt(t){const m=Math.floor(t/60),s=t-m*60;return(m<10?'0':'')+m+':'+(s<10?'0':'')+s.toFixed(1);}
+function qualGet(){let v=0;try{v=parseInt(localStorage.getItem(lvKey(MAP.id,'jimnyQual')))||0;}catch(_){}return v;}
+function qualSet(v){try{localStorage.setItem(lvKey(MAP.id,'jimnyQual'),String(Math.max(1,v|0)));}catch(_){}netSave();}
 function getUnlocked(){return lvFor(MAP.id);}
 function setUnlocked(v){try{localStorage.setItem(lvKey(MAP.id,'jimnyLv'),String(v));}catch(_){}netSave();}
 function getBest(){try{return JSON.parse(localStorage.getItem(lvKey(MAP.id,'jimnyLvBest'))||'{}')||{};}catch(_){return {};}}
@@ -3204,7 +3207,7 @@ function rgView(){
   $('rgSub').textContent=m==='login'?'Masukkan email yang kamu pakai saat daftar. Kami kirim kode, lalu akunmu terbuka di perangkat ini.':m==='link'?'Tautkan email supaya kamu bisa masuk dari HP atau laptop lain hanya dengan kode dari emailmu.':m==='edit'?(ME.email?'Terhubung dengan '+ME.email+'. Untuk masuk di perangkat lain, pakai email ini.':'Akunmu belum terhubung email.'):st===3?'Email ini belum terdaftar. Tulis username Instagram dan asal kotamu, lalu kamu otomatis punya rumah dan garasi di Sibiru Residence, Kota Bandung.':!ONL?'Tulis username Instagram dan asal kotamu untuk mulai main.':'Cukup masukkan emailmu. Sudah punya akun? Langsung masuk setelah memasukkan kode. Belum punya? Kami tanya username Instagram-mu sesudahnya.';
   $('rgGo').textContent=m==='edit'?'Simpan':st===1?'Kirim kode':st===2?(m==='link'?'Tautkan':'Lanjut'):'Daftar dan mulai main';
   if(!ONL)$('rgGo').textContent='Mulai main';
-  const sw=$('rgSwap');sw.hidden=!ONL||m!=='edit'||!!ME.email;sw.textContent='Tautkan email ke akunmu';
+  const sw=$('rgSwap');sw.hidden=!ONL||m!=='edit'||!!ME.email;sw.textContent='Tautkan email ke akunmu';const ot=$('rgOut');if(ot){ot.hidden=!(m==='edit'&&ME.reg);ot.textContent='Keluar akun';ot.dataset.sure='';}
   if(st===2)$('rgOtpN').textContent='Kode dikirim ke '+RG.email+'. Cek folder Spam kalau belum masuk.';
 }
 function rgNeedMail(){const em=$('rgMail').value.trim().toLowerCase();if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(em)){rgMsg('Isi alamat email yang benar.');return null;}return em;}
@@ -3320,6 +3323,16 @@ function avSave(){
 }
 $('avSave').addEventListener('click',avSave);$('avSave').addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' ')avSave();});
 $('meBtn').addEventListener('click',()=>showReg());
+{const ot=$('rgOut');if(ot){let tm=0;const go=async()=>{
+  if(!ME.email){rgMsg('Tautkan email dulu supaya kamu bisa masuk lagi setelah keluar.');return;}
+  if(ot.dataset.sure!=='1'){ot.dataset.sure='1';ot.textContent='Yakin keluar? Tap sekali lagi';rgMsg('Data tersimpan di server. Masuk lagi nanti dengan email '+ME.email+'.');clearTimeout(tm);tm=setTimeout(()=>{ot.dataset.sure='';ot.textContent='Keluar akun';rgMsg('');},5000);return;}
+  ot.textContent='Menyimpan…';ot.dataset.sure='2';
+  try{if(ONL&&_dirty)await Promise.race([netFlush(),new Promise(r=>setTimeout(r,5000))]);}catch(e){}
+  if(ONL&&_dirty){ot.dataset.sure='';ot.textContent='Keluar akun';rgMsg('Data belum tersimpan ke server. Cek sinyal lalu coba lagi.');return;}
+  try{Object.keys(localStorage).filter(k=>/^jimny/.test(k)&&k!=='jimnyDev').forEach(k=>localStorage.removeItem(k));sessionStorage.clear();}catch(e){}
+  try{ONL&&ONL.auth&&ONL.auth.signOut();}catch(e){}
+  location.reload();};
+  ot.addEventListener('click',go);ot.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();go();}});}}
 if(ME.reg){$('welBtn').hidden=false;$('welBtn').addEventListener('click',()=>needHub('welcome',()=>startWelcome(false)));$('meBtn').hidden=false;$('meBtn').textContent='Halo, '+ME.name+' · akun';}
 function goGarage(shop,mode){PREV=null;GAR.shop=!!shop;GAR.mode=shop?(mode||'bengkel'):'home';toMenu();$('gar').hidden=false;$('mi').classList.add('lvOpen');renderGar();}
 function warkop(){const T=['Tips: oli habis = performa turun. Servis di bengkel sebelum balap.','Kabarnya Lembang lagi rame, tanjakannya licin habis hujan.','Pak Ujang bilang: turunin tekanan ban biar lumpur gampang dilewatin.','Jangan lupa bensin! Kalau habis, derek bayar maksimal 🪙500.','Juara 1 balap hadiahnya 5x lipat kerja kurir, coba aja!'];
@@ -3679,7 +3692,7 @@ let selLv=1;
 function renderLv(){
   const un=getUnlocked(),best=getBest(),g=$('lvGrid');g.innerHTML='';
   for(let i=1;i<=10;i++){const b=document.createElement('button');b.type='button';b.className='lvb'+(i===selLv?' sel':'')+(best[i]&&best[i].p<=2?' done':'');b.textContent=i;b.disabled=i>un;b.addEventListener('click',()=>{selLv=i;renderLv();});g.appendChild(b);}
-  const L=LV[selLv-1];let h='<h3>Level '+selLv+' · '+L.name+'</h3><div>'+L.laps+' lap · '+(S.pend==='ghost'?'8 bayangan pemain tercepat (sisa diisi komputer)':L.rivals.length+' lawan · finis 2 besar untuk lanjut')+'</div><div style="color:var(--amber)">Kesulitan: '+'★'.repeat(Math.ceil(selLv/2))+'☆'.repeat(5-Math.ceil(selLv/2))+'</div><div>'+CIRI[selLv-1]+'</div><div>Kualifikasi 1 lap menentukan posisi start.</div>';
+  const L=LV[selLv-1];let h='<h3>Level '+selLv+' · '+L.name+'</h3><div>'+L.laps+' lap · '+(S.pend==='ghost'?'8 bayangan pemain tercepat (sisa diisi komputer)':L.rivals.length+' lawan · finis 2 besar untuk lanjut')+'</div><div style="color:var(--amber)">Kesulitan: '+'★'.repeat(Math.ceil(selLv/2))+'☆'.repeat(5-Math.ceil(selLv/2))+'</div><div>'+CIRI[selLv-1]+'</div><div>'+(qualGet()?'Kualifikasi sudah selesai. Kamu start di posisi '+Math.min(qualGet(),L.rivals.length+1)+' dan langsung balapan.':'Kualifikasi 1 lap (cuma sekali) menentukan posisi start.')+'</div>';
   {const rt=RTS[selLv];h+='<div>Jalur: '+rt.name+' · '+STLBL[rt.st]+' · '+(rt.len/1000).toFixed(1)+' km per lap</div>';}
   const bb=best[selLv];if(bb)h+='<div style="margin-top:6px">Terbaik: posisi '+bb.p+' · '+fmt(bb.t)+'</div>';
   $('lvInfo').innerHTML=h;
@@ -3698,10 +3711,10 @@ function finish(){
     $('endA').textContent='Waktu '+fmt(R.clock)+' · Start posisi '+pos+' dari '+rows.length;
     $('endB').textContent='Level '+L+' · '+RTS[L].name;
     $('endList').innerHTML=rows.map((r,i)=>'<div class="rv"><i style="background:'+r.col+'"></i><b'+(r.you?' style="color:var(--amber)"':'')+'>'+(i+1)+'. '+r.n+'</b><span>'+fmt(r.t)+'</span></div>').join('');
-    pts=20+Math.max(0,5-pos)*5;R.grid=pos;$('next').classList.add('main');$('again').classList.remove('main');$('next').textContent='Mulai balapan';$('next').hidden=false;$('again').textContent='Ulangi kualifikasi';
+    pts=20+Math.max(0,5-pos)*5;R.grid=pos;qualSet(pos);$('next').classList.add('main');$('again').classList.remove('main');$('next').textContent='Mulai balapan';$('next').hidden=false;$('again').textContent='Ulangi kualifikasi';
   }else if(R.type==='race'||R.type==='ghost'){
     const gm=R.type==='ghost',L=R.level,rows=standings(true),rank=rows.findIndex(r=>r.you)+1,total=rows.length;
-    saveBest(L,rank,R.clock);
+    saveBest(L,rank,R.clock);if(R.type==='race')qualSet(rank);
     pts=([100,70,50][rank-1]||25)+L*10;mon=raceMon(L,rank);const adv=rank<=2||L<getUnlocked();if(rank<=2&&L<10&&L>=getUnlocked())setUnlocked(L+1);submitRun();
     try{dHook('race',{rank,type:R.type});}catch(e){}
     $('endT').textContent=rank===1?'Juara 1!':rank<=3?'Podium!':'Finish';
@@ -3740,7 +3753,7 @@ $('rmBack').addEventListener('click',()=>{$('rmap').hidden=true;$('mi').classLis
 $('raceBtn').addEventListener('click',()=>{$('rch').hidden=false;$('mi').classList.add('lvOpen');});
 $('rchBack').addEventListener('click',()=>{$('rch').hidden=true;$('mi').classList.remove('lvOpen');});
 document.querySelectorAll('[data-mode]').forEach(b=>b.addEventListener('click',()=>{const m=b.dataset.mode;if(m==='ghost'){$('rch').hidden=true;mpOpen();}else if(m==='rally'||m==='race'){$('rch').hidden=true;showRmap(m);}else needHub('free',()=>startMode('free'));}));
-$('lvGo').addEventListener('click',()=>{if(S.pend==='ghost')startGhost(selLv);else startMode('qual',selLv);});
+$('lvGo').addEventListener('click',()=>{if(S.pend==='ghost')startGhost(selLv);else if(qualGet())startMode('race',selLv,qualGet());else startMode('qual',selLv);});
 $('lvBack').addEventListener('click',()=>showLv(false));
 $('menuBtn').addEventListener('click',toMenu);$('toMenu').addEventListener('click',toMenu);
 /* cadangan untuk iPhone/WebView: bila 'click' tidak terkirim, pointerup tetap menjalankan tombol dialog */
@@ -3748,7 +3761,7 @@ $('menuBtn').addEventListener('click',toMenu);$('toMenu').addEventListener('clic
  eb.addEventListener('click',e=>{if(e.isTrusted&&performance.now()-lastUp<700){e.stopImmediatePropagation();e.preventDefault();}},true);
  eb.addEventListener('pointerup',e=>{if(e.pointerType==='mouse')return;const b=e.target&&e.target.closest&&e.target.closest('button');if(!b||b.disabled||b.hidden||!eb.contains(b))return;lastUp=performance.now();e.preventDefault();b.click();});}
 $('again').addEventListener('click',()=>{if(R.mp){mpBack(false);return;}if(R.type==='ghost')startGhost(R.level);else startMode(R.type,R.level,R.type==='race'?gridUsed:0);});
-$('next').addEventListener('click',()=>{if(R.mp){mpBack(true);return;}if(R.type==='qual')startMode('race',R.level,R.grid);else if(R.type==='ghost')startGhost(R.level+1);else startMode('qual',R.level+1);});
+$('next').addEventListener('click',()=>{if(R.mp){mpBack(true);return;}if(R.type==='qual')startMode('race',R.level,R.grid);else if(R.type==='ghost')startGhost(R.level+1);else startMode('race',R.level+1,qualGet()||gridUsed);});
 
 /* ---------- balapan mabar: room umum otomatis + room pribadi, maksimal 8 pemain ---------- */
 const MP={ch:null,subbed:false,room:false,pub:true,n:1,code:'',h:false,map:'lembang',lv:1,go:0,st:'l',inRace:false,starting:false,idx:0,order:[],pm:{},rounds:0,chat:[],pt:0,keep:false,prep:null,t:0,warnT:0,find:0};
