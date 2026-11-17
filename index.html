@@ -1433,8 +1433,8 @@ if(CITY){
     for(let k2=0;k2<5;k2++)mk(h,BX(4.2,0.05,0.16),SM(0x8a8478,0.7),2.4,0.5+k2*0.6,4.6);
     mk(h,BX(2.4,1.2,0.12),glass0,-3.0,4.2,4.55);mk(h,BX(2.4,1.2,0.12),glass0,2.6,4.8,4.55);
     h.position.set(lx,0,lz);h.rotation.y=rowB?0:Math.PI;g.add(h);
-    const nm=own&&ME.name?'Rumah '+ME.name:'Rumah kosong';
-    const lb2=label(nm.slice(0,18),lx,11,lz+(rowB?7:-7));lb2.scale.set(11,2.5,1);g.add(lb2);
+    const nm=own&&ME.name?ME.name:'Kosong';
+    const lb2=namePlate(nm.slice(0,14),2.8,0.7);lb2.position.set(lx,4.9,lz+(rowB?4.64:-4.64));lb2.rotation.y=rowB?0:Math.PI;g.add(lb2);
     obs.push([x+lx-3.2,z+lz,4.4],[x+lx+3.2,z+lz,4.4]);
     HOUSES.push({slot,own,x:x+lx,z:z+lz,dx:x+lx+(rowB?-2.6:2.6),dz:z+lz+(rowB?7.4:-7.4),lmx:x,lmz:z,name:nm,lb:lb2,nm});
    }
@@ -4441,13 +4441,21 @@ function nameSprite(txt,sx,sy){const c=document.createElement('canvas');c.width=
   g.fillStyle='rgba(14,20,18,.82)';g.fillRect(4,4,312,64);g.strokeStyle='#ffb02e';g.lineWidth=4;g.strokeRect(4,4,312,64);
   g.fillStyle='#fff';g.font='bold 30px Arial';g.textAlign='center';g.textBaseline='middle';g.fillText(txt,160,37,296);
   const sp=new T.Sprite(new T.SpriteMaterial({map:new T.CanvasTexture(c),fog:false,transparent:true}));sp.scale.set(sx||28,sy||6.3,1);return sp;}
+/* plang nomor/nama rumah: papan kecil menempel di dinding depan (bukan papan besar melayang) */
+function namePlate(txt,w,h){const c=document.createElement('canvas');c.width=512;c.height=Math.round(512*h/w);const g=c.getContext('2d');
+  g.fillStyle='#1f4a3a';g.fillRect(0,0,c.width,c.height);g.strokeStyle='#f4efe0';g.lineWidth=8;g.strokeRect(8,8,c.width-16,c.height-16);
+  g.fillStyle='#fff';g.font='bold '+Math.round(c.height*0.56)+'px Arial';g.textAlign='center';g.textBaseline='middle';g.fillText(txt,c.width/2,c.height/2+3,c.width-52);
+  return new T.Mesh(new T.PlaneGeometry(w,h),new T.MeshBasicMaterial({map:new T.CanvasTexture(c),toneMapped:false,polygonOffset:true,polygonOffsetFactor:-2,polygonOffsetUnits:-2}));}
+function freeLab(o){scene.remove(o);if(o.geometry)o.geometry.dispose();if(o.material){if(o.material.map)o.material.map.dispose();o.material.dispose();}}
 let HN={};const HLAB=new Map();let hlT=0;
 function houseLabels(dt){hlT-=dt;if(hlT>0)return;hlT=0.6;if(!HOUSES.length)return;
-  const want=new Map();for(const h of HOUSES){if(h.apt&&!h.own)continue;const p=HN[h.slot],nm=h.own?ME.name:(p&&p.name);if(!nm)continue;const d=Math.hypot(pl.x-h.x,pl.z-h.z);if(d<(h.own?170:55))want.set(h.slot,[h,nm,d]);}
+  const want=new Map();for(const h of HOUSES){if(h.apt&&!h.own)continue;if(!h.apt&&h.yaw===undefined)continue;const p=HN[h.slot],nm=h.own?ME.name:(p&&p.name);if(!nm)continue;const d=Math.hypot(pl.x-h.x,pl.z-h.z);if(d<(h.apt?(h.own?170:55):(h.own?70:45)))want.set(h.slot,[h,nm,d]);}
   const arr=[...want.values()].sort((a,b)=>a[2]-b[2]).slice(0,18),keep=new Set(arr.map(a=>a[0].slot));
-  for(const [k,sp] of HLAB)if(!keep.has(k)){scene.remove(sp);if(sp.material.map)sp.material.map.dispose();sp.material.dispose();HLAB.delete(k);}
-  for(const [h,nm] of arr){const t=h.apt?h.unit.slice(0,20):'Rumah '+nm,old=HLAB.get(h.slot);if(old&&old.userData.t===t)continue;if(old){scene.remove(old);old.material.map&&old.material.map.dispose();old.material.dispose();}
-   const sp=nameSprite(t.slice(0,20),11,2.5);sp.userData.t=t;sp.position.set(h.x+h.ox*5.5,h.y+7.6,h.z+h.oz*5.5);scene.add(sp);HLAB.set(h.slot,sp);}
+  for(const [k,sp] of HLAB)if(!keep.has(k)){freeLab(sp);HLAB.delete(k);}
+  for(const [h,nm] of arr){const t=h.apt?h.unit.slice(0,20):nm.slice(0,14),old=HLAB.get(h.slot);if(old&&old.userData.t===t)continue;if(old)freeLab(old);
+   let sp;if(h.apt){sp=nameSprite(t,11,2.5);sp.position.set(h.x+h.ox*5.5,h.y+7.6,h.z+h.oz*5.5);}
+   else{sp=namePlate(t,4.4,1.1);sp.position.set(h.x+h.ox*4.06+h.oz*2.3,h.y+3.65,h.z+h.oz*4.06-h.ox*2.3);sp.rotation.y=h.yaw;}
+   sp.userData.t=t;scene.add(sp);HLAB.set(h.slot,sp);}
 }
 function setHouseName(h,nm){if(!h||!h.lb||h.nm===nm)return;h.nm=nm;const o=h.lb,par=o.parent,sp=nameSprite(nm.slice(0,18),o.scale.x,o.scale.y);sp.position.copy(o.position);if(par){par.remove(o);par.add(sp);}h.lb=sp;}
 const NET={on:false,ch:null,last:0,unread:0,msgIds:new Set()};
