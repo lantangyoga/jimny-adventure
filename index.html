@@ -58,6 +58,13 @@ button{font-family:inherit;color:inherit;cursor:pointer}
 #fbChip{position:absolute;left:50%;transform:translateX(-50%);bottom:calc(env(safe-area-inset-bottom,0px) + 96px);z-index:30;pointer-events:auto;background:rgba(10,16,12,.92);border-color:var(--amber);color:var(--amber)}
 #setP{position:absolute;inset:0;z-index:44;display:flex;align-items:center;justify-content:center;background:rgba(5,10,8,.55);padding:12px;pointer-events:auto}
 #setP[hidden]{display:none}
+#mqBtn{pointer-events:auto;position:relative;z-index:5;font-size:14px;background:var(--amber);border-color:var(--amber);color:#1a1205}
+#mqP{position:absolute;inset:0;z-index:44;display:flex;align-items:center;justify-content:center;background:rgba(5,10,8,.6);padding:12px;pointer-events:auto}#mqP[hidden]{display:none}
+#mqP .box{width:min(94%,460px);max-height:88%;overflow:auto;background:#14201a;border:1px solid var(--line);border-radius:16px;padding:14px;color:#eef5f0}
+#mqP .hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}#mqP .hd b{font:800 18px var(--disp);text-transform:uppercase;letter-spacing:.06em}
+#mqP .hd button{all:unset;cursor:pointer;width:32px;height:32px;text-align:center;line-height:32px;border-radius:50%;background:rgba(255,255,255,.1)}
+#mqP h4{margin:12px 0 4px;font:800 13px var(--disp);letter-spacing:.1em;text-transform:uppercase;color:var(--amber)}#mqP p{margin:0 0 6px;font-size:12.5px;line-height:1.35;color:#cfe0d6}
+#mqP .mqr{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:6px}#mqP .mqr .chip{min-width:40px;text-align:center}#mqP .mqr .chip:disabled{opacity:.35}
 #setP .box{width:min(94%,420px);max-height:88%;overflow:auto;background:#14201a;border:1px solid var(--line);border-radius:16px;padding:14px}
 #setP .hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px}#setP .hd b{font:800 18px var(--disp);text-transform:uppercase;letter-spacing:.06em}
 #setP .hd button{all:unset;cursor:pointer;width:32px;height:32px;text-align:center;line-height:32px;border-radius:50%;background:rgba(255,255,255,.1)}
@@ -407,9 +414,10 @@ h1.logoH{margin:0 0 8px;font-size:0;line-height:0}h1.logoH .logo{width:min(380px
         <div id="todPop" hidden><button type="button" data-m="auto">Otomatis (jam perangkat)</button><button type="button" data-m="day">Siang</button><button type="button" data-m="dusk">Sore</button><button type="button" data-m="night">Malam</button></div></div>
       <canvas id="mm" width="224" height="224"></canvas>
       <div id="zone"></div>
-      <div class="row"><button class="chip" id="drv" type="button">4x2</button><button class="chip" id="chatBtn" type="button" hidden>Chat</button><button class="chip" id="setBtn" type="button" aria-label="Pengaturan">⚙ Setelan</button></div>
+      <div class="row"><button class="chip" id="mqBtn" type="button" hidden>Misi</button><button class="chip" id="drv" type="button">4x2</button><button class="chip" id="chatBtn" type="button" hidden>Chat</button><button class="chip" id="setBtn" type="button" aria-label="Pengaturan">⚙ Setelan</button></div>
     </div>
     <button id="fbChip" type="button" class="chip" hidden>Seru nggak? Ceritakan →</button>
+    <div id="mqP" hidden><div class="box"><div class="hd"><b>Misi &amp; Balapan</b><button type="button" id="mqX" aria-label="Tutup">✕</button></div><div id="mqB"></div></div></div>
     <div id="setP" hidden><div class="box"><div class="hd"><b>Setelan</b><button type="button" id="setX" aria-label="Tutup">✕</button></div>
       <div class="sec"><span>Permainan</span><div class="grp"><button class="chip" id="menuBtn" type="button">Menu utama</button><button class="chip" id="snd" type="button">Suara: nyala</button><button class="chip" id="fsBtn" type="button">Layar penuh</button></div><p id="fsHint" hidden style="margin:8px 0 0;font:600 12px/1.4 var(--body);color:var(--mute)">iPhone tidak mengizinkan layar penuh di Safari. Ketuk ikon Bagikan → <b>Tambah ke Layar Utama</b>, lalu buka game dari ikon itu agar tampil penuh tanpa bilah browser.</p></div>
       <div class="sec"><span>Waktu</span><div class="grp" id="setTime"><button type="button" class="chip" data-m="auto">Otomatis</button><button type="button" class="chip" data-m="day">Siang</button><button type="button" class="chip" data-m="dusk">Sore</button><button type="button" class="chip" data-m="night">Malam</button></div></div>
@@ -2481,6 +2489,18 @@ function hudApply(){const h=$('hud');for(const [k] of HUDI)h.classList.toggle('h
 function setSync(){document.querySelectorAll('#setTime button').forEach(x=>x.classList.toggle('on',x.dataset.m===TIMEM));}
 $('setBtn').addEventListener('click',()=>{setSync();$('setP').hidden=false;});
 $('setX').addEventListener('click',()=>{$('setP').hidden=true;});
+function mqRender(){const B=$('mqB');B.textContent='';
+  const u=misGet();
+  [['pkg','Antar Paket'],['tow','Derek Mobil'],['foto','Berburu Foto']].forEach(([k,t])=>{const h=document.createElement('h4');h.textContent='Misi · '+t;const p=document.createElement('p');p.textContent=MISD[k];const r=document.createElement('div');r.className='mqr';
+    for(let l=1;l<=5;l++){const b=document.createElement('button');b.type='button';b.className='chip';b.textContent='Lv '+l;b.disabled=l>u[k];b.addEventListener('click',()=>{$('mqP').hidden=true;needHub('free',()=>startMission(k,l));});r.appendChild(b);}
+    B.append(h,p,r);});
+  const h=document.createElement('h4');h.textContent='Balapan vs Komputer';const p=document.createElement('p');p.textContent='Pilih level. Level baru terbuka setelah finis 2 besar.';const r=document.createElement('div');r.className='mqr';
+  const un=getUnlocked();
+  for(let i=1;i<=10;i++){const b=document.createElement('button');b.type='button';b.className='chip';b.textContent=i;b.title=LV[i-1].name;b.disabled=i>un;b.addEventListener('click',()=>{$('mqP').hidden=true;selLv=i;try{S.pend='';}catch(e){}if(qualGet())startMode('race',i,qualGet());else startMode('qual',i);});r.appendChild(b);}
+  B.append(h,p,r);}
+$('mqBtn').addEventListener('click',()=>{mqRender();$('mqP').hidden=false;});
+$('mqX').addEventListener('click',()=>{$('mqP').hidden=true;});
+$('mqP').addEventListener('pointerdown',e=>{if(e.target===$('mqP'))$('mqP').hidden=true;});
 $('setP').addEventListener('pointerdown',e=>{if(e.target===$('setP'))$('setP').hidden=true;});
 $('setTime').addEventListener('click',e=>{const m=e.target.dataset&&e.target.dataset.m;if(!m)return;TIMEM=m;try{localStorage.setItem('jimnyTime',TIMEM);}catch(_){}todKey='';todClock();setSync();});
 $('menuBtn').addEventListener('click',()=>{$('setP').hidden=true;});
@@ -4334,7 +4354,7 @@ function updateHud(){
   if(MI.on&&S.mode==='free')obj=msHud();
   {const vfOn=MI.on&&MI.type==='foto'&&MI.hold>0;$('vf').hidden=!vfOn;if(vfOn)$('vfBar').style.width=Math.min(100,MI.hold/MI.hh*100)+'%';}
   $('camRow').hidden=!S.inCar;$('towRow').hidden=!(S.mode==='free'&&FUEL<=0&&!S.shopOpen&&!MI.on&&!TOWA.on);$('bLook').hidden=CK.on;
-  setT('obj',obj);setBoard();setT('drv',car.awd?'4x4':'4x2');$('drv').classList.toggle('on',car.awd);
+  setT('obj',obj);setBoard();setT('drv',car.awd?'4x4':'4x2');{const mb=$('mqBtn'),sh=S.mode==='free'&&!R.on&&!MI.on&&!S.shopOpen;if(mb.hidden===sh)mb.hidden=!sh;}$('drv').classList.toggle('on',car.awd);
   const near=!S.inCar&&!PK.on&&Math.hypot(pl.x-car.x,pl.z-car.z)<4;
   const bk=!!(shopN&&shopN.bengkel);
   $('bAct').classList.toggle('ready',S.inCar?Math.abs(car.v)<4&&!R.on:(near||!!shopN));
