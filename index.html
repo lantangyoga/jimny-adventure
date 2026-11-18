@@ -2996,7 +2996,7 @@ function updPts(){const e=$('ptsLine');if(!e)return;let l='Poin: '+ptsGet();try{
 /* mata uang game: Koin (disimpan dalam satuan lama, ditampilkan dibagi 100) */
 function rp(n){const v=Math.round(n/100);return '🪙\u2060'+(v<0?'-':'')+Math.abs(v).toString().replace(/\B(?=(\d{3})+(?!\d))/g,'.');}
 function monGet(){let n=0;try{n=parseInt(localStorage.getItem('jimnyMoney'))||0;}catch(e){}return n;}
-function monAdd(n){try{localStorage.setItem('jimnyMoney',String(Math.max(0,monGet()+Math.round(n))));}catch(e){}updPts();netSave();}
+function monAdd(n){const o=monGet(),v=Math.max(0,o+Math.round(n));try{localStorage.setItem('jimnyMoney',String(v));}catch(e){}updPts();netSave();try{coinQ(v-o);}catch(e){}}
 function ptsAdd(n,m,src){try{localStorage.setItem('jimnyPts',String(ptsGet()+n));}catch(e){}monAdd(m!==undefined?m:n*250);updPts();netSave();try{wkAdd(n,src);lvCheck();renderHub();}catch(e){}}
 const PRICE={col:150000,shape:350000,rim:75000,stk:50000,ext:{bar:500000,rack:500000,stripe:100000,snorkel:120000,lamp:180000,flare:150000,winch:600000,flag:40000,jerry:60000,eng1:350000,eng2:800000,tire:300000,tank:250000,lift:450000}};
 function ownGet(){let o=null;try{o=JSON.parse(localStorage.getItem('jimnyOwn')||'null');}catch(e){}return Array.isArray(o)?o:null;}
@@ -3695,7 +3695,7 @@ function renderGar0(){
   const fr=$('gFuelRow');fr.style.display=isP?'':'none';
   {const sr=$('gSvcRow');sr.style.display=(home||isB)?'':'none';const f=svcFrac();$('gSvc').textContent='Ganti oli & servis · '+rp(svcPrice())+' · terpakai '+Math.min(100,Math.round(f*100))+'% · ODO '+odoCar().km.toFixed(1)+' km';}
   try{lvRender();}catch(e){}
-  {const fr2=$('gFixRow');fr2.style.display=(home||isB||isP)?'':'none';try{fixLabel();}catch(e){}}
+  {const fr2=$('gFixRow');fr2.style.display=(home||isB||isP||isS)?'':'none';try{fixLabel();}catch(e){}}
   const need=Math.ceil(100-FUEL),cost=need*FUELP;$('gFuel').textContent='Bensin '+Math.round(FUEL)+'% · '+(need>0?'isi penuh '+rp(cost):'sudah penuh');
 }
 $('gSvc').addEventListener('click',()=>{const o=odoCar();if(o.svc<SVC_KM*0.05){toast('Mobil masih prima, belum perlu servis',1600);return;}
@@ -4651,7 +4651,7 @@ function netStart(){
 }
 let _lgTry=0;
 function doLogin(){ONL.rpc('login_player',{p_token:TOK}).then(({data,error})=>{if(error){setTimeout(doLogin,Math.min(30000,3000*(++_lgTry)));return;}
-  premSync();setTimeout(()=>{try{rwTick();}catch(e){}},2500);
+  premSync();setTimeout(()=>{try{rwTick();}catch(e){}},2500);setTimeout(()=>{try{coinSync();}catch(e){}},700);
   if(data){
     if(!ME.reg||ME.id!==data.id||ME.slot!==data.slot){try{localStorage.setItem('jimnyUser',JSON.stringify({name:data.name,email:data.email||'',slot:data.slot,cluster:data.cluster,id:data.id,city:data.city||'',hang:data.hang||''}));
       if(data.game&&typeof data.game==='object'){for(const k in data.game)if(k!=='ts'&&data.game[k]!=null&&GKEY.test(k)&&localStorage.getItem(k)==null)localStorage.setItem(k,String(data.game[k]));if(data.game.ts)localStorage.setItem('jimnyTs',String(data.game.ts));}
@@ -5112,7 +5112,18 @@ $('gFix').addEventListener('click',()=>{const c=fixCost();if(c<=0){toast('Mobil 
   if(monGet()<c*100){toast('Koin kurang '+rp(c*100-monGet())+' · kerjakan misi dulu',2400);return;}
   monAdd(-c*100);DIRT=0;DENT={f:0,b:0};dirtLast=-1;dirtApply();dirtSave();toast('Mobil kinclong lagi · '+rp(c*100),2200);beep76(1320,0.08);try{renderGar();}catch(e){}});
 try{dirtApply(true);}catch(e){}
-window.__jimny={GH,ghWalk,ghostStep,crashHit,DIRTG:()=>DIRT,DENTG:()=>DENT,setDirt:v=>{DIRT=v;dirtApply();},setDent:(f,b)=>{DENT={f,b};dirtApply();},crashCheck,SPK,ADV,ADT,adFlush,storyMake,rwTick,REF,END76,collide,MAPG:()=>MAP,MP,mpOpen,mpResume,mpBack,GHS,finish,TOWA,callTow,openDm,ACT,R,startMode,car,S,pl,action,PREM,premUntil,pb,renderShopCoin,redeemCode,renderSpec,COINPK,PREMPK,bogClear,PH76,BOG,KV,RADIO,dState,dProg,kvStart,kvState,bogStart,winchGo,phoOpen,phoClose,lvLine,LB,renderHub,plvOf,startMission,CLOTS:()=>CLOTS,BILLS,INFOC:()=>INFOC,openInfo,renderInfo,setPIT:v=>{PIT=v;},cam,vehApply,startGhost,setGHD:v=>{GHD=v;},GHS,ACT,R,startMode,standings,TWRS,PK,parkCar,unparkAt,callTow,HANGS,hangXZ,GH,REM,HN:()=>HN,setHN:v=>{HN=v;},ghostStep,carMesh,keys,inHouse,collide,garPick,garBuy,cancelPrev,getPrev:()=>PREV,scene,cam,CIN,startWelcome,endWelcome,cinCam,monGet,monAdd,ownGet,GAR,garGate,renderGar,LMS,getFuel:()=>FUEL,setFuel:v=>{FUEL=v;},NPK1,NPK2,PBOX,CAMPERS,CAMPF,update,stepMission,getCH:()=>CH,pl,fit,PS,H,PUD,HOUSES,startMission,MI,stuck,addRock,rockH,shopN:()=>shopN,openShop,RUKOS,GATES,RUKO,car,pl,S,PUD,HILLS,ROCKC,ROCKB,grid,R,WP,N,ACT,LV,RTS,stepCar,CK,setCockpit,carBumps,stepAI,applyAll,MUDZ,PS,pathAt,applyRoute,startMode};
+/* ===================== v111: saldo koin dipegang server (sama di semua browser/HP) ===================== */
+var COINQ=0,coinBusy=false,coinTm=0;
+try{COINQ=parseInt(localStorage.getItem('jimnyCoinQ'))||0;}catch(e){}
+function coinQ(d){if(!d)return;COINQ+=d;try{localStorage.setItem('jimnyCoinQ',String(COINQ));}catch(e){}clearTimeout(coinTm);coinTm=setTimeout(coinSync,1500);}
+function coinSync(){if(!ONL||!ME.reg||coinBusy)return;coinBusy=true;const d=COINQ;
+  try{ONL.rpc('coin_sync',{p_token:TOK,p_delta:d,p_local:monGet()}).then(({data,error})=>{coinBusy=false;if(error||!data||data.coins==null)return;
+    COINQ-=d;try{localStorage.setItem('jimnyCoinQ',String(COINQ));}catch(e){}
+    const bal=Math.max(0,(+data.coins||0)+COINQ),old=monGet();if(bal!==old){try{localStorage.setItem('jimnyMoney',String(bal));}catch(e){}updPts();try{if(S.mode==='menu')renderHub();}catch(e){}}
+    if(COINQ)coinSync();},()=>{coinBusy=false;});}catch(e){coinBusy=false;}}
+setInterval(()=>{if(!document.hidden)coinSync();},20000);
+document.addEventListener('visibilitychange',()=>{if(!document.hidden)setTimeout(coinSync,300);});
+window.__jimny={coinSync,COING:()=>COINQ,GH,ghWalk,ghostStep,crashHit,DIRTG:()=>DIRT,DENTG:()=>DENT,setDirt:v=>{DIRT=v;dirtApply();},setDent:(f,b)=>{DENT={f,b};dirtApply();},crashCheck,SPK,ADV,ADT,adFlush,storyMake,rwTick,REF,END76,collide,MAPG:()=>MAP,MP,mpOpen,mpResume,mpBack,GHS,finish,TOWA,callTow,openDm,ACT,R,startMode,car,S,pl,action,PREM,premUntil,pb,renderShopCoin,redeemCode,renderSpec,COINPK,PREMPK,bogClear,PH76,BOG,KV,RADIO,dState,dProg,kvStart,kvState,bogStart,winchGo,phoOpen,phoClose,lvLine,LB,renderHub,plvOf,startMission,CLOTS:()=>CLOTS,BILLS,INFOC:()=>INFOC,openInfo,renderInfo,setPIT:v=>{PIT=v;},cam,vehApply,startGhost,setGHD:v=>{GHD=v;},GHS,ACT,R,startMode,standings,TWRS,PK,parkCar,unparkAt,callTow,HANGS,hangXZ,GH,REM,HN:()=>HN,setHN:v=>{HN=v;},ghostStep,carMesh,keys,inHouse,collide,garPick,garBuy,cancelPrev,getPrev:()=>PREV,scene,cam,CIN,startWelcome,endWelcome,cinCam,monGet,monAdd,ownGet,GAR,garGate,renderGar,LMS,getFuel:()=>FUEL,setFuel:v=>{FUEL=v;},NPK1,NPK2,PBOX,CAMPERS,CAMPF,update,stepMission,getCH:()=>CH,pl,fit,PS,H,PUD,HOUSES,startMission,MI,stuck,addRock,rockH,shopN:()=>shopN,openShop,RUKOS,GATES,RUKO,car,pl,S,PUD,HILLS,ROCKC,ROCKB,grid,R,WP,N,ACT,LV,RTS,stepCar,CK,setCockpit,carBumps,stepAI,applyAll,MUDZ,PS,pathAt,applyRoute,startMode};
 resize();
 toMenu();
 if(!ME.reg)showReg();
