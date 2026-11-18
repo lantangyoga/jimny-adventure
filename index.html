@@ -4662,6 +4662,7 @@ function doLogin(){ONL.rpc('login_player',{p_token:TOK}).then(({data,error})=>{i
       if(data.car&&data.car.col!=null)localStorage.setItem('jimnyCust',JSON.stringify(Object.assign({},CUSTD,data.car)));}catch(e){}
       let again=false;try{again=!!sessionStorage.getItem('jimnySync');sessionStorage.setItem('jimnySync','1');}catch(e){}if(!again){location.reload();return;}}
     else if(dirty)netFlush();
+    try{if(data.points>ptsGet()){localStorage.setItem('jimnyPts',String(data.points));updPts();}}catch(e){}
     if(data.city&&!ME.city){ME.city=data.city;ME.hang=data.hang||'';}
     netStart();
   }else if(ME.reg){let g=null;try{g=sessionStorage.getItem('jimnyLg');}catch(e){}
@@ -5116,9 +5117,9 @@ try{dirtApply(true);}catch(e){}
 var COINQ=0,coinBusy=false,coinTm=0;
 try{COINQ=parseInt(localStorage.getItem('jimnyCoinQ'))||0;}catch(e){}
 function coinQ(d){if(!d)return;COINQ+=d;try{localStorage.setItem('jimnyCoinQ',String(COINQ));}catch(e){}clearTimeout(coinTm);coinTm=setTimeout(coinSync,1500);}
-function coinSync(){if(!ONL||!ME.reg||coinBusy)return;coinBusy=true;const d=COINQ;
-  try{ONL.rpc('coin_sync',{p_token:TOK,p_delta:d,p_local:monGet()}).then(({data,error})=>{coinBusy=false;if(error||!data||data.coins==null)return;
-    COINQ-=d;try{localStorage.setItem('jimnyCoinQ',String(COINQ));}catch(e){}
+function coinSync(){if(!ONL||!ME.reg||coinBusy)return;coinBusy=true;const d=COINQ;let mg=false;try{mg=localStorage.getItem('jimnyCoinMg')!==String(ME.id);}catch(e){}
+  try{ONL.rpc('coin_sync',{p_token:TOK,p_delta:d,p_local:monGet()-d,p_merge:mg}).then(({data,error})=>{coinBusy=false;if(error||!data||data.coins==null)return;
+    if(mg)try{localStorage.setItem('jimnyCoinMg',String(ME.id));}catch(e){}COINQ-=d;try{localStorage.setItem('jimnyCoinQ',String(COINQ));}catch(e){}
     const bal=Math.max(0,(+data.coins||0)+COINQ),old=monGet();if(bal!==old){try{localStorage.setItem('jimnyMoney',String(bal));}catch(e){}updPts();try{if(S.mode==='menu')renderHub();}catch(e){}}
     if(COINQ)coinSync();},()=>{coinBusy=false;});}catch(e){coinBusy=false;}}
 setInterval(()=>{if(!document.hidden)coinSync();},20000);
