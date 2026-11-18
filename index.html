@@ -4148,7 +4148,7 @@ function cityDeco(){
   /* --- pohon pinggir jalan: tajuk bulat low-poly berwarna (hijau, merah, oranye) --- */
   {const spots=[],P=60,fl=MAP.fly,lms=MAP.lm||[],parks=(BDG&&BDG.parks)||[];
    for(let a=0;a<2;a++)for(let i=-4;i<=4;i++)for(const sg of[-1,1]){
-     for(let t=-250;t<=250;t+=16){const jit=((Math.sin(t*12.9898+i*78.233+sg*3.1+a*9.7)*43758.5453)%1+1)%1;
+     for(let t=-250;t<=250;t+=34){const jit=((Math.sin(t*12.9898+i*78.233+sg*3.1+a*9.7)*43758.5453)%1+1)%1;
        const along=t+jit*6-3,off=sg*8.1;
        const x=a===0?along:i*P+off,z=a===0?i*P+off:along;
        if(roadD(along,P)<13)continue;
@@ -4160,8 +4160,6 @@ function cityDeco(){
        if(bad)continue;
        if(inHouse(x,H(x,z),z,0.9))continue;
        spots.push([x,z,jit]);}}
-   for(let a=0;a<2;a++)for(let i=-4;i<=4;i+=2)for(let t=-240;t<=240;t+=12){if(roadD(t,P)<16)continue;const x=a===0?t:i*P,z=a===0?i*P:t;
-     if(fl&&Math.abs(x-fl.x)<fl.hw+16&&z>fl.z0-20&&z<fl.z1+20)continue;const jit=((Math.sin(t*3.71+i*19.3+a*5.1)*43758.5453)%1+1)%1;spots.push([x,z,0.15+jit*0.5]);}
    const n=spots.length;if(n){
      const cg=new T.IcosahedronGeometry(1.7,1),tg=new T.CylinderGeometry(0.16,0.24,2.4,6);
      const cm=SM(0xffffff,0.85,0,{flatShading:true}),tm=SM(0x5a3f2a,0.95);
