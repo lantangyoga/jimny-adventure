@@ -333,11 +333,11 @@ html,body{position:fixed;inset:0;width:100%;height:100%;overscroll-behavior:none
 .h76c ol{margin:0;padding:0;list-style:none;font-size:12.5px;display:flex;flex-direction:column;gap:3px}.h76c li{display:flex;justify-content:space-between;gap:8px}.h76c li span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .h76c .chip{align-self:flex-start;margin-top:auto;font-size:12px;padding:6px 12px}
 .h76c.tap{cursor:pointer}.h76c .reflk{font-size:11.5px;word-break:break-all;opacity:.8;user-select:all;-webkit-user-select:all}
-.wkPrize{background:rgba(255,176,46,.12);border:1px solid var(--amber);border-radius:12px;padding:9px 12px;display:flex;flex-direction:column;gap:2px;font-size:12.5px}.wkPrize b{font:800 13px var(--disp);color:var(--amber)}
+.wkPrize{background:linear-gradient(rgba(255,176,46,.14),rgba(255,176,46,.14)),#0d1511;border:1px solid var(--amber);border-radius:12px;padding:9px 12px;display:flex;flex-direction:column;gap:2px;font-size:12.5px}.wkPrize b{font:800 13px var(--disp);color:var(--amber)}
 .adst{color:var(--amber);font-weight:700}
 #shr{position:fixed;inset:0;z-index:90;background:rgba(5,9,14,.88);display:flex;align-items:center;justify-content:center;padding:max(14px,env(safe-area-inset-top,0px)) 16px max(14px,env(safe-area-inset-bottom,0px))}#shr[hidden]{display:none}
 .shrbox{display:flex;flex-direction:column;align-items:center;gap:10px;max-width:420px;text-align:center;font-size:13px;line-height:1.4}.shrbox img{max-height:62vh;max-width:100%;border-radius:12px;border:2px solid var(--amber);-webkit-touch-callout:default;user-select:auto}.shrbox p{margin:0}.h76c.tap:hover{border-color:var(--amber)}.h76c .dcb{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto}.h76c .dcb .chip{margin-top:0}.h76c .chip:disabled{opacity:.45}
-#wk{margin-top:2px;display:flex;flex-direction:column;gap:10px}#wk[hidden]{display:none}#wkL{display:flex;flex-direction:column;gap:6px}
+#wk{margin-top:2px;display:flex;flex-direction:column;gap:10px;background:rgba(7,13,10,.94);border:1px solid var(--line);border-radius:14px;padding:12px;color:#eef5f0}#wk .eyebrow{color:var(--amber)}#wk[hidden]{display:none}#wkL{display:flex;flex-direction:column;gap:6px}
 .wkMe,.wkP{background:rgba(12,20,16,.78);border:1px solid var(--line);border-radius:12px;padding:10px 12px}.wkMe{border-color:var(--amber)}.wkMe>b{display:block;font:800 14px var(--disp);margin-bottom:6px}
 .wkP summary{display:flex;justify-content:space-between;gap:8px;cursor:pointer;font-size:13.5px;list-style:none}.wkP summary::-webkit-details-marker{display:none}.wkP summary b{color:var(--amber);white-space:nowrap}.wkP summary span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.wkP[open] summary{margin-bottom:8px}
 .wkS{display:flex;flex-direction:column;gap:5px}.wkR{display:grid;grid-template-columns:minmax(0,9.5em) 1fr auto;gap:8px;align-items:center;font-size:12px}.wkR span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;opacity:.85}.wkR i{height:7px;border-radius:4px;background:rgba(255,255,255,.12);overflow:hidden}.wkR u{display:block;height:100%;background:var(--amber)}.wkR b{font-size:12px;min-width:3em;text-align:right}.wkE{font-size:12px;opacity:.7}
@@ -2677,7 +2677,6 @@ function action(){
   if(shopN&&shopN.park){if(S.inCar&&!PK.on)parkCar(shopN.park);else if(!S.inCar&&PK.on)unparkAt(shopN.park);return;}
   if(shopN&&shopN.bengkel&&(!S.inCar||Math.abs(car.v)<4)){if(shopN.gm==='bantuan')openHelp();else goGarage(true,shopN.gm);return;}
   if(shopN&&shopN.info&&(!S.inCar||Math.abs(car.v)<4)){openInfo();return;}
-  if(shopN&&shopN.bill&&(!S.inCar||Math.abs(car.v)<4)){openShop(shopN.ad);return;}
   if(S.inCar&&shopN&&shopN.ruko&&Math.abs(car.v)<4){openShop(shopN.ad);return;}
   if(!S.inCar&&shopN&&Math.hypot(pl.x-car.x,pl.z-car.z)>=4){if(shopN.house)goGarage(false);else if(shopN.bengkel){if(shopN.gm==='bantuan')openHelp();else goGarage(true,shopN.gm);}else openShop(shopN.ad);return;}
   if(R.on){toast('Selesaikan balapan dulu');return;}
@@ -3433,7 +3432,7 @@ function adSpots(){
   const L=[],sec=(t)=>L.push({sec:t});
   sec('Billboard');
   L.push({id:'ar',title:'Billboard Arena Balap',st:'Tersedia',ok:1,loc:'Di samping garis start arena balap (ada di setiap peta balap)',desc:'Satu-satunya billboard di arena. Dilihat semua pembalap setiap kali start dan lewat garis finis.',img:pvArena(),msg:ARENAAD.msg});
-  if(MAP.city){const bl=cityBills();bl.forEach(b=>L.push({id:'b'+b.n,title:'Papan Iklan Kota No. '+b.n,st:'Tersedia',ok:1,loc:b.near,desc:'Papan Space Available di sudut jalan '+MAP.label+'. Ketuk E di depan papan untuk chat langsung.',img:pvBill(b),msg:'Assalamualaikum, saya tertarik pasang iklan di *Papan Iklan Kota No. '+b.n+'* ('+b.near+', '+MAP.label+') game Jimny Adventure by Cerita Sibiru. Boleh minta info harga per bulan, ukuran papan, dan ketentuan materi iklannya?'}));}
+  if(MAP.city){const bl=cityBills();bl.forEach(b=>L.push({id:'b'+b.n,title:'Papan Iklan Kota No. '+b.n,st:'Tersedia',ok:1,loc:b.near,desc:'Papan Space Available di sudut jalan '+MAP.label+'. Ketuk papannya untuk chat langsung.',img:pvBill(b),msg:'Assalamualaikum, saya tertarik pasang iklan di *Papan Iklan Kota No. '+b.n+'* ('+b.near+', '+MAP.label+') game Jimny Adventure by Cerita Sibiru. Boleh minta info harga per bulan, ukuran papan, dan ketentuan materi iklannya?'}));}
   else L.push({id:'bk',title:'Papan Iklan Kota',st:'Di Kota Bandung',ok:0,loc:'Sudut jalan Kota Bandung',desc:'Papan Space Available di sudut-sudut jalan ada di Kota Bandung. Buka peta Bandung untuk melihat lokasi tepatnya.',img:pvBill(null),msg:'Assalamualaikum, saya tertarik pasang iklan di *Papan Iklan Kota Bandung* game Jimny Adventure by Cerita Sibiru. Boleh minta info harga dan lokasi yang masih tersedia?'});
   sec('Ruko (12 unit di Deretan Ruko)');
   ADS.forEach((ad,i)=>{const kosong=!!ad.empty;L.push({id:'r'+i,title:'Ruko No. '+(i+1)+(kosong?'':' · '+ad.name),st:kosong?'Disewakan':'Terisi',ok:kosong?1:0,loc:'Deretan Ruko, '+(i%2?'deret selatan':'deret utara')+' · slot '+((i%6)+1),
